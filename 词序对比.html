@@ -177,14 +177,14 @@
       </div>
 
       <div class="btn-box">
-        <button type="button" class="submit-btn" onclick="submitExam()">提交答案并生成PDF</button>
+        <button type="button" class="submit-btn" onclick="submitExam()">提交答案并导出完整试卷</button>
       </div>
     </form>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"></script>
 
 <script>
 let startTime;
@@ -208,7 +208,6 @@ async function submitExam() {
   let unanswered = [];
   let correct = 0;
 
-  // 检查未答题目
   for (let i = 1; i <= total; i++) {
     const name = 'q' + i;
     const val = form.get(name);
@@ -220,7 +219,6 @@ async function submitExam() {
     return;
   }
 
-  // 批改并显示解析
   for (let i = 1; i <= total; i++) {
     const name = 'q' + i;
     const val = form.get(name);
@@ -228,7 +226,6 @@ async function submitExam() {
     document.getElementById('an' + i).style.display = 'block';
   }
 
-  // 计算成绩与时间
   const endTime = new Date();
   const useSec = Math.round((endTime - startTime) / 1000);
   const score = correct * 20;
@@ -238,25 +235,66 @@ async function submitExam() {
   document.getElementById('studentInfo').innerHTML =
     `学生：${name}　<span class="score-box">分数：${score}分　用时：${useSec}秒　完成时间：${finishTime}</span>`;
 
-  // 延迟一小段让页面渲染完成，再导出PDF
   await new Promise(r => setTimeout(r, 300));
-  await exportPDF();
-  alert("试卷已提交，PDF 已自动导出！");
+  
+  // 先导出长图（一定能完整截取）
+  await exportFullImage();
+  // 再导出完整PDF
+  await exportFullPDF();
+
+  alert("提交成功！已导出：完整长图 + 完整PDF");
 }
 
-async function exportPDF() {
+// ====================== 导出完整长图（全页，无截断）======================
+async function exportFullImage() {
+  const paper = document.getElementById('paper');
+  const name = document.getElementById('studentName').value.trim();
+  const title = '汉越语序结构对比专项测试卷';
+
+  const canvas = await html2canvas(paper, {
+    scale: 2,
+    useCORS: true,
+    logging: false,
+    allowTaint: true,
+    width: paper.scrollWidth,
+    height: paper.scrollHeight,
+    scrollX: 0,
+    scrollY: 0,
+    windowWidth: paper.scrollWidth,
+    windowHeight: paper.scrollHeight
+  });
+
+  const a = document.createElement('a');
+  a.download = `${name} - ${title}.jpg`;
+  a.href = canvas.toDataURL('image/jpeg', 0.95);
+  a.click();
+}
+
+// ====================== 导出完整PDF（全页，无截断）======================
+async function exportFullPDF() {
   const { jsPDF } = window.jspdf;
   const paper = document.getElementById('paper');
   const name = document.getElementById('studentName').value.trim();
   const title = '汉越语序结构对比专项测试卷';
 
-  const canvas = await html2canvas(paper, { scale: 2, useCORS: true });
-  const imgData = canvas.toDataURL('image/jpeg', 0.95);
-  const pdf = new jsPDF('p', 'mm', 'a4');
+  const canvas = await html2canvas(paper, {
+    scale: 2,
+    useCORS: true,
+    logging: false,
+    allowTaint: true,
+    width: paper.scrollWidth,
+    height: paper.scrollHeight,
+    scrollX: 0,
+    scrollY: 0,
+    windowWidth: paper.scrollWidth,
+    windowHeight: paper.scrollHeight
+  });
+
   const imgWidth = 210;
-  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  const imgHeight = canvas.height * imgWidth / canvas.width;
+  const pdf = new jsPDF('p', 'mm', 'a4');
   
-  pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+  pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, imgWidth, imgHeight);
   pdf.save(`${name} - ${title}.pdf`);
 }
 </script>
