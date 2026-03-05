@@ -482,7 +482,7 @@ thực sự đạt được: nghe hiểu, nói ra, dùng đúng, trở thành ng
       </div>
     </div>
 
-   <!-- 联系方式区域 - 二维码强制同行版 -->
+  <!-- 联系方式区域 - 二维码强制同行 + 信息区紧凑型 -->
 <div id="contact-area" class="anchor-target"></div>
 <div class="test-area">
   <!-- 标题保持与主页匹配的风格 -->
@@ -563,45 +563,50 @@ thực sự đạt được: nghe hiểu, nói ra, dùng đúng, trở thành ng
       </div>
     </div>
 
-    <!-- 第二部分：信息区（Facebook → Email → SĐT） -->
+    <!-- 第二部分：信息区（紧凑型 - Facebook → Email → SĐT） -->
     <div style="
       background: #f5f5f7;
-      padding: 25px 20px;
-      border-radius: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      padding: 12px 15px; /* 大幅减少内边距 */
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
+      gap: 8px; /* 压缩列间距 */
       align-items: center;
       text-align: center;
+      max-width: 700px; /* 限制最大宽度，更紧凑 */
+      margin: 0 auto;
     ">
+      <!-- Facebook 信息（紧凑型） -->
       <div>
-        <h3 style="color: #1d1d1f; font-size: 20px; margin-bottom: 10px; font-weight: 600;">Facebook</h3>
+        <h3 style="color: #1d1d1f; font-size: 16px; margin-bottom: 4px; font-weight: 600;">Facebook</h3>
         <a href="https://www.facebook.com/share/1HkARNg9Ug/?mibextid=wwXIfr" 
            target="_blank" 
-           style="font-size: 15px; color: #1877f2; text-decoration: none; font-weight: 500;">
+           style="font-size: 12px; color: #1877f2; text-decoration: none; font-weight: 500; line-height: 1.2;">
           Truy cập trang FB
         </a>
       </div>
+      <!-- Email 信息（紧凑型） -->
       <div>
-        <h3 style="color: #1d1d1f; font-size: 20px; margin-bottom: 10px; font-weight: 600;">Email</h3>
-        <p style="font-size: 15px; color: #0071e3; font-weight: 500;">
+        <h3 style="color: #1d1d1f; font-size: 16px; margin-bottom: 4px; font-weight: 600;">Email</h3>
+        <p style="font-size: 12px; color: #0071e3; font-weight: 500; line-height: 1.2;">
           xufanokok@gmail.com
         </p>
       </div>
+      <!-- SĐT 信息（紧凑型） -->
       <div>
-        <h3 style="color: #1d1d1f; font-size: 20px; margin-bottom: 10px; font-weight: 600;">SĐT</h3>
-        <p style="font-size: 14px; color: #1d1d1f; line-height: 1.4;">
+        <h3 style="color: #1d1d1f; font-size: 16px; margin-bottom: 4px; font-weight: 600;">SĐT</h3>
+        <p style="font-size: 11px; color: #1d1d1f; line-height: 1.1; margin: 0;">
           🇨🇳 +86 13377970080<br>
           (Thêm Zalo/WeChat)<br>
           🇻🇳 +84 357 7693703<br>
-          (Chỉ nhận tin nhắn/gọi)
+          (Chỉ nhận tin/gọi)
         </p>
       </div>
     </div>
   </div>
 
-  <!-- 移动端适配（小屏才换行，大屏始终同行） -->
+  <!-- 移动端适配（同步紧凑型） -->
   <style>
     /* 大屏（≥768px）：二维码始终同行 */
     @media (min-width: 768px) {
@@ -609,7 +614,7 @@ thực sự đạt được: nghe hiểu, nói ra, dùng đúng, trở thành ng
         flex-wrap: nowrap !important;
       }
     }
-    /* 小屏（<768px）：二维码单列显示，避免挤压 */
+    /* 小屏（<768px）：二维码单列显示，信息区更紧凑 */
     @media (max-width: 767px) {
       .test-area-title {
         font-size: 24px !important;
@@ -632,20 +637,24 @@ thực sự đạt được: nghe hiểu, nói ra, dùng đúng, trở thành ng
         width: 140px !important;
         height: 140px !important;
       }
+      /* 移动端信息区更紧凑 */
       .test-area-content > div:last-child {
         grid-template-columns: 1fr !important;
-        gap: 20px !important;
-        padding: 20px 15px !important;
+        gap: 10px !important;
+        padding: 10px 12px !important;
+        max-width: 100% !important;
       }
       h3 {
-        font-size: 18px !important;
+        font-size: 15px !important;
+        margin-bottom: 3px !important;
       }
       p, a {
-        font-size: 13px !important;
+        font-size: 11px !important;
       }
     }
   </style>
 </div>
+<!-- 此行为区域结束位置 -->
 
     <div id="download-area" class="anchor-target"></div>
     <div class="test-area download-area">
