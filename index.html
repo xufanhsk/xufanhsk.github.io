@@ -323,6 +323,7 @@ body {
 }
 
 /* ========== 分区名称：下载区 分区结束 ========== */
+  
 /* ========== 分区名称：移动端导航适配 起始 ========== */
 
 .menu-toggle {
@@ -357,6 +358,91 @@ body {
 }
 
 /* ========== 分区名称：移动端导航适配 结束 ========== */
+  /* ========== 分区名称：终极移动端导航系统 起始 ========== */
+
+.menu-area {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  z-index: 1001;
+}
+
+.menu-hint {
+  font-size: 12px;
+  color: var(--text-gray);
+  animation: pulseHint 1.8s infinite;
+}
+
+@keyframes pulseHint {
+  0% { opacity: 0.4; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+  100% { opacity: 0.4; transform: translateY(0); }
+}
+
+.menu-toggle {
+  font-size: 26px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.menu-toggle.active {
+  transform: rotate(90deg);
+}
+
+/* 遮罩层 */
+.nav-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .menu-area {
+    display: flex;
+  }
+
+  .nav-overlay.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+  }
+
+  .nav-buttons {
+    position: fixed;
+    top: 72px;
+    right: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+    gap: 28px;
+
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s ease;
+    z-index: 999;
+  }
+
+  .nav-buttons.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* ========== 分区名称：终极移动端导航系统 结束 ========== */
 </style>
 </head>
 
@@ -365,7 +451,12 @@ body {
 <div class="header" id="floatingHeader">
   <div class="header-logo">Lớp học trực tuyến HSK</div>
 
-  <div class="menu-toggle" id="menuToggle">☰</div>
+  <div class="menu-area">
+    <div class="menu-hint">Menu</div>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </div>
+
+  <div class="nav-overlay" id="navOverlay"></div>
 
   <div class="nav-buttons" id="navMenu">
     <a href="#learn" class="nav-btn">Cách học tiếng Trung hiệu quả</a>
@@ -496,9 +587,27 @@ function toggleAudio() {
 }
   const toggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
+const navOverlay = document.getElementById('navOverlay');
+const navLinks = document.querySelectorAll('#navMenu a');
+
+function closeMenu() {
+  navMenu.classList.remove('active');
+  toggle.classList.remove('active');
+  navOverlay.classList.remove('active');
+  document.body.classList.remove('menu-open');
+}
 
 toggle.addEventListener('click', () => {
   navMenu.classList.toggle('active');
+  toggle.classList.toggle('active');
+  navOverlay.classList.toggle('active');
+  document.body.classList.toggle('menu-open');
+});
+
+navOverlay.addEventListener('click', closeMenu);
+
+navLinks.forEach(link => {
+  link.addEventListener('click', closeMenu);
 });
 
 </script>
