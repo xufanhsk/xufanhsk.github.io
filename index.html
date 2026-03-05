@@ -10,20 +10,18 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* 苹果官网字体栈，适配越南语显示 */
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    letter-spacing: -0.02em; /* 苹果风格字间距 */
+    letter-spacing: -0.02em;
   }
 
   html, body {
     width: 100%;
     min-height: 300vh;
-    background: #f5f5f7; /* 苹果官网基础背景色 */
+    background: #f5f5f7;
     color: #1d1d1f;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
-    /* 给body顶部增加足够的安全间距，彻底避免内容被导航栏遮挡 */
-    padding-top: 0; /* 恢复默认值，避免双重间距 */
+    padding-top: 0;
   }
 
   /* 顶部导航栏 - 苹果风格优化 + 强化缩放效果 */
@@ -32,31 +30,29 @@
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(245, 245, 247, 0.8); /* 苹果风格半透明背景 */
-    backdrop-filter: blur(20px); /* 增强毛玻璃效果 */
+    background: rgba(245, 245, 247, 0.8);
+    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* 更细的边框 */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 32px; /* 加大内边距，更接近苹果风格 */
+    padding: 0 32px;
     z-index: 999;
-    height: 72px; /* 初始高度更高，缩放对比更明显 */
-    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); /* 延长过渡时间，效果更明显 */
+    height: 72px;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
-  /* 导航栏缩放状态 - 强化视觉变化 */
   .header.shrink {
-    height: 44px; /* 缩放到更矮的高度，对比明显 */
-    background: rgba(255, 255, 255, 0.95); /* 缩放后更实的背景 */
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08); /* 增加阴影，强化效果 */
-    padding: 0 24px; /* 缩放后减少内边距 */
+    height: 44px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+    padding: 0 24px;
   }
 
-  /* 标题美化 - 苹果风格 */
   .header-logo {
-    font-size: 22px; /* 初始更大的字号 */
-    font-weight: 600; /* 苹果风格中等加粗 */
+    font-size: 22px;
+    font-weight: 600;
     color: #1d1d1f;
     line-height: 1;
     transition: all 0.4s ease;
@@ -65,59 +61,51 @@
     gap: 10px;
   }
 
-  /* logo小图标 - 苹果风格简约 */
   .header-logo::before {
     content: "📚";
     font-size: 20px;
   }
 
-  /* 缩放后标题变化 */
   .header.shrink .header-logo {
-    font-size: 18px; /* 缩放后字号更小，对比明显 */
+    font-size: 18px;
   }
 
-  /* 导航按钮组 - 苹果风格精简 */
   .nav-buttons {
     display: flex;
     gap: 16px;
     align-items: center;
-    transition: all 0.4s ease; /* 确保按钮组有过渡动画 */
+    transition: all 0.4s ease;
   }
 
-  /* 缩放后按钮间距变化 - 确保选择器优先级正确 */
   .header.shrink .nav-buttons {
-    gap: 12px !important; /* 强制生效，避免被其他样式覆盖 */
+    gap: 12px !important;
   }
 
-  /* 导航按钮样式 - 苹果官网按钮风格 */
   .nav-btn {
-    padding: 11px 22px; /* 苹果风格按钮内边距 */
-    background: #0071e3; /* 苹果蓝色 */
+    padding: 11px 22px;
+    background: #0071e3;
     color: #ffffff;
     border: none;
-    border-radius: 980px; /* 苹果风格超大圆角 */
+    border-radius: 980px;
     font-size: 15px;
-    font-weight: 400; /* 苹果风格常规字重 */
+    font-weight: 400;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.3s ease; /* 按钮自身过渡动画 */
+    transition: all 0.3s ease;
     white-space: nowrap;
     box-shadow: 0 1px 3px rgba(0, 113, 227, 0.15);
   }
 
-  /* 下载按钮突出显示 - 苹果绿色 */
   .nav-btn.download-btn {
     background: #34c759;
     box-shadow: 0 1px 3px rgba(52, 199, 89, 0.15);
   }
 
-  /* 缩放后按钮变化 - 确保选择器优先级正确 */
   .header.shrink .nav-btn {
-    padding: 8px 18px !important; /* 缩放后按钮更小 */
-    font-size: 14px !important;   /* 强制生效 */
+    padding: 8px 18px !important;
+    font-size: 14px !important;
   }
 
-  /* 按钮hover效果 - 苹果风格细腻 */
   .nav-btn:hover {
     background: #0077ed;
     transform: translateY(-1px);
@@ -134,193 +122,170 @@
     box-shadow: 0 1px 3px rgba(0, 113, 227, 0.15);
   }
 
-  /* 主视觉区 - 彻底解决头像遮挡问题 */
+  /* 主视觉区 - 关键修改：增加头像上方空间 */
   .hero-section {
-    /* 精准调整顶部内边距，确保头像完全在导航栏下方 */
-    padding: 20px 20px 80px;
+    padding: 60px 20px 80px; /* 顶部内边距从20px改为60px，给头像上方留更多空间 */
     text-align: center;
-    max-width: 980px; /* 苹果风格宽屏 */
+    max-width: 980px;
     margin: 0 auto;
-    background: #ffffff; /* 白色背景，苹果风格分区 */
-    /* 核心修改：顶部外边距适配导航栏最大高度 */
-    margin-top: 90px;
-    border-radius: 24px; /* 苹果风格大圆角 */
+    background: #ffffff;
+    margin-top: 90px; /* 保留导航栏下方的基础间距 */
+    border-radius: 24px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
     margin-bottom: 40px;
-    /* 确保主视觉区层级正确 */
     position: relative;
     z-index: 1;
   }
 
-  /* 头像样式 - 苹果风格优化 + 位置调整 */
+  /* 头像样式 - 保留原有样式，仅调整间距相关 */
   .hero-avatar {
-    width: 140px; /* 更大的头像 */
+    width: 140px;
     height: 140px;
     border-radius: 50%;
-    margin: 0 auto 32px; /* 增加底部间距 */
-    object-fit: cover;
-    border: 2px solid rgba(0, 0, 0, 0.03); /* 更细的边框 */
+    margin: 0 auto 32px; /* 上下auto保证居中，底部32px间距不变 */
+    object-fit: cover; /* 保证图片比例，裁剪多余部分 */
+    border: 2px solid rgba(0, 0, 0, 0.03);
     background: #f5f5f7;
-    /* 苹果风格轻微阴影 */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    /* 确保头像不会被任何元素覆盖 */
     position: relative;
     z-index: 2;
   }
 
-  /* 主标题 - 苹果风格 */
   .hero-title {
-    font-size: 40px; /* 更大的标题 */
+    font-size: 40px;
     font-weight: 600;
     margin-bottom: 16px;
-    line-height: 1.1; /* 苹果风格行高 */
+    line-height: 1.1;
     color: #1d1d1f;
   }
 
-  /* 副标题 - 苹果风格 */
   .hero-subtitle {
-    font-size: 20px; /* 更大的副标题 */
+    font-size: 20px;
     color: #86868b;
     line-height: 1.4;
     max-width: 700px;
     margin: 0 auto;
   }
 
-  /* 导航链接测试区 - 苹果风格布局 */
   .link-test-section {
     max-width: 1200px;
     margin: 0 auto 80px;
-    padding: 0 32px; /* 苹果风格大边距 */
+    padding: 0 32px;
   }
 
-  /* 锚点偏移容器 - 适配导航栏高度（进一步加大偏移量） */
   .anchor-target {
     display: block;
     position: relative;
-    top: -120px; /* 大幅增加偏移量，确保锚点定位时内容不被遮挡 */
+    top: -120px;
     visibility: hidden;
   }
 
-  /* 内容区域 - 苹果风格卡片 */
   .test-area {
     width: 100%;
     min-height: 600px;
     background: #ffffff;
-    border-radius: 32px; /* 苹果风格超大圆角 */
-    padding: 64px 48px; /* 更大的内边距 */
+    border-radius: 32px;
+    padding: 64px 48px;
     margin-bottom: 40px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04); /* 更柔和的阴影 */
-    border: 1px solid rgba(0, 0, 0, 0.02); /* 极细边框 */
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.02);
   }
 
-  /* 下载区域特殊样式 - 苹果风格渐变 */
   .test-area.download-area {
-    background: linear-gradient(135deg, #f8fffe 0%, #e8f4f8 100%); /* 更柔和的渐变 */
+    background: linear-gradient(135deg, #f8fffe 0%, #e8f4f8 100%);
   }
 
-  /* 标题样式 - 苹果风格 */
   .test-area-title {
-    font-size: 36px; /* 更大的标题 */
+    font-size: 36px;
     font-weight: 600;
     margin-bottom: 40px;
     color: #1d1d1f;
     text-align: center;
     position: relative;
-    letter-spacing: -0.04em; /* 苹果风格负字间距 */
+    letter-spacing: -0.04em;
   }
 
-  /* 标题下划线 - 苹果风格 */
   .test-area-title::after {
     content: "";
     display: block;
-    width: 80px; /* 更长的下划线 */
-    height: 2px; /* 更细的下划线 */
+    width: 80px;
+    height: 2px;
     background: #0071e3;
     margin: 24px auto 0;
     border-radius: 2px;
   }
 
-  /* 下载区域标题下划线颜色 */
   .download-area .test-area-title::after {
     background: #34c759;
   }
 
-  /* 二级标题样式 - 苹果风格 */
   .content-subtitle {
-    font-size: 28px; /* 更大的二级标题 */
+    font-size: 28px;
     font-weight: 600;
-    margin: 64px 0 32px; /* 更大的间距 */
+    margin: 64px 0 32px;
     color: #1d1d1f;
-    border-left: 3px solid #0071e3; /* 更细的左侧边框 */
+    border-left: 3px solid #0071e3;
     padding-left: 20px;
     letter-spacing: -0.02em;
   }
 
-  /* 内容文本 - 苹果风格排版 */
   .test-area-content {
-    font-size: 18px; /* 更大的正文字号 */
+    font-size: 18px;
     line-height: 1.8;
     color: #424245;
     white-space: pre-line;
-    max-width: 900px; /* 限制行宽，提升阅读体验 */
-    margin: 0 auto; /* 居中显示 */
+    max-width: 900px;
+    margin: 0 auto;
   }
 
-  /* 下载区域内容样式 - 苹果风格卡片 */
   .download-content {
     display: flex;
     flex-direction: column;
-    gap: 28px; /* 更大的间距 */
+    gap: 28px;
     max-width: 800px;
     margin: 0 auto;
   }
 
-  /* 下载项卡片 - 苹果风格 */
   .download-item {
     background: #ffffff;
-    padding: 24px; /* 更大的内边距 */
-    border-radius: 20px; /* 苹果风格圆角 */
+    padding: 24px;
+    border-radius: 20px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
     display: flex;
     align-items: center;
     gap: 20px;
-    transition: all 0.3s ease; /* 增加hover过渡 */
+    transition: all 0.3s ease;
   }
 
-  /* 下载项hover效果 - 苹果风格 */
   .download-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   }
 
-  /* 下载图标 - 苹果风格 */
   .download-icon {
-    font-size: 36px; /* 更大的图标 */
+    font-size: 36px;
     color: #34c759;
   }
 
-  /* 下载信息标题 */
   .download-info h3 {
-    font-size: 20px; /* 更大的标题 */
+    font-size: 20px;
     margin-bottom: 10px;
     color: #1d1d1f;
     font-weight: 600;
   }
 
-  /* 下载信息描述 */
   .download-info p {
     color: #86868b;
-    font-size: 16px; /* 更大的描述文字 */
+    font-size: 16px;
     line-height: 1.5;
   }
 
-  /* 下载按钮链接 - 苹果风格 */
   .download-btn-link {
     margin-left: auto;
-    padding: 10px 20px; /* 更大的按钮 */
+    padding: 10px 20px;
     background: #34c759;
     color: white;
-    border-radius: 980px; /* 苹果风格超大圆角 */
+    border-radius: 980px;
     text-decoration: none;
     font-size: 15px;
     font-weight: 400;
@@ -328,25 +293,22 @@
     white-space: nowrap;
   }
 
-  /* 下载按钮hover效果 */
   .download-btn-link:hover {
     background: #30d158;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(52, 199, 89, 0.2);
   }
 
-  /* 空白测试区域 - 苹果风格背景 */
   .test-empty-area {
     width: 100%;
     height: 1500px;
-    background: linear-gradient(to bottom, #f5f5f7 0%, #ffffff 100%); /* 苹果风格渐变 */
+    background: linear-gradient(to bottom, #f5f5f7 0%, #ffffff 100%);
     margin: 40px 0;
-    border-radius: 32px; /* 苹果风格圆角 */
+    border-radius: 32px;
   }
 
-  /* 响应式适配 - 苹果风格移动端优化 */
+  /* 响应式适配 - 同步调整移动端头像上方空间 */
   @media (max-width: 768px) {
-    /* 移动端导航栏 */
     .header {
       height: auto;
       padding: 16px 20px;
@@ -361,7 +323,6 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
 
-    /* 移动端logo */
     .header-logo {
       text-align: center;
       font-size: 20px;
@@ -372,7 +333,6 @@
       font-size: 18px;
     }
 
-    /* 移动端导航按钮 */
     .nav-buttons {
       width: 100%;
       justify-content: center;
@@ -389,10 +349,9 @@
       font-size: 14px !important;
     }
 
-    /* 移动端主视觉区 */
     .hero-section {
-      padding: 20px 16px 60px; /* 移动端调整内边距 */
-      margin-top: 120px !important; /* 移动端适配更大的顶部间距 */
+      padding: 40px 16px 60px; /* 移动端顶部内边距从20px改为40px */
+      margin-top: 120px !important;
       border-radius: 16px;
     }
 
@@ -404,12 +363,10 @@
       font-size: 18px;
     }
 
-    /* 移动端锚点偏移 */
     .anchor-target {
-      top: -140px !important; /* 适配移动端导航栏 */
+      top: -140px !important;
     }
 
-    /* 移动端内容区域 */
     .test-area {
       min-height: 500px;
       padding: 32px 24px;
@@ -428,7 +385,6 @@
       font-size: 16px;
     }
 
-    /* 移动端下载项 */
     .download-item {
       flex-direction: column;
       text-align: center;
@@ -442,7 +398,6 @@
       margin-top: 12px;
     }
 
-    /* 移动端空白区域 */
     .test-empty-area {
       height: 1000px;
       border-radius: 16px;
@@ -451,7 +406,6 @@
 </style>
 </head>
 <body>
-  <!-- 顶部导航栏：调整为苹果风格，强化缩放效果 -->
   <div class="header" id="floatingHeader">
     <div class="header-logo">Lớp học trực tuyến HSK</div>
     <div class="nav-buttons">
@@ -461,16 +415,21 @@
     </div>
   </div>
 
-  <!-- 主视觉区：增加顶部间距，解决头像遮挡问题 -->
   <div class="hero-section">
-    <img src="" alt="Ảnh đại diện Giáo viên Hứa Phàm" class="hero-avatar">
+    <!-- 
+      【图片存放路径备注】
+      1. GitHub仓库结构：根目录/Pic/ 文件夹存放所有图片
+      2. 头像文件路径：根目录/Pic/avatar.jpg
+      3. 访问地址：https://xufanhsk.github.io/Pic/avatar.jpg
+      4. 确保Pic文件夹和avatar.jpg文件已上传到GitHub仓库（仓库名：xufanhsk.github.io）
+    -->
+    <!-- 头像图片地址：适配GitHub Pages的访问路径 -->
+    <img src="https://raw.githubusercontent.com/xufanhsk/xufanhsk.github.io/main/Pic/avatar.jpg" alt="Ảnh đại diện Giáo viên Hứa Phàm" class="hero-avatar">
     <h1 class="hero-title">Hứa Phàm<br>Giáo viên dạy HSK trực tuyến</h1>
     <p class="hero-subtitle">Chuyên dạy HSK 1-1 một trực tuyến, từ chối tiếng Trung câm, làm cho tiếng Trung trở thành công cụ giao tiếp của bạn</p>
   </div>
 
-  <!-- 导航链接测试区：调整顺序为 学习方法 → 联系我 → 下载资料 -->
   <div class="link-test-section">
-    <!-- 如何学好汉语 + 我的教学理念 合并区域 -->
     <div id="learn-area" class="anchor-target"></div>
     <div class="test-area">
       <h2 class="test-area-title">Cách học tiếng Trung hiệu quả: Từ chối tư duy dịch thuật</h2>
@@ -504,7 +463,6 @@ Mục tiêu cuối cùng của học tiếng Trung, không phải là trở thà
 
 Nếu bạn không chỉ là học sinh để lấy chứng chỉ HSK, mà còn là người học tiếng Trung thực sự muốn nói, dùng, dám giao tiếp, thì bạn đã tìm thấy lựa chọn khôn ngoan nhất.
 
-      <!-- 二级标题：分隔教学理念内容 -->
       <h3 class="content-subtitle">Quan điểm giảng dạy của tôi</h3>
 
 Lý tưởng giảng dạy cốt lõi
@@ -524,7 +482,6 @@ thực sự đạt được: nghe hiểu, nói ra, dùng đúng, trở thành ng
       </div>
     </div>
 
-    <!-- 如何联系我 区域：调整到下载区域之前 -->
     <div id="contact-area" class="anchor-target"></div>
     <div class="test-area">
       <h2 class="test-area-title">Cách liên hệ với tôi</h2>
@@ -536,7 +493,6 @@ thực sự đạt được: nghe hiểu, nói ra, dùng đúng, trở thành ng
       </div>
     </div>
 
-    <!-- 免费下载学习资料 区域：调整到联系我区域之后 -->
     <div id="download-area" class="anchor-target"></div>
     <div class="test-area download-area">
       <h2 class="test-area-title">Tải tài liệu học tập miễn phí</h2>
@@ -577,31 +533,27 @@ thực sự đạt được: nghe hiểu, nói ra, dùng đúng, trở thành ng
     </div>
   </div>
 
-  <!-- 空白测试区域 -->
   <div class="test-empty-area"></div>
 
   <script>
-    // 头像加载失败兜底处理
+    // 头像加载失败兜底处理（保留，防止图片加载失败）
     const avatar = document.querySelector('.hero-avatar');
     avatar.onerror = function() {
       this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="#86868b"><circle cx="70" cy="70" r="68" stroke="#eee" stroke-width="2"/><path d="M70 40c-17 0-30 13-30 30s13 30 30 30 30-13 30-30-13-30-30-30zm0 45c-8 0-15-7-15-15s7-15 15-15 15 7 15 15-7 15-15 15zm0-55c-9 0-16 7-16 16s7 16 16 16 16-7 16-16-7-16-16-16z"/></svg>';
     };
 
-    // 导航栏滑动缩放逻辑 - 强化效果
     const header = document.getElementById('floatingHeader');
     let lastScrollTop = 0;
 
     window.addEventListener('scroll', function() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      // 滚动向下且超过50px时缩导航栏，否则恢复
       if (scrollTop > lastScrollTop && scrollTop > 50) {
         header.classList.add('shrink');
       } else {
         header.classList.remove('shrink');
       }
 
-      // 防止scrollTop为负数
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
   </script>
