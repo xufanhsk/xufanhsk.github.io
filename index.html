@@ -323,7 +323,40 @@ body {
 }
 
 /* ========== 分区名称：下载区 分区结束 ========== */
+/* ========== 分区名称：移动端导航适配 起始 ========== */
 
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+  .nav-buttons {
+    position: absolute;
+    top: 72px;
+    right: 0;
+    width: 100%;
+    background: #ffffff;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 20px;
+    display: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+
+  .nav-buttons.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* ========== 分区名称：移动端导航适配 结束 ========== */
 </style>
 </head>
 
@@ -331,7 +364,10 @@ body {
 
 <div class="header" id="floatingHeader">
   <div class="header-logo">Lớp học trực tuyến HSK</div>
-  <div class="nav-buttons">
+
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <div class="nav-buttons" id="navMenu">
     <a href="#learn" class="nav-btn">Cách học tiếng Trung hiệu quả</a>
     <a href="#contact" class="nav-btn">Cách liên hệ với tôi</a>
     <a href="#download" class="nav-btn download">Tải tài liệu miễn phí</a>
@@ -458,6 +494,13 @@ function toggleAudio() {
   document.getElementById('audioDesc').style.display = 'none';
   document.getElementById('audioSub').style.display = 'block';
 }
+  const toggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+
+toggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
+
 </script>
 
 </body>
