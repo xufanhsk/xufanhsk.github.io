@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test your Chinese learning talent | 测试你学习汉语的天赋</title>
+<style>
+/* ========== 分区名称：全局设计系统 分区起始 ========== */
+:root {
+  --container-width: 980px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 60px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --text-dark: #1d1d1f;
+  --text-gray: #6e6e73;
+  --bg-light: #f5f5f7;
+  --primary: #0071e3;
+  --success: #34c759;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+body {
+  background: var(--bg-light);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+/* ========== 分区名称：全局设计系统 分区结束 ========== */
+
+/* ========== 分区名称：顶部导航栏 分区起始 ========== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  background: rgba(245,245,247,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 32px;
+  z-index: 999;
+  transition: 0.3s ease;
+}
+
+.mobile-home-btn {
+  display: none;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 769px) {
+  .header-content {
+    justify-content: flex-start;
+  }
+}
+
+.header-logo {
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.home-btn, .menu-area {
+  flex-shrink: 1;
+  flex-grow: 0;
+  min-width: 80px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.35s ease, font-size 0.3s ease;
+  animation: menuBreath 2s ease-in-out infinite;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: rgba(0, 113, 227, 0.1);
+  border: 1px solid rgba(0, 113, 227, 0.2);
+  text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .header-logo {
+    font-size: 18px;
+  }
+  .home-btn, .menu-area {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .header-logo {
+    font-size: 16px;
+  }
+  .home-btn, .menu-area {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+}
+
+.mobile-home-btn {
+  display: none;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.35s ease;
+  animation: menuBreath 2s ease-in-out infinite;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: rgba(0, 113, 227, 0.1);
+  border: 1px solid rgba(0, 113, 227, 0.2);
+  text-decoration: none;
+}
+
+.home-btn:hover, .mobile-home-btn:hover, .menu-area:hover {
+  transform: scale(1.05);
+  background: rgba(0, 113, 227, 0.15);
+  box-shadow: 0 0 12px rgba(0, 113, 227, 0.3);
+}
+
+.mobile-home-btn {
+  display: none;
+}
+
+.menu-area {
+  margin-left: auto;
+}
+
+.menu-hint {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-toggle {
+  font-size: 16px;
+  line-height: 1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+}
+
+.header.shrink {
+  height: 50px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.header-logo {
+  font-size: 20px;
+  font-weight: 600;
+}
+.nav-buttons {
+  display: flex;
+  gap: 16px;
+}
+.nav-btn {
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+.nav-btn.download {
+  background: var(--success);
+}
+.nav-btn:hover {
+  opacity: 0.85;
+}
+
+/* 导航被抓弹性动画 */
+.header.grabbed{
+  animation:navElastic .45s ease;
+}
+@keyframes navElastic{
+  0%{ transform:translateY(-6px) }
+  50%{ transform:translateY(3px) }
+  100%{ transform:translateY(0) }
+}
+/* ========== 分区名称：顶部导航栏 分区结束 ========== */
+
+/* ========== 分区名称：主视觉区（Hero） 分区起始 ========== */
+.hero-section {
+  width: 100%;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+}
+.hero-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  transition: 0.4s ease;
+}
+.hero-card:hover {
+  transform: translateY(-6px);
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--text-gray);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+  animation: buttonGlow 2s ease-in-out infinite;
+}
+
+.hero-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 113, 227, 0.6);
+  opacity: 0.9;
+  animation: none;
+}
+
+@keyframes buttonGlow {
+  0% {
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 8px 24px rgba(0, 113, 227, 0.6);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+    transform: scale(1);
+  }
+}
+/* ========== 分区名称：主视觉区（Hero） 分区结束 ========== */
+
+/* ========== 分区名称：通用内容区 分区起始 ========== */
+.section {
+  width: 100%;
+  padding: var(--space-xl) 0;
+}
+.section:nth-child(even) {
+  background: #f5f5f7;
+}
+.section:nth-child(odd) {
+  background: #ffffff;
+}
+.section-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 50px 30px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+}
+.section-title {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+.section-content {
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--text-gray);
+  white-space: pre-line;
+}
+/* ========== 分区名称：通用内容区 分区结束 ========== */
+
+/* ========== 分区名称：天赋测试区 分区起始 ========== */
+.test-section {
+  width: 100%;
+  padding: var(--space-xl) 0;
+  background: #ffffff;
+}
+.test-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 50px 30px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+}
+.test-title {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+.test-content {
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--text-gray);
+  white-space: pre-line;
+  margin-bottom: var(--space-lg);
+}
+.test-form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.test-question {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background: #f5f5f7;
+  border-radius: var(--radius-md);
+}
+.question-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.option-item:hover {
+  background: #e3f2fd;
+}
+.option-item input[type="radio"] {
+  width: 18px;
+  height: 18px;
+}
+.option-item label {
+  cursor: pointer;
+  flex: 1;
+}
+.submit-btn {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+  cursor: pointer;
+  animation: buttonGlow 2s ease-in-out infinite;
+}
+.submit-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 113, 227, 0.6);
+  opacity: 0.9;
+  animation: none;
+}
+/* ========== 分区名称：天赋测试区 分区结束 ========== */
+
+/* ========== 分区名称：响应式导航 分区起始 ========== */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .menu-area { display:flex; position:relative; align-items: center; }
+  .home-btn {
+    display: none;
+  }
+  .mobile-home-btn {
+    display: flex;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0 8px;
+    height: 28px;
+    line-height: 28px;
+  }
+  .header-content {
+    flex: 1;
+    justify-content: center;
+  }
+  .header-logo {
+    font-size: 16px;
+  }
+  .home-btn, .menu-area {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0 8px;
+    height: 28px;
+    line-height: 28px;
+  }
+  .menu-hint {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .menu-toggle {
+    display: flex;
+    font-size: 14px;
+    height: 14px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width:480px) {
+  .header {
+    padding: 0 16px;
+  }
+  .header-logo {
+    font-size: 14px;
+  }
+  .home-btn, .mobile-home-btn, .menu-area {
+    font-size: 11px;
+    padding: 0 6px;
+    height: 24px;
+    line-height: 24px;
+    gap: 4px;
+  }
+  .menu-hint {
+    font-size: 11px;
+  }
+  .menu-toggle {
+    font-size: 12px;
+    height: 12px;
+  }
+}
+/* ========== 分区名称：终极移动端导航系统 结束 ========== */
+
+.nav-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .nav-buttons {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    z-index: 999;
+    gap: 12px;
+  }
+  
+  .nav-buttons.active {
+    display: flex;
+  }
+}
+
+.nav-overlay { display: none; }
+@media (max-width: 768px) {
+  .nav-overlay.active {
+    display: block;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    pointer-events: auto;
+  }
+}
+
+/* ========== 分区名称：浮动头像 分区起始 ========== */
+.floating-avatar{
+  position:fixed;
+  top:62px;
+  left:50%;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  object-fit:cover;
+  transform:translateX(-50%) translateY(-80px) scale(.6);
+  opacity:0;
+  z-index:998;
+  cursor:pointer;
+  transition: transform .45s cubic-bezier(.22,1.4,.36,1), opacity .35s;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+  filter:drop-shadow(0 10px 10px rgba(0,0,0,.25));
+}
+
+.floating-avatar.show{
+  transform:translateX(-50%) translateY(0) scale(1);
+  opacity:1;
+}
+
+@keyframes floatGlow {
+  0% { box-shadow: 0 14px 30px rgba(0,0,0,0.28); }
+  50% { box-shadow: 0 14px 40px rgba(0,113,227,0.4); }
+  100% { box-shadow: 0 14px 30px rgba(0,0,0,0.28); }
+}
+
+@keyframes gripBreath {
+  0% { transform:translateX(-50%) scale(1) }
+  50% { transform:translateX(-50%) scale(1.03) }
+  100% { transform:translateX(-50%) scale(1) }
+}
+
+@keyframes cliffShake {
+  0% { transform:translateX(-50%) rotate(0deg) }
+  20% { transform:translateX(-50%) rotate(-2deg) }
+  40% { transform:translateX(-50%) rotate(2deg) }
+  60% { transform:translateX(-50%) rotate(-1deg) }
+  80% { transform:translateX(-50%) rotate(1deg) }
+  100% { transform:translateX(-50%) rotate(0deg) }
+}
+
+.floating-avatar.tired{
+  animation:
+    floatGlow 3s ease-in-out infinite,
+    gripBreath 3s ease-in-out infinite,
+    cliffShake .6s ease-in-out;
+}
+
+@keyframes menuBreath {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+/* ========== 分区名称：浮动头像 分区结束 ========== */
+</style>
+</head>
+<body>
+
+<div class="header" id="floatingHeader">
+  <a href="#" class="mobile-home-btn" id="mobileHomeBtn">Home</a>
+  <div class="header-content">
+    <div class="header-logo">Lớp học trực tuyến HSK</div>
+    <a href="#" class="nav-btn home-btn" id="homeBtn">Trang chủ</a>
+  </div>
+  <div class="menu-area" id="menuArea">
+    <div class="menu-hint">Menu</div>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </div>
+  <div class="nav-overlay" id="navOverlay"></div>
+  <div class="nav-buttons" id="navMenu">
+    <a href="https://xufanhsk.github.io/#learn" class="nav-btn">Cách học tiếng Trung hiệu quả</a>
+    <a href="https://xufanhsk.github.io/#contact" class="nav-btn">Cách liên hệ với tôi</a>
+    <a href="https://xufanhsk.github.io/#download" class="nav-btn download">Tải tài liệu miễn phí</a>
+  </div>
+</div>
+
+<div class="hero-section">
+  <div class="container">
+    <div class="hero-card">
+      <h1 class="hero-title">测试你学习汉语的天赋</h1>
+      <p class="hero-subtitle">
+        这个测试将帮助你了解自己学习汉语的潜力和优势，为你的汉语学习之旅提供参考。
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="test-section">
+  <div class="container">
+    <div class="test-card">
+      <h2 class="test-title">天赋测试</h2>
+      <div class="test-content">
+        请回答以下问题，选择最符合你情况的选项。测试结果将帮助你了解自己学习汉语的天赋和优势。
+      </div>
+      <form class="test-form" id="talentTestForm">
+        <div class="test-question">
+          <div class="question-text">1. 你对学习新语言有多大兴趣？</div>
+          <div class="option-group">
+            <div class="option-item">
+              <input type="radio" name="q1" value="5" id="q1a">
+              <label for="q1a">非常感兴趣，我总是主动学习新语言</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q1" value="4" id="q1b">
+              <label for="q1b">比较感兴趣，愿意花时间学习</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q1" value="3" id="q1c">
+              <label for="q1c">一般，需要一定的动力才会学习</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q1" value="2" id="q1d">
+              <label for="q1d">不太感兴趣，只是为了特定目的学习</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q1" value="1" id="q1e">
+              <label for="q1e">完全不感兴趣，被迫学习</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="test-question">
+          <div class="question-text">2. 你学习新事物的速度如何？</div>
+          <div class="option-group">
+            <div class="option-item">
+              <input type="radio" name="q2" value="5" id="q2a">
+              <label for="q2a">非常快，一点就通</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q2" value="4" id="q2b">
+              <label for="q2b">比较快，能够迅速掌握</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q2" value="3" id="q2c">
+              <label for="q2c">一般，需要一定时间理解</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q2" value="2" id="q2d">
+              <label for="q2d">比较慢，需要反复练习</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q2" value="1" id="q2e">
+              <label for="q2e">非常慢，很难理解新事物</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="test-question">
+          <div class="question-text">3. 你对声音和语调的敏感度如何？</div>
+          <div class="option-group">
+            <div class="option-item">
+              <input type="radio" name="q3" value="5" id="q3a">
+              <label for="q3a">非常敏感，能够分辨细微的声音差异</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q3" value="4" id="q3b">
+              <label for="q3b">比较敏感，能够分辨明显的声音差异</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q3" value="3" id="q3c">
+              <label for="q3c">一般，能够分辨基本的声音差异</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q3" value="2" id="q3d">
+              <label for="q3d">不太敏感，需要努力才能分辨声音差异</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q3" value="1" id="q3e">
+              <label for="q3e">完全不敏感，很难分辨声音差异</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="test-question">
+          <div class="question-text">4. 你对图形和符号的记忆力如何？</div>
+          <div class="option-group">
+            <div class="option-item">
+              <input type="radio" name="q4" value="5" id="q4a">
+              <label for="q4a">非常好，能够快速记住图形和符号</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q4" value="4" id="q4b">
+              <label for="q4b">比较好，能够记住大部分图形和符号</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q4" value="3" id="q4c">
+              <label for="q4c">一般，需要一定时间才能记住</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q4" value="2" id="q4d">
+              <label for="q4d">比较差，需要反复记忆</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q4" value="1" id="q4e">
+              <label for="q4e">非常差，很难记住图形和符号</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="test-question">
+          <div class="question-text">5. 你在学习过程中遇到困难时会怎么做？</div>
+          <div class="option-group">
+            <div class="option-item">
+              <input type="radio" name="q5" value="5" id="q5a">
+              <label for="q5a">积极寻找解决方案，不轻易放弃</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q5" value="4" id="q5b">
+              <label for="q5b">尝试不同的方法，直到解决问题</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q5" value="3" id="q5c">
+              <label for="q5c">寻求帮助，然后继续学习</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q5" value="2" id="q5d">
+              <label for="q5d">暂时搁置，等以后再解决</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" name="q5" value="1" id="q5e">
+              <label for="q5e">放弃，认为自己无法解决</label>
+            </div>
+          </div>
+        </div>
+        
+        <button type="button" class="submit-btn" onclick="calculateResult()">提交测试</button>
+      </form>
+      <div id="testResult" style="margin-top: 32px; text-align: center; display: none;">
+        <h3>测试结果</h3>
+        <p id="resultText" style="font-size: 18px; margin-top: 16px;"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<img id="floatingAvatar" class="floating-avatar"
+src="https://raw.githubusercontent.com/xufanhsk/xufanhsk.github.io/main/Pic/avatar.JPG">
+
+<script>
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const header = document.getElementById('floatingHeader');
+      header.classList.toggle('shrink', window.scrollY > 50);
+      ticking = false;
+    });
+    ticking = true;
+  }
+
+  const navMenu = document.getElementById('navMenu');
+  const toggle = document.getElementById('menuToggle');
+  const navOverlay = document.getElementById('navOverlay');
+
+  if (navMenu.classList.contains('active')) {
+    const scrollY = window.scrollY;
+    const opacity = Math.max(0, 1 - scrollY / 100);
+    const scale = Math.max(0.8, 1 - scrollY / 200);
+    navMenu.style.opacity = opacity;
+    navMenu.style.transform = `translateY(0) scale(${scale})`;
+    if (scrollY > 100) {
+      closeMenu();
+      navMenu.style.opacity = '';
+      navMenu.style.transform = '';
+    }
+  }
+});
+
+function toggleAudio() {
+  document.getElementById('audioDesc').style.display = 'none';
+  document.getElementById('audioSub').style.display = 'block';
+}
+
+const toggle = document.getElementById('menuToggle');
+const menuArea = document.getElementById('menuArea');
+const navMenu = document.getElementById('navMenu');
+const navOverlay = document.getElementById('navOverlay');
+const navLinks = document.querySelectorAll('#navMenu a');
+
+function closeMenu() {
+  navMenu.classList.remove('active');
+  toggle.classList.remove('active');
+  navOverlay.classList.remove('active');
+  document.body.classList.remove('menu-open');
+  setTimeout(() => {
+    navMenu.style.opacity = '';
+    navMenu.style.transform = '';
+    toggle.style.animationPlayState = 'running';
+  }, 350);
+}
+
+function toggleMenu(e) {
+  e.stopPropagation();
+  const isActive = navMenu.classList.contains('active');
+  if (isActive) {
+    closeMenu();
+  } else {
+    navMenu.classList.add('active');
+    toggle.classList.add('active');
+    navOverlay.classList.add('active');
+    document.body.classList.add('menu-open');
+    navMenu.style.opacity = '';
+    navMenu.style.transform = '';
+    toggle.style.animationPlayState = 'paused';
+  }
+}
+
+toggle.addEventListener('click', toggleMenu);
+menuArea.addEventListener('click', toggleMenu);
+navOverlay.addEventListener('click', closeMenu);
+navLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+document.addEventListener('click', (e) => {
+  const isClickInsideMenu = menuArea.contains(e.target);
+  const isClickInsideNav = navMenu.contains(e.target);
+  const isClickOnOverlay = navOverlay.contains(e.target);
+  if (!isClickInsideMenu && !isClickInsideNav && !isClickOnOverlay && navMenu.classList.contains('active')) {
+    closeMenu();
+  }
+});
+navMenu.addEventListener('click', (e) => e.stopPropagation());
+
+/* ==============================================
+   浮动头像：巢穴 → 爬出 → 抓导航 → 紧张悬挂
+============================================== */
+const floatingAvatar = document.getElementById("floatingAvatar");
+let lastScroll = 0;
+
+window.addEventListener("scroll",()=>{
+  // 获取导航栏高度
+  const headerHeight = document.querySelector(".header").offsetHeight;
+  
+  // 当页面滚动到一定程度时显示浮动头像
+  if(window.scrollY > 300){
+    floatingAvatar.classList.add("show");
+  }else{
+    floatingAvatar.classList.remove("show");
+  }
+
+  const speed = Math.abs(window.scrollY - lastScroll);
+  floatingAvatar.style.transitionDuration =
+    Math.min(0.6, 0.35 + speed/1000) + "s";
+  lastScroll = window.scrollY;
+});
+
+floatingAvatar.addEventListener("click",()=>{
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+setInterval(()=>{
+  if(floatingAvatar.classList.contains("show")){
+    floatingAvatar.classList.add("tired");
+    setTimeout(()=>{
+      floatingAvatar.classList.remove("tired");
+    }, 600);
+  }
+}, 5000);
+
+// 主页按钮点击事件
+function handleHomeClick(e) {
+  e.preventDefault();
+  // 检查当前页面是否为主页
+  const currentPath = window.location.pathname;
+  if (currentPath === '/' || currentPath.endsWith('index.html')) {
+    // 如果是主页，滚动到顶部
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  } else {
+    // 如果不是主页，跳转到主页
+    window.location.href = 'https://xufanhsk.github.io';
+  }
+  // 如果是移动端，点击后关闭菜单
+  closeMenu();
+}
+
+// 为桌面端主页按钮添加事件监听
+const homeBtn = document.getElementById('homeBtn');
+homeBtn.addEventListener('click', handleHomeClick);
+
+// 为移动端主页按钮添加事件监听
+const mobileHomeBtn = document.getElementById('mobileHomeBtn');
+mobileHomeBtn.addEventListener('click', handleHomeClick);
+
+// 天赋测试结果计算
+function calculateResult() {
+  let score = 0;
+  const questions = ['q1', 'q2', 'q3', 'q4', 'q5'];
+  
+  for (let q of questions) {
+    const selected = document.querySelector(`input[name="${q}"]:checked`);
+    if (selected) {
+      score += parseInt(selected.value);
+    }
+  }
+  
+  let resultText = '';
+  if (score >= 20) {
+    resultText = `你的得分是 ${score}/25，你具有很强的汉语学习天赋！你对语言学习充满热情，学习能力强，对声音和符号敏感，并且具有坚韧的学习态度。只要你投入时间和精力，一定能够在汉语学习中取得优异的成绩。`;
+  } else if (score >= 15) {
+    resultText = `你的得分是 ${score}/25，你具有良好的汉语学习天赋。你对语言学习有一定的兴趣，学习能力中等，对声音和符号有一定的敏感度。只要你保持学习的热情和毅力，一定能够在汉语学习中取得不错的成绩。`;
+  } else if (score >= 10) {
+    resultText = `你的得分是 ${score}/25，你具有一般的汉语学习天赋。你对语言学习的兴趣和能力都处于中等水平，需要更多的努力和时间来学习汉语。不过，只要你坚持学习，相信你一定能够取得进步。`;
+  } else {
+    resultText = `你的得分是 ${score}/25，你可能需要更多的努力来学习汉语。不过，天赋并不是决定因素，只要你有足够的热情和毅力，通过系统的学习和练习，你仍然可以在汉语学习中取得进步。`;
+  }
+  
+  document.getElementById('resultText').textContent = resultText;
+  document.getElementById('testResult').style.display = 'block';
+  
+  // 滚动到结果区域
+  document.getElementById('testResult').scrollIntoView({
+    behavior: 'smooth'
+  });
+}
+</script>
+</body>
+</html>
