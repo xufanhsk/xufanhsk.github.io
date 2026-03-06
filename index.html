@@ -4,30 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Giáo viên Trung Quốc HSK</title>
-
 <style>
-
 /* ========== 分区名称：全局设计系统 分区起始 ========== */
-
 :root {
   --container-width: 980px;
-
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 32px;
-  --space-xl: 60px; /* 减小超大间距，修复区域间隔过大问题 */
-
+  --space-xl: 60px;
   --radius-lg: 24px;
   --radius-md: 16px;
-
   --text-dark: #1d1d1f;
   --text-gray: #6e6e73;
   --bg-light: #f5f5f7;
   --primary: #0071e3;
   --success: #34c759;
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -35,25 +28,20 @@
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
-
 body {
   background: var(--bg-light);
   color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
   padding: 0 20px;
 }
-
 /* ========== 分区名称：全局设计系统 分区结束 ========== */
 
-
 /* ========== 分区名称：顶部导航栏 分区起始 ========== */
-
 .header {
   position: fixed;
   top: 0;
@@ -65,10 +53,102 @@ body {
   border-bottom: 1px solid rgba(0,0,0,0.05);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
   padding: 0 32px;
   z-index: 999;
   transition: 0.3s ease;
+}
+
+.mobile-home-btn {
+  display: none;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 769px) {
+  .header-content {
+    justify-content: center;
+  }
+}
+
+.header-logo {
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.home-btn, .menu-area {
+  flex-shrink: 1;
+  flex-grow: 0;
+  min-width: 80px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.35s ease, font-size 0.3s ease;
+  animation: menuBreath 2s ease-in-out infinite;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: rgba(0, 113, 227, 0.1);
+  border: 1px solid rgba(0, 113, 227, 0.2);
+  text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .header-logo {
+    font-size: 18px;
+  }
+  .home-btn, .menu-area {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .header-logo {
+    font-size: 16px;
+  }
+  .home-btn, .menu-area {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+}
+
+.mobile-home-btn {
+  display: flex;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 28px;
+  height: 28px;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.35s ease;
+  animation: menuBreath 2s ease-in-out infinite;
+  padding: 0 8px;
+  border-radius: 12px;
+  background: rgba(0, 113, 227, 0.1);
+  border: 1px solid rgba(0, 113, 227, 0.2);
+  text-decoration: none;
+}
+
+.home-btn:hover, .mobile-home-btn:hover {
+  transform: scale(1.05);
+  background: rgba(0, 113, 227, 0.15);
+  box-shadow: 0 0 12px rgba(0, 113, 227, 0.3);
 }
 
 .header.shrink {
@@ -76,17 +156,19 @@ body {
   background: rgba(255,255,255,0.95);
   box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
-
 .header-logo {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
 }
-
 .nav-buttons {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+  gap: 15px;
+  overflow: visible;
+  margin-top: 12px;
 }
-
 .nav-btn {
   padding: 10px 20px;
   background: var(--primary);
@@ -96,38 +178,68 @@ body {
   font-size: 14px;
   transition: 0.3s;
 }
-
 .nav-btn.download {
   background: var(--success);
 }
-
 .nav-btn:hover {
   opacity: 0.85;
 }
 
+/* 导航被抓弹性动画 */
+.header.grabbed{
+  animation:navElastic .45s ease;
+}
+@keyframes navElastic{
+  0%{ transform:translateY(-6px) }
+  50%{ transform:translateY(3px) }
+  100%{ transform:translateY(0) }
+}
 /* ========== 分区名称：顶部导航栏 分区结束 ========== */
 
-
 /* ========== 分区名称：主视觉区（Hero） 分区起始 ========== */
-
 .hero-section {
   width: 100%;
-  padding-top: 120px; /* 减小顶部内边距 */
-  padding-bottom: 80px; /* 减小底部内边距 */
+  padding-top: 120px;
+  padding-bottom: 80px;
   background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
 }
-
 .hero-card {
   background: #ffffff;
   border-radius: var(--radius-lg);
-  padding: 60px 40px; /* 减小内边距 */
+  padding: 60px 40px;
   text-align: center;
   box-shadow: 0 20px 40px rgba(0,0,0,0.06);
   transition: 0.4s ease;
 }
-
 .hero-card:hover {
   transform: translateY(-6px);
+}
+
+/* 头像巢穴 */
+.avatar-nest{
+  position:relative;
+  width:170px;
+  height:170px;
+  margin:0 auto var(--space-lg);
+  border-radius:50%;
+}
+.avatar-nest::before{
+  content:"";
+  position:absolute;
+  inset:-15px;
+  border-radius:50%;
+  background:
+  radial-gradient(circle,
+  rgba(0,113,227,0.25) 0%,
+  rgba(0,113,227,0.08) 40%,
+  transparent 70%);
+  filter:blur(10px);
+  animation:nestBreath 4s ease-in-out infinite;
+}
+@keyframes nestBreath{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+  100%{transform:scale(1)}
 }
 
 .hero-avatar {
@@ -135,21 +247,14 @@ body {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: var(--space-lg);
-  /* 头像呼吸+旋转动画 */
   animation: avatarBreath 4s ease-in-out infinite;
-  /* 增加头像阴影，增强立体感 */
   box-shadow: 0 0 20px rgba(0,113,227,0.2);
   transition: all 0.5s ease;
 }
-
-/* 头像悬停增强效果 */
 .hero-avatar:hover {
   transform: scale(1.05) rotate(5deg);
   box-shadow: 0 0 30px rgba(0,113,227,0.4);
 }
-
-/* 头像呼吸动画 */
 @keyframes avatarBreath {
   0% {
     transform: scale(1);
@@ -170,59 +275,84 @@ body {
   font-weight: 700;
   margin-bottom: 20px;
 }
-
 .hero-subtitle {
   font-size: 20px;
   color: var(--text-gray);
   max-width: 720px;
   margin: 0 auto;
   line-height: 1.6;
+  margin-bottom: 32px;
 }
 
+.hero-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+  animation: buttonGlow 2s ease-in-out infinite;
+}
+
+.hero-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 113, 227, 0.6);
+  opacity: 0.9;
+  animation: none;
+}
+
+@keyframes buttonGlow {
+  0% {
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 8px 24px rgba(0, 113, 227, 0.6);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+    transform: scale(1);
+  }
+}
 /* ========== 分区名称：主视觉区（Hero） 分区结束 ========== */
 
-
 /* ========== 分区名称：通用内容区 分区起始 ========== */
-
 .section {
   width: 100%;
-  padding: var(--space-xl) 0; /* 使用减小后的space-xl */
+  padding: var(--space-xl) 0;
 }
-
 .section:nth-child(even) {
   background: #f5f5f7;
 }
-
 .section:nth-child(odd) {
   background: #ffffff;
 }
-
 .section-card {
   background: #ffffff;
   border-radius: var(--radius-lg);
-  padding: 50px 30px; /* 减小内边距 */
+  padding: 50px 30px;
   box-shadow: 0 12px 30px rgba(0,0,0,0.05);
 }
-
 .section-title {
   font-size: 32px;
   font-weight: 600;
   text-align: center;
   margin-bottom: var(--space-lg);
 }
-
 .section-content {
   font-size: 18px;
   line-height: 1.9;
   color: var(--text-gray);
   white-space: pre-line;
 }
-
 /* ========== 分区名称：通用内容区 分区结束 ========== */
 
-
 /* ========== 分区名称：学习方法区 音频预留模块 样式起始 ========== */
-
 .audio-placeholder {
   margin: 0 auto 40px auto;
   max-width: 680px;
@@ -231,7 +361,6 @@ body {
   border-radius: var(--radius-md);
   text-align: center;
 }
-
 .audio-btn {
   padding: 12px 28px;
   background: var(--primary);
@@ -242,63 +371,49 @@ body {
   font-size: 14px;
   margin-bottom: 20px;
 }
-
-.audio-description,
-.audio-subtitle {
+.audio-description, .audio-subtitle {
   font-size: 15px;
   color: var(--text-gray);
   line-height: 1.8;
 }
-
 .audio-subtitle {
   display: none;
   text-align: left;
   white-space: pre-line;
 }
-
 /* ========== 分区名称：学习方法区 音频预留模块 样式结束 ========== */
 
-
 /* ========== 分区名称：联系方式区 优化起始 ========== */
-
 .contact-wrapper {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
 }
-
 .contact-qr-row {
   display: flex;
   justify-content: center;
-  gap: var(--space-md); /* 减小二维码间距 */
+  gap: var(--space-md);
 }
-
 .contact-card {
   flex: 1;
   max-width: 240px;
-  padding: 20px 15px; /* 减小内边距 */
+  padding: 20px 15px;
   background: #f5f5f7;
   border-radius: var(--radius-md);
   text-align: center;
   transition: 0.3s ease;
-  /* 关键：添加overflow隐藏，防止二维码穿出 */
   overflow: hidden;
 }
-
 .contact-card:hover {
   transform: translateY(-6px);
 }
-
 .contact-card img {
-  /* 修复极小屏幕二维码缩放问题 */
   width: 100%;
   max-width: 160px;
   height: auto;
   margin-top: 15px;
-  /* 确保二维码自适应容器 */
   object-fit: contain;
 }
-
 .contact-info-box {
   background: #f5f5f7;
   padding: 24px;
@@ -306,63 +421,51 @@ body {
   text-align: center;
   line-height: 1.8;
 }
-
-/* 优化极小屏幕适配（小于480px） */
 @media (max-width: 480px) {
   .contact-qr-row {
     flex-direction: column;
     align-items: center;
     gap: 16px;
   }
-
   .contact-card {
     max-width: 90%;
     padding: 15px 10px;
   }
-  
   .contact-card img {
     max-width: 120px;
   }
 }
-
 @media (max-width: 768px) {
   .contact-qr-row {
     flex-direction: row;
     gap: 16px;
   }
-
   .contact-card {
     max-width: 45%;
-    padding: 15px 10px; /* 减小内边距 */
+    padding: 15px 10px;
   }
 }
-
 /* ========== 分区名称：联系方式区 优化结束 ========== */
 
-
 /* ========== 分区名称：下载区 分区起始 ========== */
-
 .download-list {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
-
 .download-item {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  padding: 20px 15px; /* 减小内边距 */
+  padding: 20px 15px;
   border-radius: var(--radius-md);
   background: #ffffff;
   box-shadow: 0 8px 20px rgba(0,0,0,0.04);
   transition: 0.3s ease;
 }
-
 .download-item:hover {
   transform: translateY(-6px);
 }
-
 .download-btn {
   margin-left: auto;
   padding: 10px 20px;
@@ -372,51 +475,33 @@ body {
   text-decoration: none;
   font-size: 14px;
 }
-
 /* ========== 分区名称：下载区 分区结束 ========== */
-  
-/* ========== 分区名称：移动端导航适配 起始 ========== */
 
+/* ========== 分区名称：移动端导航适配 起始 ========== */
 .menu-toggle {
   display: none;
   cursor: pointer;
 }
-
 @media (max-width: 768px) {
+  .mobile-home-btn {
+    display: block;
+  }
   .nav-buttons {
-    position: fixed;
-    top: 72px;
-    right: 0;
-    width: 100%;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(20px);
+    display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 0;
-    gap: 28px;
-    transform: translateY(-20px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.35s ease-in-out;
-    z-index: 999;
+    padding: 12px 0;
+    gap: 15px;
     overflow: visible;
+    margin-top: 12px;
   }
-
-  .nav-buttons.active {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
   .menu-toggle {
     display: block;
   }
 }
-
 /* ========== 分区名称：移动端导航适配 结束 ========== */
 
 /* ========== 分区名称：终极移动端导航系统 起始 ========== */
-
 .menu-area {
   display: none;
   align-items: center;
@@ -424,8 +509,6 @@ body {
   cursor: pointer;
   z-index: 1001;
 }
-
-/* Menu文字 */
 .menu-hint {
   font-size: 24px;
   font-weight: 700;
@@ -434,11 +517,8 @@ body {
   height: 32px;
   display: flex;
   align-items: center;
-  /* 文字同步呼吸效果 */
   animation: textBreath 4s ease-in-out infinite;
 }
-
-/* 三杠按钮 */
 .menu-toggle {
   font-size: 32px;
   line-height: 32px;
@@ -446,11 +526,8 @@ body {
   display: flex;
   align-items: center;
   transition: transform 0.35s ease;
-  /* 三杠呼吸灯动画 */
   animation: menuBreath 2s ease-in-out infinite;
 }
-
-/* 三杠呼吸灯动画 */
 @keyframes menuBreath {
   0% {
     opacity: 0.7;
@@ -468,8 +545,6 @@ body {
     text-shadow: 0 0 5px rgba(0,113,227,0.1);
   }
 }
-
-/* 文字呼吸动画 */
 @keyframes textBreath {
   0% {
     opacity: 0.8;
@@ -484,16 +559,10 @@ body {
     color: #1d1d1f;
   }
 }
-
-/* 打开菜单旋转 */
 .menu-toggle.active {
   transform: rotate(90deg);
-  /* 旋转时暂停呼吸动画，避免冲突 */
   animation-play-state: paused;
 }
-
-/* ===== 每5秒高亮一次 ===== */
-
 .menu-area::after {
   content: "";
   position: absolute;
@@ -502,78 +571,224 @@ body {
   pointer-events: none;
   animation: menuGlow 5s infinite;
 }
-
 @keyframes menuGlow {
   0% { opacity:0; }
   6% {
     opacity:1;
-    box-shadow:0 0 0 2px rgba(0,113,227,0.25),
-               0 0 12px rgba(0,113,227,0.35);
+    box-shadow:0 0 0 2px rgba(0,113,227,0.25), 0 0 12px rgba(0,113,227,0.35);
   }
   12% { opacity:0; }
   100% { opacity:0; }
 }
-
-/* 手机端显示 */
 @media (max-width:768px) {
-  .menu-area {
-    display:flex;
-    position:relative;
+  .menu-area { display:flex; position:relative; align-items: center; }
+  .home-btn {
+    display: none;
+  }
+  .mobile-home-btn {
+    display: flex;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0 8px;
+    height: 28px;
+    line-height: 28px;
+  }
+  .header-content {
+    flex: 1;
+    justify-content: center;
+  }
+  .header-logo {
+    font-size: 16px;
+  }
+  .home-btn, .menu-area {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0 8px;
+    height: 28px;
+    line-height: 28px;
+  }
+  .menu-hint {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .menu-toggle {
+    font-size: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
+@media (max-width:480px) {
+  .header {
+    padding: 0 16px;
+  }
+  .header-logo {
+    font-size: 14px;
+  }
+  .home-btn, .mobile-home-btn, .menu-area {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0 6px;
+    height: 24px;
+    line-height: 24px;
+    gap: 4px;
+  }
+  .menu-hint {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .menu-toggle {
+    font-size: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
 /* ========== 分区名称：终极移动端导航系统 结束 ========== */
 
-/* 遮罩层样式 */
-.nav-overlay {
-  display: none;
-}
-
+.nav-overlay { display: none; }
 @media (max-width: 768px) {
   .nav-overlay.active {
     display: block;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: rgba(0,0,0,0.25);
     backdrop-filter: blur(4px);
     z-index: 998;
     pointer-events: auto;
   }
 }
+
+/* ======================
+   浮动头像 · 巢穴攀爬系统
+====================== */
+.floating-avatar{
+  position:fixed;
+  top:77px;
+  left:50%;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  transform:translateX(-50%) translateY(-80px) scale(.6);
+  opacity:0;
+  z-index:998;
+  cursor:pointer;
+  transition:
+    transform .45s cubic-bezier(.22,1.4,.36,1),
+    opacity .35s;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+  filter:drop-shadow(0 10px 10px rgba(0,0,0,.25));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.floating-avatar.show {
+  opacity: 0.5;
+}
+
+.floating-avatar.show:hover,
+.floating-avatar.show:active {
+  opacity: 1;
+}
+
+.floating-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.floating-avatar-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.floating-avatar.show{
+  transform: translateX(-50%) translateY(0) scale(1);
+  animation: floatGlow 3s ease-in-out infinite, gripBreath 3s ease-in-out infinite;
+}
+@keyframes floatGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(0,113,227,0.3), 0 14px 30px rgba(0,0,0,0.28);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(0,113,227,0.55), 0 14px 30px rgba(0,0,0,0.28);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0,113,227,0.3), 0 14px 30px rgba(0,0,0,0.28);
+  }
+}
+@keyframes gripBreath{
+  0%{ transform:translateX(-50%) translateY(0) scale(1) }
+  50%{ transform:translateX(-50%) translateY(2px) scale(1.03) }
+  100%{ transform:translateX(-50%) translateY(0) scale(1) }
+}
+@keyframes cliffShake{
+  0%{ transform:translateX(-50%) translateY(0) rotate(0deg) }
+  20%{ transform:translateX(-50%) translateY(0) rotate(-2deg) }
+  40%{ transform:translateX(-50%) translateY(0) rotate(2deg) }
+  60%{ transform:translateX(-50%) translateY(0) rotate(-1deg) }
+  80%{ transform:translateX(-50%) translateY(0) rotate(1deg) }
+  100%{ transform:translateX(-50%) translateY(0) rotate(0deg) }
+}
+.floating-avatar.tired{
+  animation:
+    floatGlow 3s ease-in-out infinite,
+    gripBreath 3s ease-in-out infinite,
+    cliffShake .6s ease-in-out;
+}
 </style>
 </head>
-
 <body>
 
 <div class="header" id="floatingHeader">
-  <div class="header-logo">Lớp học trực tuyến HSK</div>
-
-  <div class="menu-area" id="menuArea">
-    <div class="menu-hint">Menu</div>
-    <div class="menu-toggle" id="menuToggle">☰</div>
+  <a href="#" class="mobile-home-btn" id="mobileHomeBtn">Home</a>
+  <div class="header-content">
+    <div class="header-logo">Lớp học trực tuyến HSK</div>
   </div>
-
-  <div class="nav-overlay" id="navOverlay"></div>
-
-  <div class="nav-buttons" id="navMenu">
-    <a href="#learn" class="nav-btn">Cách học tiếng Trung hiệu quả</a>
-    <a href="#contact" class="nav-btn">Cách liên hệ với tôi</a>
-    <a href="#download" class="nav-btn download">Tải tài liệu miễn phí</a>
-  </div>
+  <a href="#contact" class="mobile-home-btn" id="contactBtn">Contact</a>
 </div>
 
 <div class="hero-section">
   <div class="container">
     <div class="hero-card">
-      <img src="https://raw.githubusercontent.com/xufanhsk/xufanhsk.github.io/main/Pic/avatar.JPG" class="hero-avatar">
+      <div class="avatar-nest">
+        <img src="https://raw.githubusercontent.com/xufanhsk/xufanhsk.github.io/main/Pic/avatar.JPG" class="hero-avatar">
+      </div>
       <h1 class="hero-title">Hứa Phàm<br>Giáo viên dạy HSK trực tuyến</h1>
       <p class="hero-subtitle">
         Chuyên dạy HSK 1-1 trực tuyến, từ chối tiếng Trung câm,
         làm cho tiếng Trung trở thành công cụ giao tiếp của bạn
       </p>
+      <a href="https://xufanhsk.github.io/kaoshi/TianFuCeShi.html" target="_blank" class="hero-btn">测试你学习汉语的天赋</a>
+      <div class="nav-buttons">
+        <a href="#learn" class="nav-btn">Cách học tiếng Trung hiệu quả</a>
+        <a href="#contact" class="nav-btn">Cách liên hệ với tôi</a>
+        <a href="#download" class="nav-btn download">Tải tài liệu miễn phí</a>
+      </div>
     </div>
   </div>
 </div>
@@ -582,8 +797,6 @@ body {
   <div class="container">
     <div class="section-card">
       <h2 class="section-title">Cách học tiếng Trung hiệu quả</h2>
-
-      <!-- ========== 分区名称：学习方法区 音频播放预留模块 起始 ========== -->
       <div class="audio-placeholder">
         <button class="audio-btn" onclick="toggleAudio()">▶ Phát audio</button>
         <div class="audio-description" id="audioDesc">
@@ -591,13 +804,35 @@ body {
         </div>
         <div class="audio-subtitle" id="audioSub">
           Đây là khu vực hiển thị phụ đề sau khi phát audio.
-          (字幕区示例文本)
         </div>
       </div>
-      <!-- ========== 分区名称：学习方法区 音频播放预留模块 结束 ========== -->
-
       <div class="section-content">
-        （此处放你完整文章内容）
+        <h3>Từ chối tư duy dịch thuật</h3>
+        <p>Nhiều người học tiếng Trung, vì sợ không nghe hiểu, không theo kịp, nên thích chọn lớp học sử dụng nhiều tiếng Việt trong suốt buổi học. Dường như dễ dàng, nghe hiểu, nhưng thực chất phụ thuộc vào dịch thuật lâu dài, cuối cùng vẫn không dám nói, không giao tiếp được, khi vào tình huống thực tế lại ngượng ngùng, do dự, rất khó sử dụng tiếng Trung thực sự.</p>
+        <p>Đặc biệt là người mới bắt đầu từ cơ sở 0, nên chọn lớp học chủ đạo bằng tiếng Trung, càng phải tránh mô hình giảng dạy quá phụ thuộc vào tiếng Việt. Cơ sở 0 là giai đoạn vàng để hình thành thói quen ngôn ngữ, một khi từ đầu nhập môn đã bị ảnh hưởng bởi phát âm và ngữ điệu của tiếng mẹ đẻ, dù sau này bỏ ra nhiều lần thời gian cũng rất khó sửa chữa hoàn toàn, sẽ tạo thành vấn đề giọng ngôn đi theo cả đời.</p>
+        <p>Đồng thời, phụ thuộc vào dịch thuật lâu dài sẽ khiến học sinh từ đầu đã hình thành tư duy cố định "dịch trước, hiểu sau, biểu đạt cuối", phát âm không chuẩn, khó xây dựng cảm giác ngôn ngữ, học càng lâu càng không dám nói, ngược lại đi con đường xa nhất.</p>
+        <p>Muốn học tốt tiếng Trung, không chỉ dựa vào từ vựng và đề thi, mà còn phải vào lớp học chủ đạo bằng tiếng Trung — giảng giải toàn bộ bằng tiếng Trung, tương tác bằng tiếng Trung, chỉ sử dụng ít gợi ý phụ bằng ngôn ngữ mẹ khi cần thiết, để người học thực sự hòa mình vào môi trường tiếng Trung, hiểu tiếng Trung bằng tiếng Trung.</p>
+        <p>Thực ra mỗi người đều có năng lực ngôn ngữ tự nhiên nhất: thời thơ ấu, chúng ta không hiểu bất kỳ ngôn ngữ nào, nhưng trong môi trường ngôn ngữ mẹ thuần túy, qua nghe nhiều, mô phỏng, giao tiếp, tự nhiên học nói. Không có dịch thuật, không có đối chiếu, chỉ có đầu vào ngôn ngữ trong môi trường đắm chìm + phản xạ nói tự nhiên, đó mới là quy luật thực sự, hiệu quả nhất trong học ngôn ngữ.</p>
+        <p>Chúng ta cũng thấy, nhiều đứa trẻ trong gia đình đa quốc gia, từ nhỏ lớn lên tự nhiên trong môi trường hai ngôn ngữ, không cần dịch từng chữ, vẫn có thể nắm vững song ngữ một cách lưu loát bẩm sinh. Điều này chính xác chứng minh: ngôn ngữ không được học qua dịch thuật, mà được rèn luyện qua môi trường, cảm giác nghe và sử dụng thực tế.</p>
+        <p>Trong lớp học sử dụng nhiều tiếng Việt, học sinh rất dễ hình thành thói quen cố định: nghe tiếng Trung → dịch sang tiếng Việt trong đầu → nghĩ cách trả lời → dịch lại thành tiếng Trung nói ra. Toàn bộ quá trình như một "máy dịch thuật", phản ứng chậm, không tự nhiên, một lúc căng thẳng lại sai, mãi không thể giao tiếp lưu loát.</p>
+        <p>Còn trong lớp học chủ đạo bằng tiếng Trung, học sinh không có đủ thời gian phụ thuộc vào dịch thuật, phải tập trung chú ý nghe phát âm, xem biểu cảm, hiểu ngữ cảnh, buộc não bộ xử lý trực tiếp thông tin tiếng Trung. Thời gian dài, sẽ hình thành phản ứng tự nhiên, nói ngay khi nghĩ ra, nghe là hiểu, nghĩ là nói, chứ không phải dịch ngược lại trong đầu, ngượng ngùng, do dự.</p>
+        <p>Ưu thế của mô hình học tập này rất rõ ràng:</p>
+        <ul>
+          <li>Từ bỏ tư duy "dịch trước giao tiếp sau", xây dựng cảm giác ngôn ngữ tiếng Trung chuẩn xác</li>
+          <li>Nâng cao phát âm chuẩn và logic biểu đạt, phát âm chuẩn hơn, biểu đạt rõ ràng hơn</li>
+          <li>Nâng cao tốc độ phản ứng nghe hiểu, thực sự nghe hiểu, dám nói, biết sử dụng</li>
+          <li>Triệt tiêu tiếng Trung câm từ gốc rễ, từ chối chỉ biết làm bài thi, không biết nói</li>
+        </ul>
+        <p>Mục tiêu cuối cùng của học tiếng Trung, không phải là trở thành một máy dịch thuật di động, cũng không chỉ vì một tấm chứng chỉ, mà là có thể tự tin, tự nhiên, thoải mái giao tiếp bằng tiếng Trung, thực sự biến tiếng Trung thành ngôn ngữ của chính mình.</p>
+        <p>Nếu bạn không chỉ là học sinh để lấy chứng chỉ HSK, mà còn là người học tiếng Trung thực sự muốn nói, dùng, dám giao tiếp, thì bạn đã tìm thấy lựa chọn khôn ngoan nhất.</p>
+        
+        <h3>Quan điểm giảng dạy của tôi</h3>
+        <p><strong>Lý tưởng giảng dạy cốt lõi</strong><br>
+        Dựa trên phát âm chuẩn làm nền tảng, lấy logic biểu đạt làm khung xương, giảng chi tiết từ vựng và ngữ pháp hữu dụng, để học sinh nghe hiểu trước – nói được – dám sử dụng trong thực tế, sau đó nâng cao đều đặn. Từ chối làm bài tập lặp lại cơ khí, chú trọng hiểu và sử dụng, triệt tiêu tiếng Trung câm từ gốc rễ.</p>
+        <p><strong>Nguyên tắc thiết kế đánh giá kiểm tra</strong><br>
+        Đánh giá không chỉ nhìn điểm số, mà còn coi trọng năng lực ngôn ngữ thực tế. Đồng thời đảm bảo yêu cầu thi HSK và các kỳ thi khác cùng với tình huống giao tiếp hàng ngày, vừa đảm bảo đạt chuẩn thi cử, vừa tăng cường hiểu nghe, biểu đạt nói và sử dụng thực tế, để điểm số phản ánh đúng trình độ thực tế.</p>
+        <p><strong>Mục tiêu nuôi dưỡng học viên</strong><br>
+        Để học sinh nắm vững phát âm chuẩn và logic biểu đạt rõ ràng, có thể giao tiếp thoải mái trong cuộc sống, học tập, công việc, thực sự đạt được: nghe hiểu, nói ra, dùng đúng, trở thành người học tiếng Trung biết dùng, chứ không chỉ biết làm bài thi.</p>
       </div>
     </div>
   </div>
@@ -611,24 +846,17 @@ body {
         <div class="contact-qr-row">
           <div class="contact-card">
             <h3>Zalo</h3>
-            <img src="https://xufanhsk.github.io/Pic/zalo.JPG" alt="Zalo QR Code">
+            <img src="https://xufanhsk.github.io/Pic/zalo.JPG" alt="Zalo QR">
           </div>
           <div class="contact-card">
             <h3>WeChat</h3>
-            <img src="https://xufanhsk.github.io/Pic/wechat.JPG" alt="WeChat QR Code">
+            <img src="https://xufanhsk.github.io/Pic/wechat.JPG" alt="WeChat QR">
           </div>
         </div>
         <div class="contact-info-box">
-          <div>Facebook: 
-            <a href="https://www.facebook.com/share/1HkARNg9Ug/?mibextid=wwXIfr" target="_blank">
-              Truy cập trang FB
-            </a>
-          </div>
+          <div>Facebook: <a href="https://www.facebook.com/share/1HkARNg9Ug/?mibextid=wwXIfr" target="_blank">Truy cập trang FB</a></div>
           <div>Email: xufanokok@gmail.com</div>
-          <div>
-            🇨🇳 +86 13377970080<br>
-            🇻🇳 +84 357 7693703
-          </div>
+          <div>🇨🇳 +86 13377970080 (Thêm Zalo/WeChat)<br>🇻🇳 +84 357 7693703 (Chỉ nhận tin/gọi)</div>
         </div>
       </div>
     </div>
@@ -640,52 +868,57 @@ body {
     <div class="section-card">
       <h2 class="section-title">Tải tài liệu học tập miễn phí</h2>
       <div class="download-list">
-        <div class="download-item">
-          📖 Tài liệu HSK 1–6
-          <a href="#" class="download-btn">Tải</a>
-        </div>
-        <div class="download-item">
-          🎧 Audio nghe hiểu
-          <a href="#" class="download-btn">Tải</a>
-        </div>
-        <div class="download-item">
-          📝 Bài tập luyện viết
-          <a href="#" class="download-btn">Tải</a>
-        </div>
+        <div class="download-item">📖 Tài liệu HSK 1–6 <a href="#" class="download-btn">Tải</a></div>
+        <div class="download-item">🎧 Audio nghe hiểu <a href="#" class="download-btn">Tải</a></div>
+        <div class="download-item">📝 Bài tập luyện viết <a href="#" class="download-btn">Tải</a></div>
       </div>
     </div>
   </div>
 </div>
 
+<div id="floatingAvatar" class="floating-avatar">
+  <img src="https://raw.githubusercontent.com/xufanhsk/xufanhsk.github.io/main/Pic/avatar.JPG" class="floating-avatar-img">
+  <div class="floating-avatar-top">Top</div>
+</div>
+
 <script>
+const floatingAvatar = document.getElementById("floatingAvatar");
 let ticking = false;
+let isContactSection = false;
+
 window.addEventListener('scroll', () => {
   if (!ticking) {
     window.requestAnimationFrame(() => {
       const header = document.getElementById('floatingHeader');
       header.classList.toggle('shrink', window.scrollY > 50);
+      
+      // 动态调整浮动头像的位置，使其始终吸附在导航栏下方
+      const headerHeight = header.offsetHeight;
+      floatingAvatar.style.top = `${headerHeight + 5}px`;
+      
       ticking = false;
     });
     ticking = true;
   }
 
-  const navMenu = document.getElementById('navMenu');
-  const toggle = document.getElementById('menuToggle');
-  const navOverlay = document.getElementById('navOverlay');
+  // 检测是否滚动到了联系方式区
+  const contactSection = document.getElementById('contact');
+  const rect = contactSection.getBoundingClientRect();
+  const isInView = rect.top <= window.innerHeight && rect.bottom >= 0;
   
-  if (navMenu.classList.contains('active')) {
-    const scrollY = window.scrollY;
-    const opacity = Math.max(0, 1 - scrollY / 100);
-    const scale = Math.max(0.8, 1 - scrollY / 200);
-    
-    navMenu.style.opacity = opacity;
-    navMenu.style.transform = `translateY(0) scale(${scale})`;
-    
-    if (scrollY > 100) {
-      closeMenu();
-      navMenu.style.opacity = '';
-      navMenu.style.transform = '';
-    }
+  const avatarImg = floatingAvatar.querySelector('.floating-avatar-img');
+  const topBtn = floatingAvatar.querySelector('.floating-avatar-top');
+  
+  if (isInView) {
+    isContactSection = true;
+    // 显示Top按钮，隐藏头像
+    avatarImg.style.opacity = '0';
+    topBtn.style.opacity = '1';
+  } else {
+    isContactSection = false;
+    // 显示头像，隐藏Top按钮
+    avatarImg.style.opacity = '1';
+    topBtn.style.opacity = '0';
   }
 });
 
@@ -694,76 +927,111 @@ function toggleAudio() {
   document.getElementById('audioSub').style.display = 'block';
 }
 
-const toggle = document.getElementById('menuToggle');
-const menuArea = document.getElementById('menuArea');
-const navMenu = document.getElementById('navMenu');
-const navOverlay = document.getElementById('navOverlay');
-const navLinks = document.querySelectorAll('#navMenu a');
 
-// 增强关闭菜单函数，确保动画同步完成
-function closeMenu() {
-  navMenu.classList.remove('active');
-  toggle.classList.remove('active');
-  navOverlay.classList.remove('active');
-  document.body.classList.remove('menu-open');
-  
-  setTimeout(() => {
-    navMenu.style.opacity = '';
-    navMenu.style.transform = '';
-    // 恢复呼吸动画
-    toggle.style.animationPlayState = 'running';
-  }, 350);
-}
 
-// 统一菜单切换，确保状态同步
-function toggleMenu(e) {
-  e.stopPropagation();
+/* ==============================================
+   浮动头像：巢穴 → 爬出 → 抓导航 → 紧张悬挂
+============================================== */
+const heroAvatar = document.querySelector(".hero-avatar");
+const nest = document.querySelector(".avatar-nest");
+let lastScroll = 0;
+
+window.addEventListener("scroll",()=>{
+  const rect = nest.getBoundingClientRect();
+  const start = 190;
+  const end = 80;
+  let progress = (start - rect.top)/(start-end);
+  progress = Math.min(Math.max(progress,0),1);
+
+  const nestScale = 1 - progress*0.25;
+  nest.style.transform = `scale(${nestScale})`;
+
+  const avatarScale = 1 - progress*0.55;
+  heroAvatar.style.transform =
+    `scale(${avatarScale}) translateY(${-progress*25}px)`;
+
+  // 获取导航栏高度
+  const headerHeight = document.querySelector(".header").offsetHeight;
+  // 主头像下沿的位置
+  const avatarBottom = rect.bottom;
   
-  const isActive = navMenu.classList.contains('active');
-  
-  if (isActive) {
-    closeMenu();
+  // 当导航栏即将完全遮蔽主头像时显示浮动头像
+  // 当主头像下沿在导航栏下沿开始出现时隐藏浮动头像
+  if(avatarBottom <= headerHeight + 20){ // 提前20px开始显示
+    floatingAvatar.classList.add("show");
+  }else if(avatarBottom > headerHeight + 10){ // 添加10px的缓冲
+    floatingAvatar.classList.remove("show");
+  }
+
+  if(progress > 0.9){
+    document.querySelector(".header").classList.add("grabbed");
+  }else{
+    document.querySelector(".header").classList.remove("grabbed");
+  }
+
+  const speed = Math.abs(window.scrollY - lastScroll);
+  floatingAvatar.style.transitionDuration =
+    Math.min(0.6, 0.35 + speed/1000) + "s";
+  lastScroll = window.scrollY;
+});
+
+floatingAvatar.addEventListener("click",()=>{
+  if (isContactSection) {
+    // 如果在联系方式区，回到页面顶端
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   } else {
-    navMenu.classList.add('active');
-    toggle.classList.add('active');
-    navOverlay.classList.add('active');
-    document.body.classList.add('menu-open');
-    navMenu.style.opacity = '';
-    navMenu.style.transform = '';
-    // 暂停呼吸动画
-    toggle.style.animationPlayState = 'paused';
+    // 否则跳转到联系方式区
+    document.getElementById("contact").scrollIntoView({
+      behavior:"smooth"
+    });
+  }
+});
+
+setInterval(()=>{
+  if(floatingAvatar.classList.contains("show")){
+    floatingAvatar.classList.add("tired");
+    setTimeout(()=>{
+      floatingAvatar.classList.remove("tired");
+    }, 600);
+  }
+}, 5000);
+
+// 主页按钮点击事件
+function handleHomeClick(e) {
+  e.preventDefault();
+  // 检查当前页面是否为主页
+  const currentPath = window.location.pathname;
+  if (currentPath === '/' || currentPath.endsWith('index.html')) {
+    // 如果是主页，滚动到顶部
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  } else {
+    // 如果不是主页，跳转到主页
+    window.location.href = 'https://xufanhsk.github.io';
   }
 }
 
-// 绑定点击事件
-toggle.addEventListener('click', toggleMenu);
-menuArea.addEventListener('click', toggleMenu);
 
-// 遮罩层点击关闭菜单
-navOverlay.addEventListener('click', closeMenu);
 
-// 菜单链接点击关闭菜单
-navLinks.forEach(link => {
-  link.addEventListener('click', closeMenu);
+// 为移动端主页按钮添加事件监听
+const mobileHomeBtn = document.getElementById('mobileHomeBtn');
+mobileHomeBtn.addEventListener('click', handleHomeClick);
+
+// 为contact按钮添加事件监听
+const contactBtn = document.getElementById('contactBtn');
+contactBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('contact').scrollIntoView({
+    behavior: 'smooth'
+  });
 });
 
-// 点击页面其他区域关闭菜单
-document.addEventListener('click', (e) => {
-  const isClickInsideMenu = menuArea.contains(e.target);
-  const isClickInsideNav = navMenu.contains(e.target);
-  const isClickOnOverlay = navOverlay.contains(e.target);
-  
-  if (!isClickInsideMenu && !isClickInsideNav && !isClickOnOverlay && navMenu.classList.contains('active')) {
-    closeMenu();
-  }
-});
-
-// 防止菜单内点击触发页面点击事件
-navMenu.addEventListener('click', (e) => {
-  e.stopPropagation();
-});
 
 </script>
-
 </body>
 </html>
