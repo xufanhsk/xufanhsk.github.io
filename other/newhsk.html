@@ -249,6 +249,39 @@ body {
   color: var(--text-gray);
   white-space: pre-line;
 }
+
+.section-content h3 {
+  line-height: 1.3;
+  margin: 20px 0 8px 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+.section-content h4 {
+  line-height: 1.3;
+  margin: 6px 0 6px 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.audio-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.exam-images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.exam-images img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
 /* ========== 分区名称：通用内容区 分区结束 ========== */
 
 /* ========== 分区名称：联系方式区 优化起始 ========== */
@@ -672,11 +705,41 @@ body {
 <div class="section" style="padding-top: 120px;">
   <div class="container">
     <div class="section-card">
-      <h2 class="section-title">Nội dung chính</h2>
+      <h2 class="section-title">Trải nghiệm HSK 3.0</h2>
+      <div style="display: flex; justify-content: center; margin: 20px 0;">
+        <a href="https://drive.google.com/file/d/1hsytcBPwW7upbQwR2ZuscQz6-LIMhZ1q/view?usp=drive_link" class="nav-btn" target="_blank">Tải giáo trình HSK 1 phiên bản mới</a>
+      </div>
       <div class="section-content">
         <!-- 在这里添加页面内容 -->
-        <p>这是一个模板页面，保留了顶部导航栏、悬浮头像和联系方式区的所有功能和效果。</p>
-        <p>您可以在此处添加新页面的具体内容。</p>
+        <p>Tính đến tháng 3 năm 2026, theo tiêu chuẩn HSK 3.0, giáo trình chính thức được phát hành hiện mới chỉ có HSK 1.Theo thông tin từ phía chính thức, giáo trình HSK 2 và HSK 3 dự kiến sẽ được phát hành dần trong năm 2026.</p>
+        
+        <h3>Thi thử nói HSK 3.0 (phiên bản chính thức)</h3>
+        
+        <h4>Trải nghiệm kỳ thi nói HSK mới (cấp 3)</h4>
+        <div class="audio-box">
+          <audio controls>
+            <source src="../au/kys3.MP3" type="audio/mpeg">
+            Trình duyệt của bạn không hỗ trợ phần tử audio.
+          </audio>
+        </div>
+        
+        <div class="exam-images">
+          <img src="../Pic/newhsk3kouyukoushitiyan1.jpg" alt="HSK 3口语考试样卷">
+          <img src="../Pic/newhsk3kouyukoushitiyan2.jpg" alt="HSK 3口语考试样卷">
+        </div>
+        
+        <h4>Trải nghiệm kỳ thi nói HSK mới (cấp 6)</h4>
+        <div class="audio-box">
+          <audio controls>
+            <source src="../au/kys6.MP3" type="audio/mpeg">
+            Trình duyệt của bạn không hỗ trợ phần tử audio.
+          </audio>
+        </div>
+        
+        <div class="exam-images">
+          <img src="../Pic/newhsk6kouyukoushitiyan1.jpg" alt="HSK 6口语考试样卷">
+          <img src="../Pic/newhsk6kouyukoushitiyan2.jpg" alt="HSK 6口语考试样卷">
+        </div>
       </div>
     </div>
   </div>
