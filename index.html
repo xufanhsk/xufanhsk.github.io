@@ -361,6 +361,12 @@ body {
   border-radius: var(--radius-md);
   text-align: center;
 }
+.audio-subtitle-header {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+}
 .audio-btn {
   padding: 12px 28px;
   background: var(--primary);
@@ -371,15 +377,59 @@ body {
   font-size: 14px;
   margin-bottom: 20px;
 }
-.audio-description, .audio-subtitle {
+.audio-description {
   font-size: 15px;
   color: var(--text-gray);
   line-height: 1.8;
+  margin-bottom: 20px;
 }
 .audio-subtitle {
-  display: none;
-  text-align: left;
-  white-space: pre-line;
+  font-size: 15px;
+  color: var(--text-gray);
+  line-height: 1.8;
+  text-align: center;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+#player-container {
+  margin: 20px 0;
+}
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.player-controls button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+.progress-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.progress-bar {
+  width: 0%;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+  margin-bottom: 5px;
+}
+.time-display {
+  font-size: 12px;
+  color: var(--text-gray);
+  text-align: center;
 }
 /* ========== 分区名称：学习方法区 音频预留模块 样式结束 ========== */
 
@@ -954,13 +1004,26 @@ body {
     <div class="section-card">
       <h2 class="section-title">Cách học tiếng Trung hiệu quả</h2>
       <div class="audio-placeholder">
-        <button class="audio-btn" onclick="toggleAudio()">▶ Phát audio</button>
+        <h4 class="audio-subtitle-header">Nghe thử thầy nói gì nhé</h4>
         <div class="audio-description" id="audioDesc">
-          Nội dung audio giới thiệu phương pháp học sẽ được đặt tại đây.
+          Trước khi bắt đầu, hãy thử một trải nghiệm tiếng Trung nhỏ: <br>
+          Nghe một đoạn tiếng Trung tự nhiên và cảm nhận âm thanh cùng nhịp điệu của nó.
         </div>
-        <div class="audio-subtitle" id="audioSub">
-          Đây là khu vực hiển thị phụ đề sau khi phát audio.
+        <div id="player-container" style="display: none;">
+          <div class="player-controls">
+            <button id="prev-btn" onclick="skipTime(-5)">⏪</button>
+            <button id="play-pause-btn" onclick="togglePlayPause()">⏸</button>
+            <button id="next-btn" onclick="skipTime(5)">⏩</button>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <div class="time-display">
+              <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+            </div>
+          </div>
         </div>
+        <button class="audio-btn" id="play-btn" onclick="toggleAudio()">▶ Phát audio</button>
+        <div class="audio-subtitle" id="audioSub"></div>
       </div>
       <div class="section-content">
         <h3>Từ chối tư duy dịch thuật</h3>
@@ -1138,9 +1201,137 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// 全局变量
+let audio = null;
+let isPlaying = false;
+
 function toggleAudio() {
+  // 创建音频对象
+  audio = new Audio('https://xufanhsk.github.io/au/index1.MP3');
+  
+  // 显示/隐藏元素
   document.getElementById('audioDesc').style.display = 'none';
-  document.getElementById('audioSub').style.display = 'block';
+  document.getElementById('play-btn').style.display = 'none';
+  document.getElementById('player-container').style.display = 'block';
+  const audioSub = document.getElementById('audioSub');
+  audioSub.style.display = 'block';
+  
+  // 字幕数据
+  const subtitles = [
+    {start: 1.833, end: 4.833, text: '你好呀欢迎来到我的个人主页<br>Nǐ hǎo ya huānyíng lái dào wǒ de gèrén zhǔyè<br>Xin chào, chào mừng bạn đến với trang cá nhân của tôi.'},
+    {start: 5.200, end: 7.900, text: '如果你现在正在听这段录音<br>Rúguǒ nǐ xiànzài zhèngzài tīng zhè duàn lùyīn<br>Nếu bây giờ bạn đang nghe đoạn ghi âm này'},
+    {start: 8.266, end: 10.500, text: '其实只有一个很简单的目的<br>Qíshí zhǐyǒu yí gè hěn jiǎndān de mùdì<br>thì thực ra chỉ có một mục đích rất đơn giản.'},
+    {start: 10.700, end: 13.333, text: '让你体验一下汉语的感觉<br>Ràng nǐ tǐyàn yíxià Hànyǔ de gǎnjué<br>Để bạn trải nghiệm cảm giác của tiếng Trung.'},
+    {start: 14.100, end: 16.433, text: '也许你以前没有学过汉语<br>Yěxǔ nǐ yǐqián méiyǒu xuéguò Hànyǔ<br>Có thể trước đây bạn chưa từng học tiếng Trung.'},
+    {start: 16.633, end: 18.700, text: '也许你刚刚开始学习<br>Yěxǔ nǐ gānggāng kāishǐ xuéxí<br>Cũng có thể bạn vừa mới bắt đầu học.'},
+    {start: 19.033, end: 21.866, text: '所以现在你不需要紧张<br>Suǒyǐ xiànzài nǐ bù xūyào jǐnzhāng<br>Vì vậy bây giờ bạn không cần căng thẳng.'},
+    {start: 22.066, end: 24.700, text: '也不需要去理解每一个词<br>Yě bù xūyào qù lǐjiě měi yí gè cí<br>Cũng không cần hiểu từng từ một.'},
+    {start: 25.233, end: 29.833, text: '只要轻轻松松的听一听汉语的声音<br>Zhǐyào qīngqīng sōngsōng de tīng yì tīng Hànyǔ de shēngyīn<br>Chỉ cần thoải mái nghe thử âm thanh của tiếng Trung.'},
+    {start: 29.866, end: 32.200, text: '感受一下它的节奏<br>Gǎnshòu yíxià tā de jiézòu<br>Và cảm nhận nhịp điệu của nó.'},
+    {start: 32.333, end: 33.666, text: '这样就可以了<br>Zhèyàng jiù kěyǐ le<br>Như vậy là đủ rồi.'},
+    {start: 34.466, end: 36.733, text: '很多人学习语言的时候<br>Hěn duō rén xuéxí yǔyán de shíhou<br>Khi học ngôn ngữ, nhiều người thường'}, 
+    {start: 36.733, end: 38.533, text: '总是习惯这样做<br>Zǒngshì xíguàn zhèyàng zuò<br>có thói quen như thế này.'}, 
+    {start: 38.933, end: 40.466, text: '听到一句话<br>Tīngdào yí jù huà<br>Khi nghe một câu nói'}, 
+    {start: 40.466, end: 41.733, text: '先翻译<br>Xiān fānyì<br>họ sẽ dịch trước'}, 
+    {start: 41.733, end: 44.600, text: '理解之后呢再想怎么回答<br>Lǐjiě zhīhòu ne zài xiǎng zěnme huídá<br>sau khi hiểu mới nghĩ cách trả lời'}, 
+    {start: 44.700, end: 48.433, text: '最后再把自己的语言翻译回去<br>Zuìhòu zài bǎ zìjǐ de yǔyán fānyì huíqù<br>cuối cùng lại dịch ngôn ngữ của mình sang tiếng Trung.'}, 
+    {start: 49.466, end: 51.766, text: '但如果一直这样学习<br>Dàn rúguǒ yìzhí zhèyàng xuéxí<br>Nhưng nếu cứ học như vậy'}, 
+    {start: 52.133, end: 55.733, text: '语言就会变成一件很累的事情<br>Yǔyán jiù huì biànchéng yí jiàn hěn lèi de shìqing<br>ngôn ngữ sẽ trở thành việc rất mệt mỏi.'}, 
+    {start: 56.533, end: 59.400, text: '真正自然的语言学习<br>Zhēnzhèng zìrán de yǔyán xuéxí<br>Việc học ngôn ngữ tự nhiên'}, 
+    {start: 59.500, end: 63.600, text: '其实更像是小时候学习母语一样<br>Qíshí gèng xiàng shì xiǎoshíhou xuéxí mǔyǔ yíyàng<br>thực ra giống khi ta học tiếng mẹ đẻ lúc nhỏ.'}, 
+    {start: 64.633, end: 66.800, text: '多听多接触<br>Duō tīng duō jiēchù<br>Nghe nhiều, tiếp xúc nhiều'}, 
+    {start: 67.033, end: 68.300, text: '慢慢理解<br>Mànman lǐjiě<br>từ từ hiểu'}, 
+    {start: 68.400, end: 71.300, text: '然后自然而然的说出来<br>Ránhòu zìrán ér rán de shuō chūlái<br>sau đó tự nhiên nói ra.'}, 
+    {start: 72.200, end: 74.633, text: '所以这一小段语音<br>Suǒyǐ zhè yí xiǎo duàn yǔyīn<br>Vì vậy đoạn âm thanh này'}, 
+    {start: 74.900, end: 79.533, text: '更像是一次简单的汉语试听体验<br>Gèng xiàng shì yí cì jiǎndān de Hànyǔ shìtīng tǐyàn<br>giống như một trải nghiệm nghe thử tiếng Trung.'}, 
+    {start: 80.400, end: 81.666, text: '如果你想了解更多<br>Rúguǒ nǐ xiǎng liǎojiě gèng duō<br>Nếu bạn muốn tìm hiểu thêm'}, 
+    {start: 81.666, end: 83.833, text: '关于这种学习的方式<br>Guānyú zhè zhǒng xuéxí de fāngshì<br>về phương pháp học này'}, 
+    {start: 83.833, end: 85.900, text: '或者想知道我的课堂<br>Huòzhě xiǎng zhīdào wǒ de kètáng<br>hoặc muốn biết lớp học của tôi'}, 
+    {start: 85.900, end: 88.700, text: '为什么强调用汉语交流<br>Wèishénme qiángdiào yòng Hànyǔ jiāoliú<br>vì sao nhấn mạnh giao tiếp bằng tiếng Trung'}, 
+    {start: 89.200, end: 90.800, text: '你可以继续往下看<br>Nǐ kěyǐ jìxù wǎng xià kàn<br>bạn có thể xem tiếp bên dưới.'}, 
+    {start: 91.033, end: 91.800, text: '在下面<br>Zài xiàmiàn<br>Ở phía dưới'}, 
+    {start: 91.800, end: 95.100, text: '我准备了一段越南语的详细说明<br>Wǒ zhǔnbèi le yí duàn Yuènányǔ de xiángxì shuōmíng<br>tôi đã chuẩn bị phần giải thích bằng tiếng Việt.'}, 
+    {start: 95.266, end: 98.833, text: '会更完整的介绍这种学习的理念<br>Huì gèng wánzhěng de jièshào zhè zhǒng xuéxí de lǐniàn<br>sẽ giới thiệu đầy đủ hơn về phương pháp này.'}, 
+    {start: 99.900, end: 102.400, text: '好了感谢你的试听<br>Hǎo le gǎnxiè nǐ de shìtīng<br>Cảm ơn bạn đã nghe thử.'}, 
+    {start: 102.733, end: 107.833, text: '希望我们会有机会一起交流和学习<br>Xīwàng wǒmen huì yǒu jīhuì yìqǐ jiāoliú hé xuéxí<br>Hy vọng chúng ta sẽ có cơ hội học cùng nhau.'}, 
+    {start: 108.500, end: 109.300, text: '再见<br>Zàijiàn<br>Tạm biệt.'}
+  ];
+  
+  // 初始化字幕显示
+  audioSub.innerHTML = '';
+  
+  // 监听音频播放时间更新
+  audio.addEventListener('timeupdate', function() {
+    const currentTime = audio.currentTime;
+    let currentSubtitle = null;
+    
+    // 找到当前时间对应的字幕
+    for (let i = 0; i < subtitles.length; i++) {
+      if (currentTime >= subtitles[i].start && currentTime <= subtitles[i].end) {
+        currentSubtitle = subtitles[i];
+        break;
+      }
+    }
+    
+    // 更新字幕显示
+    if (currentSubtitle) {
+      audioSub.innerHTML = currentSubtitle.text;
+    } else {
+      // 如果没有对应的字幕，显示空
+      audioSub.innerHTML = '';
+    }
+    
+    // 更新进度条
+    updateProgress();
+  });
+  
+  // 监听音频加载完成
+  audio.addEventListener('loadedmetadata', function() {
+    document.getElementById('duration').textContent = formatTime(audio.duration);
+  });
+  
+  // 播放音频
+  audio.play();
+  isPlaying = true;
+  document.getElementById('play-pause-btn').textContent = '⏸';
+}
+
+// 播放/暂停切换
+function togglePlayPause() {
+  if (audio) {
+    if (isPlaying) {
+      audio.pause();
+      document.getElementById('play-pause-btn').textContent = '▶';
+    } else {
+      audio.play();
+      document.getElementById('play-pause-btn').textContent = '⏸';
+    }
+    isPlaying = !isPlaying;
+  }
+}
+
+// 跳转到指定时间
+function skipTime(seconds) {
+  if (audio) {
+    audio.currentTime = Math.max(0, Math.min(audio.currentTime + seconds, audio.duration));
+    updateProgress();
+  }
+}
+
+// 更新进度条
+function updateProgress() {
+  if (audio && audio.duration) {
+    const progress = (audio.currentTime / audio.duration) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+    document.getElementById('current-time').textContent = formatTime(audio.currentTime);
+  }
+}
+
+// 格式化时间
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 
