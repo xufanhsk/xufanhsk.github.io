@@ -24,16 +24,6 @@
             --paper-shadow: rgba(15, 23, 42, 0.1);
         }
         
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background: #121212;
-                --surface: #1c1c1e;
-                --text: #f5f5f7;
-                --text-secondary: #a1a1a6;
-                --border: #2c2c2e;
-            }
-        }
-        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Segoe UI", Roboto, sans-serif;
             background: var(--background);
@@ -265,29 +255,11 @@
             box-sizing: border-box;
         }
         
-        @media (prefers-color-scheme: dark) {
-            .toolbar {
-                background: rgba(28, 28, 30, 0.6);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                box-shadow: 
-                    0 8px 30px rgba(0, 0, 0, 0.2),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            }
-        }
-        
         .toolbar:hover {
             box-shadow: 
                 0 12px 40px rgba(0, 0, 0, 0.12),
                 inset 0 1px 0 rgba(255, 255, 255, 0.6);
             transform: translateY(0);
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            .toolbar:hover {
-                box-shadow: 
-                    0 12px 40px rgba(0, 0, 0, 0.3),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            }
         }
         
         .brand {
@@ -341,6 +313,11 @@
             outline: none;
         }
 
+        .lock-button.locked {
+            background: rgba(255, 59, 48, 0.14);
+            color: #d92c22;
+        }
+
         .teaching-mode .toolbar {
             transform: translateY(-100%);
             opacity: 0;
@@ -360,6 +337,27 @@
 
         .teaching-mode .template-stage {
             max-width: 1460px;
+        }
+
+        .teaching-exit {
+            position: fixed;
+            top: 14px;
+            right: 14px;
+            z-index: 1005;
+            display: none;
+            padding: 10px 14px;
+            border: none;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.72);
+            color: #fff;
+            backdrop-filter: blur(20px);
+            cursor: pointer;
+        }
+
+        .teaching-mode .teaching-exit {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         
         .tool-button {
@@ -431,20 +429,6 @@
         /* 颜色按钮active效果 */
         .tool-button[data-color].active {
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            .tool-button:hover {
-                background: rgba(255, 255, 255, 0.1);
-            }
-            
-            .tool-button.active {
-                background: rgba(0, 113, 227, 0.25);
-            }
-            
-            .tool-button[data-color].active {
-                box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5);
-            }
         }
         
         .tool-group {
@@ -635,13 +619,6 @@
                 0 0 12px var(--c);
         }
         
-        @media (prefers-color-scheme: dark) {
-            .tooltip {
-                background: rgba(255, 255, 255, 0.8);
-                color: var(--text);
-            }
-        }
-        
         .tool-button:hover .tooltip {
             opacity: 1;
             transform: translateX(-50%) translateY(-5px);
@@ -733,7 +710,8 @@
         .tool-button,
         .nav-button,
         .knowledge-trigger,
-        .knowledge-action {
+        .knowledge-action,
+        .teaching-exit {
             user-select: none;
             -webkit-user-select: none;
             -webkit-touch-callout: none;
@@ -922,69 +900,6 @@
             pointer-events: none;
         }
         
-        @media (prefers-color-scheme: dark) {
-            .lesson-sheet {
-                background: #171717;
-                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-            }
-
-            .sheet-header {
-                border-bottom-color: rgba(255, 255, 255, 0.2);
-            }
-
-            .sheet-title,
-            .sheet-content {
-                color: #f1f1f1;
-            }
-
-            .section-mark {
-                background: #d2d2d2;
-            }
-
-            .section-mark::after {
-                background: #6f6f6f;
-            }
-
-            .target-table {
-                background: rgba(255, 255, 255, 0.02);
-            }
-
-            .target-table td {
-                border-color: rgba(255, 255, 255, 0.22);
-            }
-
-            .template-section {
-                border-top-color: rgba(255, 255, 255, 0.12);
-            }
-
-            .section-shell,
-            .simple-card,
-            .practice-box {
-                background: rgba(255, 255, 255, 0.03);
-                box-shadow: 0 18px 34px rgba(0, 0, 0, 0.16);
-            }
-
-            .status-bar {
-                background: rgba(28, 28, 30, 0.8);
-            }
-
-            .info-panel {
-                background: rgba(28, 28, 30, 0.72);
-                border-color: rgba(255, 255, 255, 0.08);
-                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
-            }
-
-            .nav-panel,
-            .knowledge-card {
-                background: rgba(28, 28, 30, 0.84);
-                border-color: rgba(255, 255, 255, 0.08);
-            }
-
-            .info-chip {
-                background: rgba(100, 210, 255, 0.14);
-            }
-        }
-        
         #brushCursor{
             position: fixed;
             border-radius: 50%;
@@ -1135,6 +1050,10 @@
                     <span class="course-title-label">本课标题</span>
                     <span class="course-title-value" id="courseTitleValue" contenteditable="true">你好</span>
                 </div>
+                <button class="tool-button lock-button" id="textLockButton" type="button" title="锁定文本">
+                    🔒
+                    <span class="tooltip">锁定文本</span>
+                </button>
                 <button class="tool-button" data-tool="select" onclick="setTool('select')" title="选择">
                     ⌖
                     <span class="tooltip">选择</span>
@@ -1422,6 +1341,8 @@
     <div class="layer-panel">
         <button onclick="clearAll()" class="tool-button">清空</button>
     </div>
+
+    <button class="teaching-exit" id="teachingExit" type="button">退出授课模式</button>
     
     <canvas id="drawCanvas"></canvas>
     <div id="brushCursor"></div>
@@ -1463,6 +1384,9 @@
         const navButtons = document.querySelectorAll('.nav-button');
         const navWrapper = document.getElementById('navWrapper');
         const navToggle = document.getElementById('navToggle');
+        const textLockButton = document.getElementById('textLockButton');
+        const teachingExit = document.getElementById('teachingExit');
+        const editableElements = Array.from(document.querySelectorAll('[contenteditable="true"]'));
         
         // 笔刷光标状态
         let lastX = 0;
@@ -1486,6 +1410,7 @@
         let activeDrawSurface = 'page';
         let activeKnowledgeSurface = null;
         let teachingMode = false;
+        let textLocked = true;
         
         // =========================
         // 基础初始化
@@ -1513,6 +1438,9 @@
                     }
                 });
             });
+
+            textLockButton.addEventListener('click', toggleTextLock);
+            teachingExit.addEventListener('click', exitTeachingMode);
             
             // 颜色选择器
             const toggle = document.getElementById('colorToggle');
@@ -1925,6 +1853,30 @@
             }
 
             startDraw(e);
+        }
+
+        function applyTextLockState() {
+            editableElements.forEach(element => {
+                element.setAttribute('contenteditable', textLocked ? 'false' : 'true');
+            });
+
+            textLockButton.classList.toggle('locked', textLocked);
+            textLockButton.innerHTML = textLocked
+                ? '🔒<span class="tooltip">文本已锁定</span>'
+                : '🔓<span class="tooltip">文本已解锁</span>';
+            textLockButton.title = textLocked ? '文本已锁定' : '文本已解锁';
+            statusBar.textContent = textLocked ? '文本编辑已锁定，仍可划词' : '文本编辑已解锁';
+        }
+
+        function toggleTextLock() {
+            textLocked = !textLocked;
+            applyTextLockState();
+        }
+
+        function exitTeachingMode() {
+            teachingMode = false;
+            document.body.classList.remove('teaching-mode');
+            statusBar.textContent = '已退出授课模式';
         }
 
         async function toggleFullscreen() {
@@ -2407,6 +2359,7 @@
         function init() {
             resizeCanvas();
             setupEventListeners();
+            applyTextLockState();
             setTool(currentTool);
             setColor(currentColor);
             updateCursor();
