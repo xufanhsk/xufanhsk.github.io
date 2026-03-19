@@ -302,9 +302,25 @@
         .course-title-box {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             padding: 0 14px 0 2px;
             border-right: 1px solid var(--border);
+        }
+
+        .course-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .course-pill {
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(10, 132, 255, 0.08);
+            color: var(--text-secondary);
+            font-size: 12px;
+            white-space: nowrap;
         }
 
         .course-title-label {
@@ -323,6 +339,27 @@
             font-size: 13px;
             font-weight: 600;
             outline: none;
+        }
+
+        .teaching-mode .toolbar {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        body.teaching-mode {
+            padding-top: 18px;
+        }
+
+        .teaching-mode .info-panel,
+        .teaching-mode .layer-panel,
+        .teaching-mode .status-bar {
+            opacity: 0.18;
+            transform: scale(0.96);
+        }
+
+        .teaching-mode .template-stage {
+            max-width: 1460px;
         }
         
         .tool-button {
@@ -1091,7 +1128,11 @@
         <div class="toolbar-inner">
             <div class="toolbar-main">
                 <div class="course-title-box">
-                    <span class="course-title-label">课程题目</span>
+                    <div class="course-meta">
+                        <span class="course-pill">第 1 课</span>
+                        <span class="course-pill">教师：假装老师</span>
+                    </div>
+                    <span class="course-title-label">本课标题</span>
                     <span class="course-title-value" id="courseTitleValue" contenteditable="true">你好</span>
                 </div>
                 <button class="tool-button" data-tool="select" onclick="setTool('select')" title="选择">
@@ -1444,6 +1485,7 @@
         let activePressure = 0.5;
         let activeDrawSurface = 'page';
         let activeKnowledgeSurface = null;
+        let teachingMode = false;
         
         // =========================
         // 基础初始化
@@ -1886,6 +1928,15 @@
         }
 
         async function toggleFullscreen() {
+            const isIPadLike = /iPad|Macintosh/.test(navigator.userAgent) && 'ontouchend' in document;
+
+            if (isIPadLike) {
+                teachingMode = !teachingMode;
+                document.body.classList.toggle('teaching-mode', teachingMode);
+                statusBar.textContent = teachingMode ? '已进入授课模式' : '已退出授课模式';
+                return;
+            }
+
             try {
                 if (!document.fullscreenElement) {
                     await document.documentElement.requestFullscreen();
