@@ -12,14 +12,16 @@
         }
         
         :root {
-            --primary: #0071e3;
-            --secondary: #34c759;
-            --background: #f5f5f7;
-            --surface: #ffffff;
+            --primary: #0a84ff;
+            --secondary: #30d158;
+            --background: #eef3f8;
+            --surface: rgba(255, 255, 255, 0.88);
             --text: #1d1d1f;
-            --text-secondary: #6e6e73;
-            --border: #d2d2d7;
-            --accent: #ff9500;
+            --text-secondary: #667085;
+            --border: rgba(15, 23, 42, 0.12);
+            --accent: #ff9f0a;
+            --paper: #fbfcfe;
+            --paper-shadow: rgba(15, 23, 42, 0.1);
         }
         
         @media (prefers-color-scheme: dark) {
@@ -33,21 +35,21 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Segoe UI", Roboto, sans-serif;
             background: var(--background);
             color: var(--text);
             min-height: 100vh;
             position: relative;
             cursor: crosshair;
             transition: background 0.3s ease;
-            padding: 88px 24px 40px;
+            padding: 88px 10px 40px;
             overflow-x: hidden;
         }
 
         .template-stage {
             position: relative;
             z-index: 0;
-            max-width: 1180px;
+            max-width: 1380px;
             margin: 0 auto;
         }
 
@@ -57,9 +59,9 @@
 
         .lesson-sheet {
             position: relative;
-            background: #fbfaf7;
+            background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,250,255,0.92));
             border-radius: 28px;
-            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+            box-shadow: 0 30px 80px var(--paper-shadow);
             overflow: hidden;
             min-height: calc(100vh - 150px);
         }
@@ -88,7 +90,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #666666, #8a8a8a);
+            background: linear-gradient(135deg, #5f6b7a, #8f9db0);
             color: #ffffff;
             font-size: 128px;
             font-weight: 700;
@@ -100,7 +102,7 @@
             align-items: center;
             padding: 32px 40px;
             font-size: 68px;
-            color: #4a4a4a;
+            color: #334155;
             letter-spacing: 2px;
         }
 
@@ -125,7 +127,7 @@
         .section-mark {
             width: 110px;
             height: 4px;
-            background: #4a4a4a;
+            background: #5f6b7a;
             position: relative;
             flex: 0 0 auto;
         }
@@ -137,7 +139,7 @@
             right: 0;
             top: 10px;
             height: 4px;
-            background: #9a9a9a;
+            background: #b9c4d3;
         }
 
         .section-heading h2 {
@@ -149,7 +151,7 @@
         .target-table {
             width: 100%;
             border-collapse: collapse;
-            background: rgba(255, 255, 255, 0.55);
+            background: rgba(255, 255, 255, 0.74);
         }
 
         .target-table td {
@@ -184,7 +186,7 @@
             border: 2px dashed rgba(35, 35, 35, 0.25);
             border-radius: 24px;
             padding: 28px 30px;
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.68);
             box-shadow: 0 18px 36px rgba(15, 23, 42, 0.06);
         }
 
@@ -236,7 +238,7 @@
         .section-shell {
             padding: 28px 30px 34px;
             border-radius: 30px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.42));
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(244, 248, 255, 0.7));
             box-shadow: 0 22px 44px rgba(15, 23, 42, 0.08);
         }
         
@@ -248,9 +250,9 @@
             transform: none;
             padding: 12px 18px;
             border-radius: 0 0 22px 22px;
-            background: rgba(255, 255, 255, 0.82);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(30px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.55);
             box-shadow: 
                 0 8px 30px rgba(0, 0, 0, 0.08),
                 inset 0 1px 0 rgba(255, 255, 255, 0.6);
@@ -316,7 +318,7 @@
             max-width: 240px;
             padding: 6px 10px;
             border-radius: 999px;
-            background: rgba(0, 113, 227, 0.08);
+            background: rgba(10, 132, 255, 0.1);
             color: var(--text);
             font-size: 13px;
             font-weight: 600;
@@ -443,7 +445,7 @@
             border: none;
             border-radius: 999px;
             padding: 8px 14px;
-            background: rgba(0, 113, 227, 0.08);
+            background: rgba(10, 132, 255, 0.1);
             color: var(--text);
             font-size: 13px;
             cursor: pointer;
@@ -480,7 +482,7 @@
             border: none;
             border-radius: 999px;
             padding: 8px 12px;
-            background: rgba(0, 113, 227, 0.08);
+            background: rgba(10, 132, 255, 0.1);
             color: var(--text);
             font-size: 12px;
             cursor: pointer;
@@ -489,7 +491,7 @@
 
         .nav-button:hover {
             transform: translateY(-1px);
-            background: rgba(0, 113, 227, 0.14);
+            background: rgba(10, 132, 255, 0.16);
         }
         
         .tool-label {
@@ -665,7 +667,7 @@
             width: min(320px, calc(100vw - 40px));
             padding: 16px 18px;
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.72);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(24px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.42);
             box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
@@ -673,6 +675,31 @@
 
         .editable-block {
             outline: none;
+            user-select: text;
+            -webkit-user-select: text;
+            -webkit-touch-callout: default;
+            cursor: text;
+        }
+
+        .lesson-sheet,
+        .lesson-sheet *:not(button),
+        .info-panel,
+        .info-panel *:not(button),
+        .knowledge-card,
+        .knowledge-card *:not(button) {
+            user-select: text;
+            -webkit-user-select: text;
+            -webkit-touch-callout: default;
+        }
+
+        button,
+        .tool-button,
+        .nav-button,
+        .knowledge-trigger,
+        .knowledge-action {
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
         }
 
         .editable-block:focus {
@@ -855,7 +882,7 @@
             z-index: 1;
             touch-action: none;
             cursor: none;
-            pointer-events: auto;
+            pointer-events: none;
         }
         
         @media (prefers-color-scheme: dark) {
@@ -927,13 +954,13 @@
             pointer-events: none;
             transform: translate(-50%, -50%);
             z-index: 9999;
-
             backdrop-filter: blur(6px);
+            transition: opacity 0.08s linear, transform 0.02s linear;
         }
         
         @media (max-width: 768px) {
             body {
-                padding: 88px 12px 24px;
+                padding: 88px 6px 24px;
             }
 
             .toolbar {
@@ -1105,6 +1132,10 @@
                 <div class="tool-group">
                     <input type="file" id="imageUpload" accept="image/*" style="display:none">
                     <button class="tool-button" onclick="addKnowledgePointAtSelection()" title="新增知识点">❗</button>
+                    <button class="tool-button" onclick="toggleFullscreen()" title="全屏">
+                        ⛶
+                        <span class="tooltip">全屏</span>
+                    </button>
                     <button class="tool-button" onclick="document.getElementById('imageUpload').click()" title="导入图片">🖼️</button>
                     <button class="tool-button" onclick="undo()" title="撤销">
                         ↶
@@ -1167,7 +1198,7 @@
                                             </div>
                                             <div class="knowledge-body">
                                                 <p>这个知识点模块固定嵌入在句型区域，适合后期一个课程放多个知识点入口。</p>
-                                                <div class="knowledge-editor editable-block" contenteditable="true">测试文本：
+                                                <div class="knowledge-editor editable-block" id="knowledgePhrase1Editor" contenteditable="true">测试文本：
 “您好”是“你好”的礼貌表达，常用于老师、长辈、正式场合。</div>
                                                 <span class="knowledge-resize"></span>
                                             </div>
@@ -1406,13 +1437,26 @@
         let resizeStartWidth = 0;
         let resizeStartHeight = 0;
         let knowledgeCounter = document.querySelectorAll('.knowledge-card').length + 1;
+        let canvasWidth = window.innerWidth;
+        let canvasHeight = window.innerHeight;
+        let activePointerId = null;
+        let activePointerType = null;
+        let activePressure = 0.5;
+        let activeDrawSurface = 'page';
+        let activeKnowledgeSurface = null;
         
         // =========================
         // 基础初始化
         // =========================
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            const dpr = window.devicePixelRatio || 1;
+            canvasWidth = window.innerWidth;
+            canvasHeight = window.innerHeight;
+            canvas.width = Math.round(canvasWidth * dpr);
+            canvas.height = Math.round(canvasHeight * dpr);
+            canvas.style.width = canvasWidth + 'px';
+            canvas.style.height = canvasHeight + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
         
         // 设置事件监听器
@@ -1452,38 +1496,13 @@
                 });
             });
             
-            // Canvas 事件（使用 Pointer Events 支持鼠标和 iPad Pencil）
-            canvas.addEventListener('pointerdown', function(e) {
-                const interactiveElement = getKnowledgeInteractiveFromPoint(e.clientX, e.clientY);
-                if (interactiveElement) {
-                    handleKnowledgeOverlayInteraction(interactiveElement, e);
-                    return;
-                }
-                if (currentTool === 'select') return;
-                if (currentTool === 'erase') {
-                    erasing = true;
-                    eraseAt(e);
-                    return;
-                }
-                startDraw(e);
-            });
-            canvas.addEventListener('pointermove', function(e) {
-                updateBrushPosition(e);
-                if (currentTool === 'select') return;
-                if (currentTool === 'erase' && erasing) {
-                    eraseAt(e);
-                    return;
-                }
-                draw(e);
-            });
-            canvas.addEventListener('pointerup', function() {
-                erasing = false;
-                endDraw();
-            });
-            canvas.addEventListener('pointerleave', function() {
-                erasing = false;
-                endDraw();
-            });
+            // 文档级输入监听：
+            // 1. 手指可以正常选中文本
+            // 2. Apple Pencil / 鼠标仍然可以在任何区域书写
+            document.addEventListener('pointerdown', handleDocumentPointerDown);
+            document.addEventListener('pointermove', handleTrackedPointerMove);
+            document.addEventListener('pointerup', finishTrackedPointer);
+            document.addEventListener('pointercancel', finishTrackedPointer);
             
             // 监听图片上传
             document.getElementById('imageUpload').addEventListener('change', function(e){
@@ -1539,6 +1558,7 @@
             document.addEventListener('pointermove', dragKnowledgeCard);
             document.addEventListener('pointermove', resizeKnowledgeCard);
             document.addEventListener('pointerup', stopKnowledgeDrag);
+            document.addEventListener('scroll', render, { passive: true });
         }
         
         // =========================
@@ -1547,21 +1567,21 @@
         function startDraw(e) {
             drawing = true;
             points = [];
+            activeKnowledgeSurface = getKnowledgeSurfaceFromPoint(e.clientX, e.clientY);
+            activeDrawSurface = activeKnowledgeSurface ? 'knowledge' : 'page';
             
-            currentStroke = {
-                points: [],
-                color: currentColor,
-                tool: currentTool,
-                time: Date.now()
-            };
+                currentStroke = {
+                    points: [],
+                    color: currentColor,
+                    tool: currentTool,
+                    time: Date.now(),
+                    surface: activeDrawSurface,
+                    surfaceId: activeKnowledgeSurface ? ensureKnowledgeSurfaceId(activeKnowledgeSurface) : null
+                };
             
             const p = getPoint(e);
             points.push(p);
             currentStroke.points.push(p);
-            
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-
         }
         
         // 绘制
@@ -1585,7 +1605,7 @@
             ctx.lineJoin = 'round';
             
             // 压感
-            const pressure = e.pressure || 0.5;
+            const pressure = activePointerType === 'pen' ? (e.pressure || activePressure || 0.35) : 0.55;
             
             // 只处理绘制工具，橡皮擦在pointerdown中处理
             if (currentTool !== 'erase') {
@@ -1607,8 +1627,19 @@
                 }
                 
                 ctx.beginPath();
-                ctx.moveTo(prev.x, prev.y);
-                ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
+                const activeRect = activeDrawSurface === 'knowledge' && activeKnowledgeSurface
+                    ? activeKnowledgeSurface.getBoundingClientRect()
+                    : null;
+                ctx.moveTo(
+                    activeRect ? activeRect.left + prev.x : prev.x - window.scrollX,
+                    activeRect ? activeRect.top + prev.y : prev.y - window.scrollY
+                );
+                ctx.quadraticCurveTo(
+                    activeRect ? activeRect.left + prev.x : prev.x - window.scrollX,
+                    activeRect ? activeRect.top + prev.y : prev.y - window.scrollY,
+                    activeRect ? activeRect.left + midX : midX - window.scrollX,
+                    activeRect ? activeRect.top + midY : midY - window.scrollY
+                );
                 ctx.stroke();
             }
         }
@@ -1616,6 +1647,11 @@
         // 结束绘制
         function endDraw() {
             drawing = false;
+            activePointerId = null;
+            activePointerType = null;
+            activePressure = 0.5;
+            activeDrawSurface = 'page';
+            activeKnowledgeSurface = null;
 
             if (currentStroke && currentStroke.points.length > 1) {
                 strokes.push(currentStroke);
@@ -1639,13 +1675,37 @@
         
         // 获取坐标
         function getPoint(e) {
+            if (activeDrawSurface === 'knowledge' && activeKnowledgeSurface) {
+                const rect = activeKnowledgeSurface.getBoundingClientRect();
+                return {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                };
+            }
             return {
                 x: e.clientX + window.scrollX,
                 y: e.clientY + window.scrollY
             };
         }
 
+        function getKnowledgeSurfaceFromPoint(clientX, clientY) {
+            return document.elementsFromPoint(clientX, clientY).find(element =>
+                element.classList?.contains('knowledge-editor')
+            ) || null;
+        }
+
+        function ensureKnowledgeSurfaceId(surface) {
+            if (!surface.id) {
+                surface.id = `knowledgeSurface${knowledgeCounter++}`;
+            }
+            return surface.id;
+        }
+
         function updateBrushPosition(e) {
+            if (e.pointerType === 'touch' && !drawing) {
+                brush.style.opacity = '0';
+                return;
+            }
             const size = currentTool === 'erase' ? 22 : currentTool === 'select' ? 18 : 8;
             lastX = e.clientX;
             lastY = e.clientY;
@@ -1679,6 +1739,10 @@
         function drawStroke(stroke) {
             const pts = stroke.visiblePoints || stroke.points;
             if (pts.length < 2) return;
+            const knowledgeSurface = stroke.surface === 'knowledge' && stroke.surfaceId
+                ? document.getElementById(stroke.surfaceId)
+                : null;
+            const knowledgeRect = knowledgeSurface ? knowledgeSurface.getBoundingClientRect() : null;
             
             ctx.strokeStyle = stroke.color;
             
@@ -1702,12 +1766,21 @@
             }
             
             ctx.beginPath();
-            ctx.moveTo(pts[0].x - window.scrollX, pts[0].y - window.scrollY);
+            ctx.moveTo(
+                knowledgeRect ? knowledgeRect.left + pts[0].x : pts[0].x - window.scrollX,
+                knowledgeRect ? knowledgeRect.top + pts[0].y : pts[0].y - window.scrollY
+            );
             
             for (let i = 1; i < pts.length; i++) {
-                const midX = ((pts[i-1].x + pts[i].x) / 2) - window.scrollX;
-                const midY = ((pts[i-1].y + pts[i].y) / 2) - window.scrollY;
-                ctx.quadraticCurveTo(pts[i-1].x - window.scrollX, pts[i-1].y - window.scrollY, midX, midY);
+                const fromX = knowledgeRect ? knowledgeRect.left + pts[i-1].x : pts[i-1].x - window.scrollX;
+                const fromY = knowledgeRect ? knowledgeRect.top + pts[i-1].y : pts[i-1].y - window.scrollY;
+                const midX = knowledgeRect
+                    ? knowledgeRect.left + ((pts[i-1].x + pts[i].x) / 2)
+                    : ((pts[i-1].x + pts[i].x) / 2) - window.scrollX;
+                const midY = knowledgeRect
+                    ? knowledgeRect.top + ((pts[i-1].y + pts[i].y) / 2)
+                    : ((pts[i-1].y + pts[i].y) / 2) - window.scrollY;
+                ctx.quadraticCurveTo(fromX, fromY, midX, midY);
             }
             
             ctx.stroke();
@@ -1715,10 +1788,10 @@
         
         // 渲染循环
         function render() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
             
             if(bgImage){
-                ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+                ctx.drawImage(bgImage, 0, 0, canvasWidth, canvasHeight);
             }
             
             const now = Date.now();
@@ -1761,7 +1834,6 @@
         function setTool(t) {
             currentTool = t;
             updateCursor();
-            canvas.style.pointerEvents = t === 'select' ? 'none' : 'auto';
             templateStage.classList.toggle('select-mode', t === 'select');
             document.body.style.cursor = 'none';
 
@@ -1782,6 +1854,78 @@
                 statusBar.textContent = '橡皮擦已激活';
                 activeToolChip.textContent = '当前工具: 橡皮擦';
             }
+        }
+
+        function handleDocumentPointerDown(e) {
+            const interactiveElement = getKnowledgeInteractiveFromPoint(e.clientX, e.clientY);
+            if (interactiveElement) {
+                if (interactiveElement.matches('.knowledge-header, .knowledge-resize')) {
+                    handleKnowledgeOverlayInteraction(interactiveElement, e);
+                }
+                return;
+            }
+
+            if (currentTool === 'select') return;
+            if (!shouldHandlePointer(e)) return;
+
+            const blockedTarget = e.target.closest('.toolbar, .nav-wrapper, .layer-panel, .tool-button, .color-panel, .nav-button, .knowledge-action');
+            if (blockedTarget) return;
+
+            activePointerId = e.pointerId;
+            activePointerType = e.pointerType;
+            activePressure = e.pressure || 0.5;
+            e.preventDefault();
+
+            if (currentTool === 'erase') {
+                erasing = true;
+                eraseAt(e);
+                return;
+            }
+
+            startDraw(e);
+        }
+
+        async function toggleFullscreen() {
+            try {
+                if (!document.fullscreenElement) {
+                    await document.documentElement.requestFullscreen();
+                    statusBar.textContent = '已进入全屏模式';
+                } else {
+                    await document.exitFullscreen();
+                    statusBar.textContent = '已退出全屏模式';
+                }
+            } catch (error) {
+                statusBar.textContent = '当前环境不支持全屏';
+            }
+        }
+
+        function shouldHandlePointer(e) {
+            if (e.pointerType === 'mouse') return true;
+            if (e.pointerType === 'pen') return true;
+            if (e.pointerType === 'touch') return currentTool === 'select';
+            return false;
+        }
+
+        function handleTrackedPointerMove(e) {
+            updateBrushPosition(e);
+            if (!drawing && !erasing) return;
+            if (e.pointerId !== activePointerId) return;
+            activePressure = e.pressure || activePressure;
+            if (currentTool === 'erase' && erasing) {
+                e.preventDefault();
+                eraseAt(e);
+                return;
+            }
+            if (drawing) {
+                e.preventDefault();
+                draw(e);
+            }
+        }
+
+        function finishTrackedPointer(e) {
+            if (e.pointerId !== activePointerId) return;
+            erasing = false;
+            endDraw();
         }
 
         function getKnowledgeInteractiveFromPoint(clientX, clientY) {
@@ -1975,7 +2119,7 @@
     </div>
     <div class="knowledge-body">
         <p>统一样式知识点模块，可继续复制和批量插入。</p>
-        <div class="knowledge-editor editable-block" contenteditable="true">${content}</div>
+        <div class="knowledge-editor editable-block" id="${id}Editor" contenteditable="true">${content}</div>
         <span class="knowledge-resize"></span>
     </div>
 </aside>`;
