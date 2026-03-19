@@ -36,6 +36,21 @@
             overflow-x: hidden;
         }
 
+        body.pen-scroll-lock {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            overflow: hidden;
+            touch-action: none;
+            overscroll-behavior: none;
+        }
+
+        html.pen-scroll-lock {
+            overflow: hidden;
+            touch-action: none;
+            overscroll-behavior: none;
+        }
+
         .template-stage {
             position: relative;
             z-index: 0;
@@ -890,10 +905,11 @@
         }
         
         #drawCanvas {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 1;
             touch-action: none;
             cursor: none;
@@ -1411,14 +1427,25 @@
         let activeKnowledgeSurface = null;
         let teachingMode = false;
         let textLocked = true;
+        let penScrollLocked = false;
+        let lockedScrollY = 0;
+        let lockedScrollX = 0;
         
         // =========================
         // 基础初始化
         // =========================
         function resizeCanvas() {
             const dpr = window.devicePixelRatio || 1;
-            canvasWidth = window.innerWidth;
-            canvasHeight = window.innerHeight;
+            canvasWidth = Math.max(
+                document.documentElement.clientWidth,
+                document.documentElement.scrollWidth,
+                document.body.scrollWidth
+            );
+            canvasHeight = Math.max(
+                document.documentElement.clientHeight,
+                document.documentElement.scrollHeight,
+                document.body.scrollHeight
+            );
             canvas.width = Math.round(canvasWidth * dpr);
             canvas.height = Math.round(canvasHeight * dpr);
             canvas.style.width = canvasWidth + 'px';
@@ -1528,7 +1555,6 @@
             document.addEventListener('pointermove', dragKnowledgeCard);
             document.addEventListener('pointermove', resizeKnowledgeCard);
             document.addEventListener('pointerup', stopKnowledgeDrag);
-            document.addEventListener('scroll', render, { passive: true });
         }
         
         // =========================
@@ -1552,6 +1578,10 @@
             const p = getPoint(e);
             points.push(p);
             currentStroke.points.push(p);
+
+            if (activePointerType === 'pen') {
+                lockPageScroll();
+            }
         }
         
         // 绘制
@@ -1601,14 +1631,14 @@
                     ? activeKnowledgeSurface.getBoundingClientRect()
                     : null;
                 ctx.moveTo(
-                    activeRect ? activeRect.left + prev.x : prev.x - window.scrollX,
-                    activeRect ? activeRect.top + prev.y : prev.y - window.scrollY
+                    activeRect ? activeRect.left + window.scrollX + prev.x : prev.x,
+                    activeRect ? activeRect.top + window.scrollY + prev.y : prev.y
                 );
                 ctx.quadraticCurveTo(
-                    activeRect ? activeRect.left + prev.x : prev.x - window.scrollX,
-                    activeRect ? activeRect.top + prev.y : prev.y - window.scrollY,
-                    activeRect ? activeRect.left + midX : midX - window.scrollX,
-                    activeRect ? activeRect.top + midY : midY - window.scrollY
+                    activeRect ? activeRect.left + window.scrollX + prev.x : prev.x,
+                    activeRect ? activeRect.top + window.scrollY + prev.y : prev.y,
+                    activeRect ? activeRect.left + window.scrollX + midX : midX,
+                    activeRect ? activeRect.top + window.scrollY + midY : midY
                 );
                 ctx.stroke();
             }
@@ -1622,6 +1652,7 @@
             activePressure = 0.5;
             activeDrawSurface = 'page';
             activeKnowledgeSurface = null;
+            unlockPageScroll();
 
             if (currentStroke && currentStroke.points.length > 1) {
                 strokes.push(currentStroke);
@@ -1709,11 +1740,6 @@
         function drawStroke(stroke) {
             const pts = stroke.visiblePoints || stroke.points;
             if (pts.length < 2) return;
-            const knowledgeSurface = stroke.surface === 'knowledge' && stroke.surfaceId
-                ? document.getElementById(stroke.surfaceId)
-                : null;
-            const knowledgeRect = knowledgeSurface ? knowledgeSurface.getBoundingClientRect() : null;
-            
             ctx.strokeStyle = stroke.color;
             
             if (stroke.tool === 'guide') {
@@ -1736,21 +1762,15 @@
             }
             
             ctx.beginPath();
-            ctx.moveTo(
-                knowledgeRect ? knowledgeRect.left + pts[0].x : pts[0].x - window.scrollX,
-                knowledgeRect ? knowledgeRect.top + pts[0].y : pts[0].y - window.scrollY
-            );
+            const firstPoint = getStrokeRenderPoint(stroke, pts[0]);
+            ctx.moveTo(firstPoint.x, firstPoint.y);
             
             for (let i = 1; i < pts.length; i++) {
-                const fromX = knowledgeRect ? knowledgeRect.left + pts[i-1].x : pts[i-1].x - window.scrollX;
-                const fromY = knowledgeRect ? knowledgeRect.top + pts[i-1].y : pts[i-1].y - window.scrollY;
-                const midX = knowledgeRect
-                    ? knowledgeRect.left + ((pts[i-1].x + pts[i].x) / 2)
-                    : ((pts[i-1].x + pts[i].x) / 2) - window.scrollX;
-                const midY = knowledgeRect
-                    ? knowledgeRect.top + ((pts[i-1].y + pts[i].y) / 2)
-                    : ((pts[i-1].y + pts[i].y) / 2) - window.scrollY;
-                ctx.quadraticCurveTo(fromX, fromY, midX, midY);
+                const from = getStrokeRenderPoint(stroke, pts[i - 1]);
+                const current = getStrokeRenderPoint(stroke, pts[i]);
+                const midX = (from.x + current.x) / 2;
+                const midY = (from.y + current.y) / 2;
+                ctx.quadraticCurveTo(from.x, from.y, midX, midY);
             }
             
             ctx.stroke();
@@ -1758,6 +1778,21 @@
         
         // 渲染循环
         function render() {
+            const nextCanvasWidth = Math.max(
+                document.documentElement.clientWidth,
+                document.documentElement.scrollWidth,
+                document.body.scrollWidth
+            );
+            const nextCanvasHeight = Math.max(
+                document.documentElement.clientHeight,
+                document.documentElement.scrollHeight,
+                document.body.scrollHeight
+            );
+
+            if (nextCanvasWidth !== canvasWidth || nextCanvasHeight !== canvasHeight) {
+                resizeCanvas();
+            }
+
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
             
             if(bgImage){
@@ -1907,6 +1942,44 @@
             if (e.pointerType === 'pen') return true;
             if (e.pointerType === 'touch') return currentTool === 'select';
             return false;
+        }
+
+        function lockPageScroll() {
+            if (penScrollLocked) return;
+            penScrollLocked = true;
+            lockedScrollX = window.scrollX;
+            lockedScrollY = window.scrollY;
+            document.documentElement.classList.add('pen-scroll-lock');
+            document.body.classList.add('pen-scroll-lock');
+            document.body.style.top = `${-lockedScrollY}px`;
+            document.body.style.left = `${-lockedScrollX}px`;
+        }
+
+        function unlockPageScroll() {
+            if (!penScrollLocked) return;
+            penScrollLocked = false;
+            document.documentElement.classList.remove('pen-scroll-lock');
+            document.body.classList.remove('pen-scroll-lock');
+            document.body.style.top = '';
+            document.body.style.left = '';
+            window.scrollTo(lockedScrollX, lockedScrollY);
+        }
+
+        function getStrokeRenderPoint(stroke, point) {
+            if (stroke.surface !== 'knowledge' || !stroke.surfaceId) {
+                return { x: point.x, y: point.y };
+            }
+
+            const knowledgeSurface = document.getElementById(stroke.surfaceId);
+            if (!knowledgeSurface) {
+                return { x: point.x, y: point.y };
+            }
+
+            const knowledgeRect = knowledgeSurface.getBoundingClientRect();
+            return {
+                x: knowledgeRect.left + window.scrollX + point.x,
+                y: knowledgeRect.top + window.scrollY + point.y
+            };
         }
 
         function handleTrackedPointerMove(e) {
@@ -2297,12 +2370,15 @@
             }
 
             ctx2.beginPath();
-            ctx2.moveTo(pts[0].x, pts[0].y);
+            const firstPoint = getStrokeRenderPoint(stroke, pts[0]);
+            ctx2.moveTo(firstPoint.x, firstPoint.y);
 
             for(let i=1;i<pts.length;i++){
-                const midX = (pts[i-1].x + pts[i].x)/2;
-                const midY = (pts[i-1].y + pts[i].y)/2;
-                ctx2.quadraticCurveTo(pts[i-1].x, pts[i-1].y, midX, midY);
+                const from = getStrokeRenderPoint(stroke, pts[i - 1]);
+                const current = getStrokeRenderPoint(stroke, pts[i]);
+                const midX = (from.x + current.x) / 2;
+                const midY = (from.y + current.y) / 2;
+                ctx2.quadraticCurveTo(from.x, from.y, midX, midY);
             }
 
             ctx2.stroke();
