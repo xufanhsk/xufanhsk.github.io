@@ -40,38 +40,252 @@
             position: relative;
             cursor: crosshair;
             transition: background 0.3s ease;
-            padding-top: 48px;
+            padding: 88px 24px 40px;
+            overflow-x: hidden;
+        }
+
+        .template-stage {
+            position: relative;
+            z-index: 0;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .template-stage.select-mode {
+            cursor: default;
+        }
+
+        .lesson-sheet {
+            position: relative;
+            background: #fbfaf7;
+            border-radius: 28px;
+            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+            overflow: hidden;
+            min-height: calc(100vh - 150px);
+        }
+
+        .selectable-item {
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .select-mode .selectable-item {
+            cursor: pointer;
+        }
+
+        .selectable-item.selected {
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.22);
+        }
+
+        .sheet-header {
+            display: grid;
+            grid-template-columns: 520px 1fr;
+            align-items: stretch;
+            min-height: 220px;
+            border-bottom: 2px dashed rgba(23, 23, 23, 0.28);
+        }
+
+        .sheet-index {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #666666, #8a8a8a);
+            color: #ffffff;
+            font-size: 128px;
+            font-weight: 700;
+            letter-spacing: 4px;
+        }
+
+        .sheet-title {
+            display: flex;
+            align-items: center;
+            padding: 32px 40px;
+            font-size: 68px;
+            color: #4a4a4a;
+            letter-spacing: 2px;
+        }
+
+        .sheet-content {
+            padding: 72px 72px 88px;
+            color: #232323;
+        }
+
+        .template-section {
+            margin-top: 54px;
+            padding-top: 18px;
+            border-top: 3px solid rgba(74, 74, 74, 0.12);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            margin-bottom: 44px;
+        }
+
+        .section-mark {
+            width: 110px;
+            height: 4px;
+            background: #4a4a4a;
+            position: relative;
+            flex: 0 0 auto;
+        }
+
+        .section-mark::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 10px;
+            height: 4px;
+            background: #9a9a9a;
+        }
+
+        .section-heading h2 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .target-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.55);
+        }
+
+        .target-table td {
+            border: 2px dashed rgba(35, 35, 35, 0.35);
+            padding: 28px 26px;
+            vertical-align: top;
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .target-table .label-cell {
+            width: 180px;
+            font-size: 24px;
+            letter-spacing: 2px;
+            vertical-align: middle;
+        }
+
+        .target-table strong {
+            font-size: 20px;
+        }
+
+        .target-list {
+            margin-top: 8px;
+            padding-left: 1.4em;
+        }
+
+        .target-list li {
+            margin: 2px 0;
+        }
+
+        .simple-card {
+            border: 2px dashed rgba(35, 35, 35, 0.25);
+            border-radius: 24px;
+            padding: 28px 30px;
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.06);
+        }
+
+        .simple-card p,
+        .simple-card li {
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .simple-card ol,
+        .simple-card ul {
+            padding-left: 1.4em;
+            margin-top: 8px;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .vocab-item {
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: rgba(0, 113, 227, 0.06);
+            box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.08);
+        }
+
+        .vocab-item strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 20px;
+        }
+
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .practice-box {
+            padding: 18px 20px;
+            border-radius: 20px;
+            border: 2px dashed rgba(35, 35, 35, 0.22);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.05);
+        }
+
+        .section-shell {
+            padding: 28px 30px 34px;
+            border-radius: 30px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.42));
+            box-shadow: 0 22px 44px rgba(15, 23, 42, 0.08);
         }
         
         .toolbar {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            border-radius: 0;
-            padding: 8px 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
+            transform: none;
+            padding: 12px 18px;
+            border-radius: 0 0 22px 22px;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             z-index: 1000;
             transition: all 0.2s ease;
-            height: 48px;
             box-sizing: border-box;
         }
         
         @media (prefers-color-scheme: dark) {
             .toolbar {
-                background: rgba(28, 28, 30, 0.8);
+                background: rgba(28, 28, 30, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 
+                    0 8px 30px rgba(0, 0, 0, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
             }
         }
         
         .toolbar:hover {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transform: translateY(0);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .toolbar:hover {
+                box-shadow: 
+                    0 12px 40px rgba(0, 0, 0, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            }
         }
         
         .brand {
@@ -82,13 +296,39 @@
             padding-right: 15px;
             border-right: 1px solid var(--border);
         }
+
+        .course-title-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 14px 0 2px;
+            border-right: 1px solid var(--border);
+        }
+
+        .course-title-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .course-title-value {
+            min-width: 110px;
+            max-width: 240px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+        }
         
         .tool-button {
-            width: 28px;
-            height: 28px;
-            border: 2px solid var(--border);
-            border-radius: 50%;
-            background: var(--surface);
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: transparent;
+            border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -100,12 +340,156 @@
             font-family: inherit;
         }
         
+        .tool-button:hover {
+            background: rgba(0, 0, 0, 0.06);
+        }
+        
+        .tool-button.active {
+            background: rgba(0, 113, 227, 0.15);
+        }
+
+        .tool-button:focus-visible,
+        .color-item:focus-visible {
+            outline: 2px solid rgba(0, 113, 227, 0.75);
+            outline-offset: 2px;
+        }
+        
+        /* 颜色按钮样式 */
+        .tool-button[data-color] {
+            border-radius: 8px;
+        }
+        
+        .tool-button[data-color="#f44336"] {
+            background: #f44336;
+        }
+        
+        .tool-button[data-color="#2196f3"] {
+            background: #2196f3;
+        }
+        
+        .tool-button[data-color="#4caf50"] {
+            background: #4caf50;
+        }
+        
+        .tool-button[data-color="#9c27b0"] {
+            background: #9c27b0;
+        }
+        
+        .tool-button[data-color="#ff9800"] {
+            background: #ff9800;
+        }
+        
+        .tool-button[data-color="#607d8b"] {
+            background: #607d8b;
+        }
+        
+        /* 颜色按钮hover效果 */
+        .tool-button[data-color]:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 颜色按钮active效果 */
+        .tool-button[data-color].active {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .tool-button:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            
+            .tool-button.active {
+                background: rgba(0, 113, 227, 0.25);
+            }
+            
+            .tool-button[data-color].active {
+                box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5);
+            }
+        }
+        
         .tool-group {
             display: flex;
             align-items: center;
             gap: 8px;
             padding: 0 15px;
             border-left: 1px solid var(--border);
+        }
+
+        .toolbar-inner {
+            width: min(1320px, 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .toolbar-main {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-wrapper {
+            position: fixed;
+            top: 14px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .nav-toggle {
+            border: none;
+            border-radius: 999px;
+            padding: 8px 14px;
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--text);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .nav-panel {
+            position: absolute;
+            right: 0;
+            top: calc(100% + 10px);
+            z-index: 998;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            width: 186px;
+            padding: 14px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 34px rgba(15, 23, 42, 0.12);
+        }
+
+        .nav-wrapper.open .nav-panel {
+            display: flex;
+        }
+
+        .nav-panel h3 {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .nav-button {
+            border: none;
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--text);
+            font-size: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-1px);
+            background: rgba(0, 113, 227, 0.14);
         }
         
         .tool-label {
@@ -125,102 +509,9 @@
             cursor: pointer;
         }
         
-        .text-element {
-            position: absolute;
-            color: var(--text);
-            font-size: 16px;
-            font-family: inherit;
-            pointer-events: auto;
-            min-width: 100px;
-            min-height: 40px;
-            padding: 8px;
-            border: 1px solid transparent;
-            outline: none;
-            z-index: 20;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 4px;
-            overflow: auto;
-            transition: all 0.2s ease;
-        }
+
         
-        .text-element:hover {
-            border-color: var(--primary);
-            box-shadow: 0 2px 8px rgba(0, 113, 227, 0.2);
-        }
-        
-        .text-element.selected {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
-        }
-        
-        .text-element:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.3);
-            outline: none;
-        }
-        
-        .resize-handle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border: 1px solid white;
-            border-radius: 50%;
-            cursor: nwse-resize;
-            z-index: 21;
-        }
-        
-        .resize-handle.bottom-right {
-            bottom: -4px;
-            right: -4px;
-        }
-        
-        .tool-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .tool-button.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
-        
-        .tool-button:nth-child(2) {
-            background: #f44336;
-            border-color: #f44336;
-            color: white;
-        }
-        
-        .tool-button:nth-child(3) {
-            background: #2196f3;
-            border-color: #2196f3;
-            color: white;
-        }
-        
-        .tool-button:nth-child(4) {
-            background: #4caf50;
-            border-color: #4caf50;
-            color: white;
-        }
-        
-        .tool-button:nth-child(5) {
-            background: #9c27b0;
-            border-color: #9c27b0;
-            color: white;
-        }
-        
-        .tool-button:nth-child(6) {
-            background: #ff9800;
-            border-color: #ff9800;
-            color: white;
-        }
-        
-        .tool-button:nth-child(7) {
-            background: #607d8b;
-            border-color: #607d8b;
-            color: white;
-        }
+
         
         .tooltip {
             position: absolute;
@@ -237,6 +528,72 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
             pointer-events: none;
             z-index: 1001;
+        }
+        
+        .color-picker {
+            position: relative;
+        }
+
+        .color-panel {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            
+            padding: 10px;
+            border-radius: 16px;
+
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(30px);
+
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
+        }
+
+        .color-panel.show {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            pointer-events: auto;
+        }
+
+        .color-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .color-item {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .color-item.active {
+            transform: scale(1.08);
+            box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.25);
+        }
+
+        /* 纯色 */
+        .color-item.solid {
+            background: var(--c);
+        }
+
+        /* 荧光（关键） */
+        .color-item.glow {
+            background: transparent;
+            box-shadow: 
+                0 0 6px var(--c), 
+                0 0 12px var(--c);
         }
         
         @media (prefers-color-scheme: dark) {
@@ -299,18 +656,293 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 999;
         }
+
+        .info-panel {
+            position: fixed;
+            left: 20px;
+            top: 104px;
+            z-index: 998;
+            width: min(320px, calc(100vw - 40px));
+            padding: 16px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.42);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+        }
+
+        .editable-block {
+            outline: none;
+        }
+
+        .editable-block:focus {
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.18);
+            border-radius: 12px;
+        }
+
+        .knowledge-inline {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        .knowledge-trigger {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: none;
+            background: radial-gradient(circle at 30% 30%, #ffe17d, #ff8a00);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 4;
+            padding: 0;
+            box-shadow: 0 0 0 0 rgba(255, 149, 0, 0.45);
+            animation: pulseGlow 2.2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 149, 0, 0.42); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 18px rgba(255, 149, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 149, 0, 0); }
+        }
+
+        .knowledge-card {
+            position: absolute;
+            left: 28px;
+            top: -10px;
+            width: 280px;
+            min-width: 220px;
+            min-height: 140px;
+            padding: 0;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.48);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+            backdrop-filter: blur(26px) saturate(180%);
+            z-index: 12;
+            overflow: hidden;
+            resize: both;
+            display: none;
+        }
+
+        .knowledge-card.open {
+            display: block;
+        }
+
+        .knowledge-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            background: linear-gradient(135deg, rgba(255, 149, 0, 0.18), rgba(0, 113, 227, 0.12));
+        }
+
+        .knowledge-title {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .knowledge-action {
+            width: 28px;
+            height: 28px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+        }
+
+        .knowledge-body {
+            padding: 14px;
+        }
+
+        .knowledge-body p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .knowledge-editor {
+            min-height: 130px;
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.04);
+            outline: none;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        .knowledge-resize {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            background:
+                linear-gradient(135deg, transparent 0 40%, rgba(0, 113, 227, 0.35) 40% 58%, transparent 58% 100%),
+                linear-gradient(135deg, transparent 0 62%, rgba(0, 113, 227, 0.7) 62% 80%, transparent 80% 100%);
+            cursor: nwse-resize;
+        }
+
+        .info-panel h2 {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .info-panel p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .info-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .info-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--text);
+            font-size: 12px;
+        }
+
+        .info-chip-swatch {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--swatch, #007AFF);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+        }
+
+        kbd {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            font: inherit;
+            font-size: 12px;
+        }
+        
+        .layer-panel {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 999;
+        }
+        
+        #drawCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            touch-action: none;
+            cursor: none;
+            pointer-events: auto;
+        }
         
         @media (prefers-color-scheme: dark) {
+            .lesson-sheet {
+                background: #171717;
+                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            }
+
+            .sheet-header {
+                border-bottom-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .sheet-title,
+            .sheet-content {
+                color: #f1f1f1;
+            }
+
+            .section-mark {
+                background: #d2d2d2;
+            }
+
+            .section-mark::after {
+                background: #6f6f6f;
+            }
+
+            .target-table {
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .target-table td {
+                border-color: rgba(255, 255, 255, 0.22);
+            }
+
+            .template-section {
+                border-top-color: rgba(255, 255, 255, 0.12);
+            }
+
+            .section-shell,
+            .simple-card,
+            .practice-box {
+                background: rgba(255, 255, 255, 0.03);
+                box-shadow: 0 18px 34px rgba(0, 0, 0, 0.16);
+            }
+
             .status-bar {
                 background: rgba(28, 28, 30, 0.8);
             }
+
+            .info-panel {
+                background: rgba(28, 28, 30, 0.72);
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+            }
+
+            .nav-panel,
+            .knowledge-card {
+                background: rgba(28, 28, 30, 0.84);
+                border-color: rgba(255, 255, 255, 0.08);
+            }
+
+            .info-chip {
+                background: rgba(100, 210, 255, 0.14);
+            }
+        }
+        
+        #brushCursor{
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+
+            backdrop-filter: blur(6px);
         }
         
         @media (max-width: 768px) {
+            body {
+                padding: 88px 12px 24px;
+            }
+
             .toolbar {
-                top: 20px;
-                padding: 10px 15px;
+                top: 0;
+                padding: 10px 12px;
                 gap: 10px;
+                width: 100%;
+                justify-content: flex-start;
+                overflow-x: visible;
             }
             
             .brand {
@@ -323,6 +955,14 @@
                 width: 28px;
                 height: 28px;
             }
+
+            .course-title-box {
+                padding-right: 10px;
+            }
+
+            .course-title-value {
+                max-width: 140px;
+            }
             
             .intro h1 {
                 font-size: 32px;
@@ -332,556 +972,1253 @@
                 font-size: 16px;
                 max-width: 300px;
             }
+
+            .toolbar-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .toolbar-main {
+                width: 100%;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 2px;
+            }
+
+            .info-panel {
+                top: auto;
+                bottom: 76px;
+                left: 12px;
+                width: calc(100vw - 24px);
+            }
+
+            .nav-wrapper {
+                position: static;
+                align-self: flex-end;
+            }
+
+            .status-bar {
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+                text-align: center;
+            }
+
+            .sheet-header {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .sheet-index {
+                min-height: 150px;
+                font-size: 84px;
+            }
+
+            .sheet-title {
+                padding: 24px 20px;
+                font-size: 42px;
+            }
+
+            .sheet-content {
+                padding: 36px 18px 48px;
+            }
+
+            .section-heading {
+                gap: 14px;
+                margin-bottom: 26px;
+            }
+
+            .section-mark {
+                width: 72px;
+            }
+
+            .section-heading h2 {
+                font-size: 22px;
+            }
+
+            .target-table td {
+                padding: 18px 14px;
+                font-size: 15px;
+            }
+
+            .target-table .label-cell {
+                width: 96px;
+                font-size: 18px;
+            }
+
+            .knowledge-card {
+                left: 22px;
+                top: 24px;
+                width: 240px;
+            }
+
+            .vocab-grid,
+            .practice-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body id="canvas">
     <div class="toolbar">
-        <button class="tool-button" data-tool="highlighter" title="荧光笔">
-            ✏️
-            <span class="tooltip">荧光笔</span>
-        </button>
-        <button class="tool-button" data-tool="text" title="文本">
-            📝
-            <span class="tooltip">文本</span>
-        </button>
-        <div class="tool-group">
-            <label for="fontSize" class="tool-label">字体大小:</label>
-            <select id="fontSize" class="tool-select">
-                <option value="12">12px</option>
-                <option value="14">14px</option>
-                <option value="16" selected>16px</option>
-                <option value="18">18px</option>
-                <option value="20">20px</option>
-                <option value="24">24px</option>
-                <option value="30">30px</option>
-                <option value="36">36px</option>
-            </select>
+        <div class="toolbar-inner">
+            <div class="toolbar-main">
+                <div class="course-title-box">
+                    <span class="course-title-label">课程题目</span>
+                    <span class="course-title-value" id="courseTitleValue" contenteditable="true">你好</span>
+                </div>
+                <button class="tool-button" data-tool="select" onclick="setTool('select')" title="选择">
+                    ⌖
+                    <span class="tooltip">选择</span>
+                </button>
+                <button class="tool-button active" data-tool="guide" onclick="setTool('guide')" title="引导笔">
+                    ✏️
+                    <span class="tooltip">引导笔</span>
+                </button>
+                <button class="tool-button" data-tool="marker" onclick="setTool('marker')" title="标记笔">
+                    🖍️
+                    <span class="tooltip">标记笔</span>
+                </button>
+                <button class="tool-button" data-tool="erase" onclick="setTool('erase')" title="橡皮擦">
+                    🧽
+                    <span class="tooltip">橡皮擦</span>
+                </button>
+                <div class="color-picker">
+                    <button class="tool-button" id="colorToggle">🎨</button>
+
+                    <div class="color-panel" id="colorPanel">
+                        <div class="color-group">
+                            <span>●</span>
+                            <button class="color-item solid" data-color="#007AFF" style="background:#007AFF"></button>
+                            <button class="color-item solid" data-color="#FF3B30" style="background:#FF3B30"></button>
+                            <button class="color-item solid" data-color="#34C759" style="background:#34C759"></button>
+                        </div>
+
+                        <div class="color-group">
+                            <span>✦</span>
+                            <button class="color-item glow" data-color="#FF2D55" style="--c:#FF2D55"></button>
+                            <button class="color-item glow" data-color="#FFD60A" style="--c:#FFD60A"></button>
+                            <button class="color-item glow" data-color="#64D2FF" style="--c:#64D2FF"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tool-group">
+                    <input type="file" id="imageUpload" accept="image/*" style="display:none">
+                    <button class="tool-button" onclick="addKnowledgePointAtSelection()" title="新增知识点">❗</button>
+                    <button class="tool-button" onclick="document.getElementById('imageUpload').click()" title="导入图片">🖼️</button>
+                    <button class="tool-button" onclick="undo()" title="撤销">
+                        ↶
+                        <span class="tooltip">撤销</span>
+                    </button>
+                    <button class="tool-button" onclick="redo()" title="重做">
+                        ↷
+                        <span class="tooltip">重做</span>
+                    </button>
+                    <button class="tool-button" onclick="exportPNG()" title="导出">
+                        📤
+                        <span class="tooltip">导出PNG</span>
+                    </button>
+                </div>
+            </div>
+            <div class="nav-wrapper" id="navWrapper">
+                <button class="nav-toggle" id="navToggle" type="button">导航</button>
+                <div class="nav-panel selectable-item" id="navPanel">
+                    <h3>课程导航</h3>
+                    <button class="nav-button" data-target="sheetTop">课程首页</button>
+                    <button class="nav-button" data-target="learningGoals">学习目标</button>
+                    <button class="nav-button" data-target="reviewSection">复习</button>
+                    <button class="nav-button" data-target="warmupSection">热身</button>
+                    <button class="nav-button" data-target="vocabSection">生词</button>
+                    <button class="nav-button" data-target="textSection">课文</button>
+                    <button class="nav-button" data-target="grammarSection">语法</button>
+                    <button class="nav-button" data-target="summarySection">总结及作业</button>
+                </div>
+            </div>
         </div>
-        <button class="tool-button" data-color="#f44336" title="红色">
-            <span class="tooltip">红色</span>
-        </button>
-        <button class="tool-button" data-color="#2196f3" title="蓝色">
-            <span class="tooltip">蓝色</span>
-        </button>
-        <button class="tool-button" data-color="#4caf50" title="绿色">
-            <span class="tooltip">绿色</span>
-        </button>
-        <button class="tool-button" data-color="#9c27b0" title="紫色">
-            <span class="tooltip">紫色</span>
-        </button>
-        <button class="tool-button" data-color="#ff9800" title="橙色">
-            <span class="tooltip">橙色</span>
-        </button>
-        <button class="tool-button" data-color="#607d8b" title="灰色">
-            <span class="tooltip">灰色</span>
-        </button>
     </div>
-    
-    <div class="intro">
-        <h1>效果</h1>
-        <p>创意工具 • 自由表达 • 瞬间灵感</p>
+
+    <!-- 模板页面：课程模板主体 -->
+    <main class="template-stage" id="templateStage">
+        <section class="lesson-sheet selectable-item" id="sheetTop">
+            <header class="sheet-header">
+                <div class="sheet-index">1</div>
+                <div class="sheet-title selectable-item editable-block" id="sheetTitle" contenteditable="true">你好</div>
+            </header>
+
+            <div class="sheet-content">
+                <div class="section-heading">
+                    <span class="section-mark" aria-hidden="true"></span>
+                    <h2>一、教学内容和学习目标</h2>
+                </div>
+
+                <table class="target-table selectable-item" id="learningGoals">
+                    <tbody>
+                        <tr>
+                            <td class="label-cell">重点句型</td>
+                            <td class="editable-block" contenteditable="true">
+                                <strong>学生能够了解并掌握：</strong>
+                                <ol class="target-list">
+                                    <li>你好！您好<span class="knowledge-inline selectable-item">
+                                        <button class="knowledge-trigger" type="button" data-knowledge-target="knowledgePhrase1">!</button>
+                                        <aside class="knowledge-card" id="knowledgePhrase1">
+                                            <div class="knowledge-header">
+                                                <span class="knowledge-title">知识点：您好</span>
+                                                <button class="knowledge-action" type="button" data-close-knowledge="knowledgePhrase1">×</button>
+                                            </div>
+                                            <div class="knowledge-body">
+                                                <p>这个知识点模块固定嵌入在句型区域，适合后期一个课程放多个知识点入口。</p>
+                                                <div class="knowledge-editor editable-block" contenteditable="true">测试文本：
+“您好”是“你好”的礼貌表达，常用于老师、长辈、正式场合。</div>
+                                                <span class="knowledge-resize"></span>
+                                            </div>
+                                        </aside>
+                                    </span>！你们好！</li>
+                                    <li>对不起！没关系！</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell">语音</td>
+                            <td class="editable-block" contenteditable="true">
+                                <strong>学生能够：</strong>
+                                <ol class="target-list">
+                                    <li>熟练朗读本课的声母、韵母和核心音节。</li>
+                                    <li>熟悉并正确朗读汉语四个声调。</li>
+                                    <li>了解音节中的声韵调拼合关系。</li>
+                                    <li>完成双音节和连续语流的自然朗读。</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell">汉字</td>
+                            <td class="editable-block" contenteditable="true">
+                                <strong>学生能够：</strong>
+                                <ol class="target-list">
+                                    <li>认读本课生词并理解其基本含义。</li>
+                                    <li>掌握基础笔画和独体字的书写顺序。</li>
+                                    <li>结合课堂练习完成规范抄写。</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell">功能</td>
+                            <td class="editable-block" contenteditable="true">
+                                <strong>学生能够：</strong>
+                                <ol class="target-list">
+                                    <li>完成打招呼和问候。</li>
+                                    <li>在合适情境中表达歉意。</li>
+                                    <li>理解并回应简单原谅表达。</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- 预设模板板块：后续导入课程内容时按此结构替换 -->
+                <section class="template-section selectable-item" id="reviewSection">
+                    <div class="section-shell">
+                        <div class="section-heading">
+                            <span class="section-mark" aria-hidden="true"></span>
+                            <h2>二、复习板块</h2>
+                        </div>
+                        <div class="simple-card editable-block" contenteditable="true">
+                            <p>复习建议：回顾上节课问候语、声调和课堂指令，检查学生是否能独立完成基础对话。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="template-section selectable-item" id="warmupSection">
+                    <div class="section-shell">
+                        <div class="section-heading">
+                            <span class="section-mark" aria-hidden="true"></span>
+                            <h2>三、热身板块</h2>
+                        </div>
+                        <div class="simple-card editable-block" contenteditable="true">
+                            <ol>
+                                <li>教师示范问候，学生跟读。</li>
+                                <li>两人一组完成“你好 / 您好”情景打招呼。</li>
+                                <li>快速听音辨别不同语气。</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="template-section selectable-item" id="vocabSection">
+                    <div class="section-shell">
+                        <div class="section-heading">
+                            <span class="section-mark" aria-hidden="true"></span>
+                            <h2>四、生词板块</h2>
+                        </div>
+                        <div class="vocab-grid">
+                            <div class="vocab-item editable-block" contenteditable="true"><strong>你好</strong><span>常用问候语，适用于日常场景。</span></div>
+                            <div class="vocab-item editable-block" contenteditable="true"><strong>您好</strong><span>更礼貌、更正式的问候表达。</span></div>
+                            <div class="vocab-item editable-block" contenteditable="true"><strong>对不起</strong><span>表达歉意。</span></div>
+                            <div class="vocab-item editable-block" contenteditable="true"><strong>没关系</strong><span>回应对方歉意。</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="template-section selectable-item" id="vocabPracticeSection">
+                    <div class="section-shell">
+                        <div class="section-heading">
+                            <span class="section-mark" aria-hidden="true"></span>
+                            <h2>五、生词练习板块</h2>
+                        </div>
+                        <div class="practice-grid">
+                            <div class="practice-box editable-block" contenteditable="true">练习 1：听音选词，把“你好 / 您好 / 对不起 / 没关系”对应到正确场景。</div>
+                            <div class="practice-box editable-block" contenteditable="true">练习 2：看图说话，两人一组完成问候和回应。</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="template-section selectable-item" id="textSection">
+                    <div class="section-shell">
+                        <div class="section-heading">
+                            <span class="section-mark" aria-hidden="true"></span>
+                            <h2>六、课文板块</h2>
+                        </div>
+                        <div class="simple-card editable-block" contenteditable="true">
+                            <p>A：你好！</p>
+                            <p>B：你好！</p>
+                            <p>A：对不起！</p>
+                            <p>B：没关系！</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="template-section selectable-item" id="grammarSection">
+                    <div class="section-shell">
+                        <div class="section-heading">
+                            <span class="section-mark" aria-hidden="true"></span>
+                            <h2>七、语法板块</h2>
+                        </div>
+                        <div class="simple-card editable-block" contenteditable="true">
+                            <p>语法提示：根据交际对象不同，问候语会有口语化和礼貌化的区别。</p>
+                            <p>“你好”适合平辈，“您好”适合正式场合或长辈。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="template-section selectable-item" id="grammarPracticeSection">
+                    <div class="section-shell">
+                        <div class="section-heading">
+                            <span class="section-mark" aria-hidden="true"></span>
+                            <h2>八、语法练习板块</h2>
+                        </div>
+                        <div class="practice-grid">
+                            <div class="practice-box editable-block" contenteditable="true">练习 1：判断不同人物关系，选择“你好”还是“您好”。</div>
+                            <div class="practice-box editable-block" contenteditable="true">练习 2：改写句子，让表达更礼貌。</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="template-section selectable-item" id="summarySection">
+                    <div class="section-shell">
+                        <div class="section-heading">
+                            <span class="section-mark" aria-hidden="true"></span>
+                            <h2>九、总结及作业板块</h2>
+                        </div>
+                        <div class="simple-card editable-block" contenteditable="true">
+                            <p>课堂总结：掌握问候与礼貌表达，能完成简单互动。</p>
+                            <p>课后作业：录音朗读课文，抄写本课生词各两遍，并完成问候情景对话。</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <div class="info-panel selectable-item" id="learningGoalPanel">
+        <h2>学习目标</h2>
+        <div class="editable-block" id="goalEditable" contenteditable="true">
+            <p>这里作为备注功能板块使用。你可以在课件页面上直接圈画、标注重点，也可以把这一块当作模板说明区。</p>
+            <p>测试文本：本节课重点关注问候表达、发音节奏和情景运用。</p>
+        </div>
+        <div class="info-chip-row">
+            <span class="info-chip" id="activeToolChip">当前工具: 引导笔</span>
+            <span class="info-chip">
+                <span class="info-chip-swatch" id="activeColorSwatch"></span>
+                <span id="activeColorLabel">#007AFF</span>
+            </span>
+        </div>
     </div>
     
     <div class="status-bar">
-        点击荧光笔开始创作
+        点击引导笔开始创作
     </div>
+    
+    <div class="layer-panel">
+        <button onclick="clearAll()" class="tool-button">清空</button>
+    </div>
+    
+    <canvas id="drawCanvas"></canvas>
+    <div id="brushCursor"></div>
+    <div id="pageBottom"></div>
 
     <script>
-        let isDrawing = false;
-        let currentColor = '#ffeb3b';
-        let currentTool = 'highlighter';
-        let drawingPath = null;
-        let drawingPoints = [];
-        let currentTextElement = null;
-        let isEditingText = false;
-        let isDragging = false;
-        let isResizing = false;
-        let isDrawingText = false;
-        let textStart = { x: 0, y: 0 };
-        let textEnd = { x: 0, y: 0 };
-        let textPreview = null;
-        let dragOffset = { x: 0, y: 0 };
-        let resizeStart = { x: 0, y: 0 };
-        let selectedTextElement = null;
+        // =========================
+        // 画布批注系统
+        // 说明：所有笔迹以页面坐标保存，滚动后仍跟随页面内容
+        // =========================
+        const canvas = document.getElementById('drawCanvas');
+        const ctx = canvas.getContext('2d');
         
-        const canvas = document.getElementById('canvas');
+        // 工具与绘制状态
+        let drawing = false;
+        let points = [];
+        let currentTool = 'guide';
+        let currentColor = '#FF2D55';
+        let currentStroke = null;
+        
+        // 笔迹数据
+        let layers = [];
+        let strokes = [];
+        let redoStack = [];
+        let erasing = false;
+        let bgImage = null;
+        
+        // DOM 引用
         const toolButtons = document.querySelectorAll('.tool-button');
-        const intro = document.querySelector('.intro');
+        const toolSwitcherButtons = document.querySelectorAll('.tool-button[data-tool]');
         const statusBar = document.querySelector('.status-bar');
-        const fontSizeSelect = document.getElementById('fontSize');
+        const brush = document.getElementById('brushCursor');
+        const activeToolChip = document.getElementById('activeToolChip');
+        const activeColorSwatch = document.getElementById('activeColorSwatch');
+        const activeColorLabel = document.getElementById('activeColorLabel');
+        const courseTitleValue = document.getElementById('courseTitleValue');
+        const sheetTitle = document.getElementById('sheetTitle');
+        const templateStage = document.getElementById('templateStage');
+        const navButtons = document.querySelectorAll('.nav-button');
+        const navWrapper = document.getElementById('navWrapper');
+        const navToggle = document.getElementById('navToggle');
         
-        // 初始化body样式
-        document.body.style.overflow = 'hidden';
-        document.body.style.width = '100vw';
-        document.body.style.height = '100vh';
+        // 笔刷光标状态
+        let lastX = 0;
+        let lastY = 0;
+        let selectedElement = null;
+        let activeKnowledgeCard = null;
+        let draggingKnowledge = false;
+        let dragKnowledgeOffsetX = 0;
+        let dragKnowledgeOffsetY = 0;
+        let resizingKnowledge = false;
+        let resizeStartX = 0;
+        let resizeStartY = 0;
+        let resizeStartWidth = 0;
+        let resizeStartHeight = 0;
+        let knowledgeCounter = document.querySelectorAll('.knowledge-card').length + 1;
         
-        // 初始化
-        function init() {
-            setupEventListeners();
+        // =========================
+        // 基础初始化
+        // =========================
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
         
         // 设置事件监听器
         function setupEventListeners() {
-            // 工具栏按钮点击
+            // 窗口大小变化
+            window.addEventListener('resize', resizeCanvas);
+            
             toolButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    if (this.dataset.tool) {
-                        currentTool = this.dataset.tool;
-                        toolButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        if (currentTool === 'highlighter') {
-                            statusBar.textContent = '荧光笔已激活';
-                        } else if (currentTool === 'text') {
-                            statusBar.textContent = '文本工具已激活';
-                        }
-                        
-                        // 隐藏介绍文字
-                        if (intro) {
-                            intro.style.opacity = '0';
-                            setTimeout(() => {
-                                if (intro) {
-                                    intro.style.display = 'none';
-                                }
-                            }, 300);
-                        }
-                    } else if (this.dataset.color) {
-                        currentColor = this.dataset.color;
-                        toolButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                        statusBar.textContent = '颜色已更改: ' + this.dataset.color;
-                        
-                        // 更新选中的文本元素颜色
-                        if (selectedTextElement) {
-                            selectedTextElement.style.color = currentColor;
-                        }
+                    if (courseTitleValue) {
+                        courseTitleValue.blur();
                     }
                 });
             });
             
-            // 字体大小选择器
-            fontSizeSelect.addEventListener('change', function() {
-                const fontSize = this.value + 'px';
-                statusBar.textContent = '字体大小: ' + fontSize;
-                
-                // 更新选中的文本元素字体大小
-                if (selectedTextElement) {
-                    selectedTextElement.style.fontSize = fontSize;
+            // 颜色选择器
+            const toggle = document.getElementById('colorToggle');
+            const panel = document.getElementById('colorPanel');
+            
+            toggle.addEventListener('click', () => {
+                panel.classList.toggle('show');
+            });
+            
+            // 点击外部关闭
+            document.addEventListener('click', (e) => {
+                if (!toggle.contains(e.target) && !panel.contains(e.target)) {
+                    panel.classList.remove('show');
                 }
             });
             
-            // 画布事件
-            canvas.addEventListener('mousedown', function(e) {
-                // 检查是否点击了文本元素
-                const target = e.target;
-                if (target.classList.contains('text-element')) {
-                    // 单击选择，双击编辑
-                    selectTextElement(target);
-                    startDrag(e, target);
-                } else if (target.classList.contains('resize-handle')) {
-                    const textElement = target.closest('.text-element');
-                    if (textElement) {
-                        selectTextElement(textElement);
-                        startResize(e, textElement);
+            // 颜色选择
+            const colorItems = document.querySelectorAll('.color-item');
+            colorItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const color = this.dataset.color;
+                    setColor(color);
+                });
+            });
+            
+            // Canvas 事件（使用 Pointer Events 支持鼠标和 iPad Pencil）
+            canvas.addEventListener('pointerdown', function(e) {
+                const interactiveElement = getKnowledgeInteractiveFromPoint(e.clientX, e.clientY);
+                if (interactiveElement) {
+                    handleKnowledgeOverlayInteraction(interactiveElement, e);
+                    return;
+                }
+                if (currentTool === 'select') return;
+                if (currentTool === 'erase') {
+                    erasing = true;
+                    eraseAt(e);
+                    return;
+                }
+                startDraw(e);
+            });
+            canvas.addEventListener('pointermove', function(e) {
+                updateBrushPosition(e);
+                if (currentTool === 'select') return;
+                if (currentTool === 'erase' && erasing) {
+                    eraseAt(e);
+                    return;
+                }
+                draw(e);
+            });
+            canvas.addEventListener('pointerup', function() {
+                erasing = false;
+                endDraw();
+            });
+            canvas.addEventListener('pointerleave', function() {
+                erasing = false;
+                endDraw();
+            });
+            
+            // 监听图片上传
+            document.getElementById('imageUpload').addEventListener('change', function(e){
+                const file = e.target.files[0];
+                if(!file) return;
+
+                const img = new Image();
+                img.onload = function(){
+                    bgImage = img;
+                    statusBar.textContent = '背景图片已导入';
+                };
+                img.src = URL.createObjectURL(file);
+            });
+
+            document.addEventListener('keydown', handleKeydown);
+            document.addEventListener('pointermove', updateBrushPosition);
+            document.addEventListener('pointerdown', handleSelectablePointerDown);
+
+            if (courseTitleValue && sheetTitle) {
+                courseTitleValue.addEventListener('input', function() {
+                    const title = this.textContent.trim() || '课程题目';
+                    sheetTitle.textContent = title;
+                });
+                sheetTitle.addEventListener('input', function() {
+                    const title = this.textContent.trim() || '课程题目';
+                    courseTitleValue.textContent = title;
+                });
+            }
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const target = document.getElementById(this.dataset.target);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        navWrapper.classList.remove('open');
                     }
-                } else if (currentTool === 'highlighter') {
-                    startDrawing(e);
-                } else if (currentTool === 'text') {
-                    startDrawingText(e);
-                } else {
-                    // 点击空白处取消选择
-                    deselectTextElement();
-                }
+                });
             });
-            
-            // 文本元素双击事件 - 激活编辑
-            document.addEventListener('dblclick', function(e) {
-                const target = e.target;
-                if (target.classList.contains('text-element')) {
-                    activateTextEdit(target);
-                }
+
+            navToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navWrapper.classList.toggle('open');
             });
-            
-            // 文本元素单击事件 - 选择但不激活编辑
+
             document.addEventListener('click', function(e) {
-                const target = e.target;
-                if (target.classList.contains('text-element')) {
-                    selectTextElement(target);
+                if (!navWrapper.contains(e.target)) {
+                    navWrapper.classList.remove('open');
                 }
             });
-            
-            document.addEventListener('mousemove', function(e) {
-                if (isDragging && selectedTextElement) {
-                    dragElement(e, selectedTextElement);
-                } else if (isResizing && selectedTextElement) {
-                    resizeElement(e, selectedTextElement);
-                } else if (isDrawingText) {
-                    drawTextPreview(e);
-                } else {
-                    draw(e);
-                }
-            });
-            
-            document.addEventListener('mouseup', function(e) {
-                stopDrawing();
-                stopDrawingText(e);
-                isDragging = false;
-                isResizing = false;
-            });
-            
-            document.addEventListener('mouseout', function() {
-                stopDrawing();
-                cancelDrawingText();
-                isDragging = false;
-                isResizing = false;
-            });
+
+            document.addEventListener('click', handleKnowledgeDelegatedClick);
+            document.addEventListener('pointerdown', handleKnowledgeDelegatedPointerDown);
+            document.addEventListener('pointermove', dragKnowledgeCard);
+            document.addEventListener('pointermove', resizeKnowledgeCard);
+            document.addEventListener('pointerup', stopKnowledgeDrag);
         }
         
-        // 开始绘制
-        function startDrawing(e) {
-            if (currentTool !== 'highlighter') return;
+        // =========================
+        // 绘制逻辑
+        // =========================
+        function startDraw(e) {
+            drawing = true;
+            points = [];
             
-            isDrawing = true;
-            drawingPoints = [];
+            currentStroke = {
+                points: [],
+                color: currentColor,
+                tool: currentTool,
+                time: Date.now()
+            };
             
-            const rect = canvas.getBoundingClientRect();
-            const startX = e.clientX - rect.left;
-            const startY = e.clientY - rect.top;
+            const p = getPoint(e);
+            points.push(p);
+            currentStroke.points.push(p);
             
-            drawingPoints.push({ x: startX, y: startY });
-            
-            // 创建绘制路径
-            drawingPath = document.createElement('div');
-            drawingPath.className = 'drawing';
-            drawingPath.style.position = 'absolute';
-            drawingPath.style.left = '0';
-            drawingPath.style.top = '0';
-            drawingPath.style.pointerEvents = 'none';
-            drawingPath.style.width = '100%';
-            drawingPath.style.height = '100%';
-            
-            document.body.appendChild(drawingPath);
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+
         }
         
         // 绘制
         function draw(e) {
-            if (!isDrawing || currentTool !== 'highlighter') return;
+            if (!drawing) return;
             
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            const p = getPoint(e);
+            points.push(p);
+            currentStroke.points.push(p);
             
-            drawingPoints.push({ x, y });
-            updateDrawing();
-        }
-        
-        // 更新绘制
-        function updateDrawing() {
-            if (!drawingPath || drawingPoints.length < 2) return;
+            if (points.length < 3) return;
             
-            let path = 'M' + drawingPoints[0].x + ',' + drawingPoints[0].y;
+            const prev = points[points.length - 2];
+            const curr = points[points.length - 1];
             
-            for (let i = 1; i < drawingPoints.length; i++) {
-                path += ' L' + drawingPoints[i].x + ',' + drawingPoints[i].y;
-            }
+            // 平滑曲线（关键）
+            const midX = (prev.x + curr.x) / 2;
+            const midY = (prev.y + curr.y) / 2;
             
-            const bodyWidth = document.body.offsetWidth;
-            const bodyHeight = document.body.offsetHeight;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
             
-            drawingPath.innerHTML = `
-                <svg width="${bodyWidth}" height="${bodyHeight}" style="position: absolute; top: 0; left: 0;">
-                    <path d="${path}" fill="none" stroke="${currentColor}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            `;
-        }
-        
-        // 停止绘制
-        function stopDrawing() {
-            if (isDrawing && currentTool === 'highlighter' && drawingPath) {
-                isDrawing = false;
+            // 压感
+            const pressure = e.pressure || 0.5;
+            
+            // 只处理绘制工具，橡皮擦在pointerdown中处理
+            if (currentTool !== 'erase') {
+                let width = 2;
+                width *= (0.7 + pressure);
                 
-                // 按书写轨迹消失延迟
-                animatePathDisappear(drawingPath);
+                ctx.lineWidth = width;
+                ctx.strokeStyle = currentColor;
+                ctx.globalCompositeOperation = 'source-over';
                 
-                // 重置绘制路径变量
-                drawingPath = null;
-                drawingPoints = [];
+                // 引导笔发光效果
+                if (currentTool === 'guide') {
+                    ctx.globalAlpha = 1;
+                    ctx.shadowColor = currentColor;
+                    ctx.shadowBlur = 8;
+                } else {
+                    ctx.globalAlpha = 1;
+                    ctx.shadowBlur = 0;
+                }
+                
+                ctx.beginPath();
+                ctx.moveTo(prev.x, prev.y);
+                ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
+                ctx.stroke();
             }
         }
         
-        // 开始绘制文本框
-        function startDrawingText(e) {
-            const rect = canvas.getBoundingClientRect();
-            textStart.x = e.clientX - rect.left;
-            textStart.y = e.clientY - rect.top;
-            isDrawingText = true;
-            
-            // 创建预览元素
-            textPreview = document.createElement('div');
-            textPreview.style.position = 'absolute';
-            textPreview.style.left = textStart.x + 'px';
-            textPreview.style.top = textStart.y + 'px';
-            textPreview.style.width = '0px';
-            textPreview.style.height = '0px';
-            textPreview.style.border = '2px dashed var(--primary)';
-            textPreview.style.backgroundColor = 'rgba(0, 113, 227, 0.1)';
-            textPreview.style.pointerEvents = 'none';
-            textPreview.style.zIndex = '15';
-            document.body.appendChild(textPreview);
+        // 结束绘制
+        function endDraw() {
+            drawing = false;
+
+            if (currentStroke && currentStroke.points.length > 1) {
+                strokes.push(currentStroke);
+                redoStack = []; // 新操作清空重做栈
+            }
+
+            currentStroke = null;
         }
         
-        // 绘制文本框预览
-        function drawTextPreview(e) {
-            if (!isDrawingText || !textPreview) return;
+        // 保存图层
+        function saveLayer() {
+            const snapshot = document.createElement('canvas');
+            snapshot.width = canvas.width;
+            snapshot.height = canvas.height;
             
-            const rect = canvas.getBoundingClientRect();
-            textEnd.x = e.clientX - rect.left;
-            textEnd.y = e.clientY - rect.top;
+            const sctx = snapshot.getContext('2d');
+            sctx.drawImage(canvas, 0, 0);
             
-            // 计算文本框的位置和大小
-            const left = Math.min(textStart.x, textEnd.x);
-            const top = Math.min(textStart.y, textEnd.y);
-            const width = Math.abs(textEnd.x - textStart.x);
-            const height = Math.abs(textEnd.y - textStart.y);
-            
-            // 更新预览元素
-            textPreview.style.left = left + 'px';
-            textPreview.style.top = top + 'px';
-            textPreview.style.width = Math.max(50, width) + 'px';
-            textPreview.style.height = Math.max(20, height) + 'px';
+            layers.push(snapshot);
         }
         
-        // 停止绘制文本框
-        function stopDrawingText(e) {
-            if (!isDrawingText || !textPreview) return;
+        // 获取坐标
+        function getPoint(e) {
+            return {
+                x: e.clientX + window.scrollX,
+                y: e.clientY + window.scrollY
+            };
+        }
+
+        function updateBrushPosition(e) {
+            const size = currentTool === 'erase' ? 22 : currentTool === 'select' ? 18 : 8;
+            lastX = e.clientX;
+            lastY = e.clientY;
+
+            brush.style.left = lastX + 'px';
+            brush.style.top = lastY + 'px';
+            brush.style.width = size + 'px';
+            brush.style.height = size + 'px';
+            brush.style.borderWidth = currentTool === 'select' ? '2px' : '1px';
+            brush.style.borderStyle = 'solid';
+
+            if (currentTool === 'guide' || currentTool === 'marker') {
+                brush.style.borderColor = currentColor;
+                brush.style.background = 'transparent';
+                brush.style.boxShadow = `0 0 8px ${currentColor}`;
+                brush.style.opacity = '1';
+            } else if (currentTool === 'erase') {
+                brush.style.borderColor = '#ffffff';
+                brush.style.background = 'rgba(0,0,0,0.3)';
+                brush.style.boxShadow = '0 0 0 1px #000, 0 0 6px rgba(0,0,0,0.5)';
+                brush.style.opacity = '1';
+            } else {
+                brush.style.borderColor = 'rgba(0, 113, 227, 0.7)';
+                brush.style.background = 'rgba(255,255,255,0.45)';
+                brush.style.boxShadow = '0 0 0 6px rgba(0, 113, 227, 0.08)';
+                brush.style.opacity = '1';
+            }
+        }
+        
+        // 绘制单个笔触
+        function drawStroke(stroke) {
+            const pts = stroke.visiblePoints || stroke.points;
+            if (pts.length < 2) return;
             
-            const rect = canvas.getBoundingClientRect();
-            textEnd.x = e.clientX - rect.left;
-            textEnd.y = e.clientY - rect.top;
+            ctx.strokeStyle = stroke.color;
             
-            // 计算文本框的位置和大小
-            const left = Math.min(textStart.x, textEnd.x);
-            const top = Math.min(textStart.y, textEnd.y);
-            const width = Math.abs(textEnd.x - textStart.x);
-            const height = Math.abs(textEnd.y - textStart.y);
-            
-            // 移除预览元素
-            if (textPreview && textPreview.parentNode) {
-                textPreview.parentNode.removeChild(textPreview);
+            if (stroke.tool === 'guide') {
+                ctx.shadowColor = stroke.color;
+                ctx.shadowBlur = 8;     // 轻微发光
+                ctx.lineWidth = 2;      // 细线
+                
+                // 透明度渐变
+                const life = Date.now() - stroke.time;
+                if (life > 1500) {
+                    const fade = 1 - Math.min((life - 1500)/1000, 1);
+                    ctx.globalAlpha = fade;
+                } else {
+                    ctx.globalAlpha = 1;
+                }
+            } else if (stroke.tool === 'marker') {
+                ctx.shadowBlur = 0;
+                ctx.lineWidth = 2;
+                ctx.globalAlpha = 1;
             }
             
-            // 如果文本框太小，不创建
-            if (width < 20 || height < 10) {
-                isDrawingText = false;
+            ctx.beginPath();
+            ctx.moveTo(pts[0].x - window.scrollX, pts[0].y - window.scrollY);
+            
+            for (let i = 1; i < pts.length; i++) {
+                const midX = ((pts[i-1].x + pts[i].x) / 2) - window.scrollX;
+                const midY = ((pts[i-1].y + pts[i].y) / 2) - window.scrollY;
+                ctx.quadraticCurveTo(pts[i-1].x - window.scrollX, pts[i-1].y - window.scrollY, midX, midY);
+            }
+            
+            ctx.stroke();
+        }
+        
+        // 渲染循环
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if(bgImage){
+                ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+            }
+            
+            const now = Date.now();
+            
+            strokes = strokes.filter(stroke => {
+                if (stroke.tool === 'guide') {
+                    const life = now - stroke.time;
+                    
+                    // ① 先完整显示 1.5s
+                    if (life < 1500) {
+                        stroke.visiblePoints = stroke.points;
+                        return true;
+                    }
+                    
+                    // ② 再开始消失（再用 1s 消失）
+                    const fadeTime = life - 1500;
+                    if (fadeTime > 1000) return false;
+                    
+                    const progress = fadeTime / 1000;
+                    const cutIndex = Math.floor(stroke.points.length * progress);
+                    
+                    stroke.visiblePoints = stroke.points.slice(cutIndex);
+                    return true;
+                }
+                return true; // 标记笔保留
+            });
+            
+            strokes.forEach(drawStroke);
+
+            if (currentStroke && currentStroke.points.length > 1) {
+                drawStroke(currentStroke);
+            }
+            
+            requestAnimationFrame(render);
+        }
+
+        // =========================
+        // 工具状态
+        // =========================
+        function setTool(t) {
+            currentTool = t;
+            updateCursor();
+            canvas.style.pointerEvents = t === 'select' ? 'none' : 'auto';
+            templateStage.classList.toggle('select-mode', t === 'select');
+            document.body.style.cursor = 'none';
+
+            toolSwitcherButtons.forEach(button => {
+                button.classList.toggle('active', button.dataset.tool === t);
+            });
+            
+            if (currentTool === 'select') {
+                statusBar.textContent = '选择工具已激活';
+                activeToolChip.textContent = '当前工具: 选择';
+            } else if (currentTool === 'guide') {
+                statusBar.textContent = '引导笔已激活';
+                activeToolChip.textContent = '当前工具: 引导笔';
+            } else if (currentTool === 'marker') {
+                statusBar.textContent = '标记笔已激活';
+                activeToolChip.textContent = '当前工具: 标记笔';
+            } else if (currentTool === 'erase') {
+                statusBar.textContent = '橡皮擦已激活';
+                activeToolChip.textContent = '当前工具: 橡皮擦';
+            }
+        }
+
+        function getKnowledgeInteractiveFromPoint(clientX, clientY) {
+            return document.elementsFromPoint(clientX, clientY).find(element =>
+                element.matches('.knowledge-trigger[data-knowledge-target], [data-close-knowledge], .knowledge-header, .knowledge-resize')
+            );
+        }
+
+        function handleKnowledgeOverlayInteraction(element, e) {
+            if (element.matches('.knowledge-trigger[data-knowledge-target]')) {
+                toggleKnowledgeCardFromTrigger(element);
                 return;
             }
-            
-            // 创建文本元素
-            const textElement = document.createElement('div');
-            textElement.className = 'text-element';
-            textElement.contentEditable = 'true';
-            textElement.style.position = 'absolute';
-            textElement.style.left = left + 'px';
-            textElement.style.top = top + 'px';
-            textElement.style.width = width + 'px';
-            textElement.style.height = height + 'px';
-            textElement.style.color = currentColor;
-            textElement.style.fontSize = fontSizeSelect.value + 'px';
-            textElement.style.fontFamily = 'inherit';
-            textElement.style.pointerEvents = 'auto';
-            textElement.style.padding = '8px';
-            textElement.style.border = '1px solid transparent';
-            textElement.style.outline = 'none';
-            textElement.style.zIndex = '20';
-            textElement.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-            textElement.style.borderRadius = '4px';
-            textElement.textContent = '输入文本';
-            
-            // 创建调整大小手柄
-            const resizeHandle = document.createElement('div');
-            resizeHandle.className = 'resize-handle bottom-right';
-            textElement.appendChild(resizeHandle);
-            
-            // 添加到页面
-            document.body.appendChild(textElement);
-            
-            // 聚焦并选择文本
-            textElement.focus();
-            const range = document.createRange();
-            range.selectNodeContents(textElement);
+
+            if (element.matches('[data-close-knowledge]')) {
+                const card = document.getElementById(element.dataset.closeKnowledge);
+                if (card) {
+                    card.classList.remove('open');
+                    delete card.dataset.freePositioned;
+                    if (activeKnowledgeCard === card) activeKnowledgeCard = null;
+                }
+                return;
+            }
+
+            if (element.matches('.knowledge-header')) {
+                startKnowledgeDrag({
+                    currentTarget: element,
+                    target: element,
+                    clientX: e.clientX,
+                    clientY: e.clientY,
+                    preventDefault() {}
+                });
+                return;
+            }
+
+            if (element.matches('.knowledge-resize')) {
+                startKnowledgeResize({
+                    currentTarget: element,
+                    target: element,
+                    clientX: e.clientX,
+                    clientY: e.clientY,
+                    preventDefault() {}
+                });
+            }
+        }
+
+        function handleKnowledgeDelegatedClick(e) {
+            const trigger = e.target.closest('.knowledge-trigger[data-knowledge-target]');
+            if (trigger) {
+                e.stopPropagation();
+                toggleKnowledgeCardFromTrigger(trigger);
+                return;
+            }
+
+            const closeButton = e.target.closest('[data-close-knowledge]');
+            if (closeButton) {
+                e.stopPropagation();
+                const card = document.getElementById(closeButton.dataset.closeKnowledge);
+                if (card) {
+                    card.classList.remove('open');
+                    delete card.dataset.freePositioned;
+                    if (activeKnowledgeCard === card) activeKnowledgeCard = null;
+                }
+                return;
+            }
+        }
+
+        function handleKnowledgeDelegatedPointerDown(e) {
+            const header = e.target.closest('.knowledge-header');
+            if (header) {
+                startKnowledgeDrag(e);
+                return;
+            }
+
+            const resizeHandle = e.target.closest('.knowledge-resize');
+            if (resizeHandle) {
+                startKnowledgeResize(e);
+            }
+        }
+
+        function toggleKnowledgeCardFromTrigger(trigger) {
+            const targetId = trigger.dataset.knowledgeTarget;
+            const card = document.getElementById(targetId);
+            if (!card) return;
+
+            if (!card.classList.contains('open')) {
+                positionKnowledgeCard(trigger, card);
+            }
+
+            card.classList.toggle('open');
+            activeKnowledgeCard = card.classList.contains('open') ? card : null;
+        }
+
+        function positionKnowledgeCard(trigger, card) {
+            if (card.dataset.freePositioned === 'true') return;
+
+            const host = trigger.closest('.knowledge-inline');
+            if (!host) return;
+
+            const previousVisibility = card.style.visibility;
+            const previousDisplay = card.style.display;
+            card.style.visibility = 'hidden';
+            card.style.display = 'block';
+
+            const triggerRect = trigger.getBoundingClientRect();
+            const hostRect = host.getBoundingClientRect();
+            const cardRect = card.getBoundingClientRect();
+
+            let desiredLeft = triggerRect.right + 6;
+            let desiredTop = triggerRect.top - cardRect.height + triggerRect.height;
+
+            if (desiredLeft + cardRect.width > window.innerWidth - 12) {
+                desiredLeft = triggerRect.left - cardRect.width - 6;
+            }
+
+            if (desiredLeft < 12) {
+                desiredLeft = 12;
+            }
+
+            if (desiredTop < 12) {
+                desiredTop = triggerRect.bottom + 6;
+            }
+
+            if (desiredTop + cardRect.height > window.innerHeight - 12) {
+                desiredTop = Math.max(12, window.innerHeight - cardRect.height - 12);
+            }
+
+            card.style.left = (desiredLeft - hostRect.left) + 'px';
+            card.style.top = (desiredTop - hostRect.top) + 'px';
+            card.style.visibility = previousVisibility;
+            card.style.display = previousDisplay;
+        }
+
+        function startKnowledgeDrag(e) {
+            const card = e.currentTarget.closest('.knowledge-card');
+            if (!card || e.target.closest('.knowledge-action')) return;
+            activeKnowledgeCard = card;
+            draggingKnowledge = true;
+            card.dataset.freePositioned = 'true';
+            const rect = card.getBoundingClientRect();
+            const parentRect = card.offsetParent.getBoundingClientRect();
+            dragKnowledgeOffsetX = e.clientX - rect.left;
+            dragKnowledgeOffsetY = e.clientY - rect.top;
+            card.style.left = (rect.left - parentRect.left) + 'px';
+            card.style.top = (rect.top - parentRect.top) + 'px';
+            e.preventDefault();
+        }
+
+        function dragKnowledgeCard(e) {
+            if (!draggingKnowledge || !activeKnowledgeCard) return;
+            const parentRect = activeKnowledgeCard.offsetParent.getBoundingClientRect();
+            activeKnowledgeCard.style.left = (e.clientX - parentRect.left - dragKnowledgeOffsetX) + 'px';
+            activeKnowledgeCard.style.top = (e.clientY - parentRect.top - dragKnowledgeOffsetY) + 'px';
+        }
+
+        function stopKnowledgeDrag() {
+            draggingKnowledge = false;
+            resizingKnowledge = false;
+        }
+
+        function startKnowledgeResize(e) {
+            const handle = e.currentTarget.closest('.knowledge-resize') || e.target.closest('.knowledge-resize');
+            const card = handle?.closest('.knowledge-card');
+            if (!card) return;
+            activeKnowledgeCard = card;
+            resizingKnowledge = true;
+            card.dataset.freePositioned = 'true';
+            resizeStartX = e.clientX;
+            resizeStartY = e.clientY;
+            resizeStartWidth = card.offsetWidth;
+            resizeStartHeight = card.offsetHeight;
+            e.preventDefault();
+        }
+
+        function resizeKnowledgeCard(e) {
+            if (!resizingKnowledge || !activeKnowledgeCard) return;
+            const nextWidth = Math.max(220, resizeStartWidth + (e.clientX - resizeStartX));
+            const nextHeight = Math.max(140, resizeStartHeight + (e.clientY - resizeStartY));
+            activeKnowledgeCard.style.width = nextWidth + 'px';
+            activeKnowledgeCard.style.height = nextHeight + 'px';
+        }
+
+        function createKnowledgeInline(id, title = '知识点', content = '测试文本：\n请在这里输入知识点内容。') {
+            const wrapper = document.createElement('span');
+            wrapper.className = 'knowledge-inline selectable-item';
+            wrapper.innerHTML = `<button class="knowledge-trigger" type="button" data-knowledge-target="${id}">!</button>
+<aside class="knowledge-card" id="${id}">
+    <div class="knowledge-header">
+        <span class="knowledge-title">${title}</span>
+        <button class="knowledge-action" type="button" data-close-knowledge="${id}">×</button>
+    </div>
+    <div class="knowledge-body">
+        <p>统一样式知识点模块，可继续复制和批量插入。</p>
+        <div class="knowledge-editor editable-block" contenteditable="true">${content}</div>
+        <span class="knowledge-resize"></span>
+    </div>
+</aside>`;
+            return wrapper;
+        }
+
+        function addKnowledgePointAtSelection() {
             const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            
-            // 标记正在编辑
-            isEditingText = true;
-            currentTextElement = textElement;
-            selectedTextElement = textElement;
-            
-            // 监听编辑完成
-            textElement.addEventListener('blur', function() {
-                isEditingText = false;
-                if (textElement.textContent === '输入文本') {
-                    textElement.textContent = '';
+            const id = `knowledgePhrase${knowledgeCounter++}`;
+            const inline = createKnowledgeInline(id, `知识点 ${knowledgeCounter - 1}`);
+
+            if (selection && selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const editableHost = range.commonAncestorContainer.nodeType === 1
+                    ? range.commonAncestorContainer.closest('.editable-block')
+                    : range.commonAncestorContainer.parentElement?.closest('.editable-block');
+
+                if (editableHost) {
+                    range.collapse(false);
+                    range.insertNode(inline);
+                    range.setStartAfter(inline);
+                    range.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    statusBar.textContent = '已插入新的知识点入口';
+                    return;
                 }
-                selectTextElement(textElement);
-            });
-            
-            // 监听键盘事件
-            textElement.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    textElement.blur();
-                }
-            });
-            
-            // 重置状态
-            isDrawingText = false;
-            textPreview = null;
-        }
-        
-        // 取消绘制文本框
-        function cancelDrawingText() {
-            if (textPreview && textPreview.parentNode) {
-                textPreview.parentNode.removeChild(textPreview);
             }
-            isDrawingText = false;
-            textPreview = null;
-        }
-        
-        // 选择文本元素
-        function selectTextElement(element) {
-            // 取消之前的选择
-            deselectTextElement();
-            
-            // 选择新元素
-            selectedTextElement = element;
-            element.classList.add('selected');
-            statusBar.textContent = '已选择文本元素';
-        }
-        
-        // 取消选择文本元素
-        function deselectTextElement() {
-            if (selectedTextElement) {
-                selectedTextElement.classList.remove('selected');
-                selectedTextElement = null;
-                statusBar.textContent = '就绪';
+
+            const fallbackHost = document.querySelector('#learningGoals .editable-block');
+            if (fallbackHost) {
+                fallbackHost.appendChild(document.createTextNode(' '));
+                fallbackHost.appendChild(inline);
+                statusBar.textContent = '已在学习目标区域末尾插入知识点入口';
             }
         }
-        
-        // 开始拖动
-        function startDrag(e, element) {
-            e.preventDefault();
-            isDragging = true;
-            const rect = element.getBoundingClientRect();
-            dragOffset.x = e.clientX - rect.left;
-            dragOffset.y = e.clientY - rect.top;
+
+        function setColor(color) {
+            currentColor = color;
+            statusBar.textContent = '颜色已更改: ' + color;
+            activeColorLabel.textContent = color;
+            activeColorSwatch.style.setProperty('--swatch', color);
+            document.querySelectorAll('.color-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.color === color);
+            });
+            updateCursor();
         }
         
-        // 拖动元素
-        function dragElement(e, element) {
-            if (!isDragging) return;
-            
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left - dragOffset.x;
-            const y = e.clientY - rect.top - dragOffset.y;
-            
-            element.style.left = Math.max(0, x) + 'px';
-            element.style.top = Math.max(0, y) + 'px';
+        // 更新鼠标光标
+        function updateCursor() {
+            // 不再操作 cursor，已在 CSS 中设置 cursor: none
         }
-        
-        // 开始调整大小
-        function startResize(e, element) {
-            e.preventDefault();
-            isResizing = true;
-            const rect = element.getBoundingClientRect();
-            resizeStart.x = e.clientX - rect.right;
-            resizeStart.y = e.clientY - rect.bottom;
+
+        function clearSelectedElement() {
+            if (selectedElement) {
+                selectedElement.classList.remove('selected');
+                selectedElement = null;
+            }
         }
-        
-        // 调整元素大小
-        function resizeElement(e, element) {
-            if (!isResizing) return;
-            
-            const rect = element.getBoundingClientRect();
-            const newWidth = Math.max(100, e.clientX - rect.left + resizeStart.x);
-            const newHeight = Math.max(40, e.clientY - rect.top + resizeStart.y);
-            
-            element.style.width = newWidth + 'px';
-            element.style.height = newHeight + 'px';
-        }
-        
-        // 激活文本编辑
-        function activateTextEdit(element) {
-            element.focus();
-            isEditingText = true;
-            currentTextElement = element;
-            selectTextElement(element);
-        }
-        
-        // 按轨迹消失动画
-        function animatePathDisappear(pathElement) {
-            if (!pathElement) return;
-            
-            // 获取SVG路径
-            const svg = pathElement.querySelector('svg');
-            if (!svg) return;
-            
-            const path = svg.querySelector('path');
-            if (!path) return;
-            
-            // 1.5秒延迟后开始消失动画
-            setTimeout(() => {
-                // 创建一个新的路径来替代原路径，实现从起点开始消失
-                const newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                newPath.setAttribute('d', path.getAttribute('d'));
-                newPath.setAttribute('fill', 'none');
-                newPath.setAttribute('stroke', path.getAttribute('stroke'));
-                newPath.setAttribute('stroke-width', path.getAttribute('stroke-width'));
-                newPath.setAttribute('stroke-linecap', 'round');
-                newPath.setAttribute('stroke-linejoin', 'round');
-                
-                // 替换原路径
-                path.parentNode.replaceChild(newPath, path);
-                
-                // 使用JavaScript动画控制消失
-                const pathLength = newPath.getTotalLength();
-                let offset = 0;
-                const duration = 800; // 动画持续时间
-                const startTime = Date.now();
-                
-                function animate() {
-                    const elapsed = Date.now() - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    
-                    // 从起点开始消失
-                    offset = progress * pathLength;
-                    newPath.style.strokeDasharray = pathLength + ' ' + pathLength;
-                    newPath.style.strokeDashoffset = -offset;
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(animate);
-                    } else {
-                        // 动画结束后移除元素
-                        if (pathElement && pathElement.parentNode) {
-                            pathElement.style.transition = 'opacity 0.3s ease';
-                            pathElement.style.opacity = '0';
-                            
-                            setTimeout(() => {
-                                if (pathElement && pathElement.parentNode) {
-                                    pathElement.parentNode.removeChild(pathElement);
-                                }
-                            }, 300);
-                        }
-                    }
+
+        function handleSelectablePointerDown(e) {
+            if (currentTool !== 'select') return;
+            const target = e.target.closest('.selectable-item, .editable-block');
+            clearSelectedElement();
+            if (target) {
+                selectedElement = target.classList.contains('selectable-item') ? target : target.closest('.selectable-item') || target;
+                if (selectedElement) {
+                    selectedElement.classList.add('selected');
+                    statusBar.textContent = '已选中元素，可编辑文本或复制内容';
                 }
-                
-                animate();
-            }, 1500); // 1.5秒延迟
+            }
         }
         
-        // 初始化
+        // 命中检测
+        function hitStroke(stroke, p) {
+            const pts = stroke.points;
+
+            for(let i=1;i<pts.length;i++){
+                const a = pts[i-1];
+                const b = pts[i];
+
+                const dist = pointToSegmentDistance(p, a, b);
+
+                if(dist < 12) return true;
+            }
+            return false;
+        }
+        
+        // 点到线段的距离计算
+        function pointToSegmentDistance(p, a, b){
+            const A = p.x - a.x;
+            const B = p.y - a.y;
+            const C = b.x - a.x;
+            const D = b.y - a.y;
+
+            const dot = A*C + B*D;
+            const len = C*C + D*D;
+            let t = dot / len;
+
+            t = Math.max(0, Math.min(1, t));
+
+            const x = a.x + t * C;
+            const y = a.y + t * D;
+
+            const dx = p.x - x;
+            const dy = p.y - y;
+
+            return Math.sqrt(dx*dx + dy*dy);
+        }
+        
+        // 擦除函数
+        function eraseAt(e){ 
+            const p = getPoint(e);
+
+            // ① 处理已完成 strokes
+            strokes = strokes.filter(stroke => {
+                return !hitStroke(stroke, p);
+            });
+
+            // ② 关键：处理“当前正在画的这一笔”
+            if(currentStroke && hitStroke(currentStroke, p)){
+                currentStroke = null;
+                drawing = false;
+            }
+        }
+
+        // =========================
+        // 选择与快捷键
+        // =========================
+        function handleKeydown(e) {
+            if (document.activeElement && (document.activeElement.isContentEditable || ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName))) {
+                return;
+            }
+
+            const key = e.key.toLowerCase();
+
+            if ((e.metaKey || e.ctrlKey) && key === 'z') {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    redo();
+                } else {
+                    undo();
+                }
+                return;
+            }
+
+            if (key === 'g') {
+                setTool('guide');
+            } else if (key === 'm') {
+                setTool('marker');
+            } else if (key === 'e') {
+                setTool('erase');
+            } else if (key === 'v' || key === 's') {
+                setTool('select');
+            }
+        }
+        
+        // 绘制单个笔触（在指定上下文）
+        function drawStrokeOn(ctx2, stroke){
+            const pts = stroke.points;
+            if(pts.length < 2) return;
+
+            ctx2.strokeStyle = stroke.color;
+
+            if(stroke.tool === 'guide'){
+                ctx2.shadowColor = stroke.color;
+                ctx2.shadowBlur = 8;
+                ctx2.lineWidth = 2;
+            } else {
+                ctx2.shadowBlur = 0;
+                ctx2.lineWidth = 2;
+            }
+
+            ctx2.beginPath();
+            ctx2.moveTo(pts[0].x, pts[0].y);
+
+            for(let i=1;i<pts.length;i++){
+                const midX = (pts[i-1].x + pts[i].x)/2;
+                const midY = (pts[i-1].y + pts[i].y)/2;
+                ctx2.quadraticCurveTo(pts[i-1].x, pts[i-1].y, midX, midY);
+            }
+
+            ctx2.stroke();
+        }
+        
+        // 撤销
+        function undo() {
+            if (strokes.length === 0) return;
+            redoStack.push(strokes.pop());
+            statusBar.textContent = '已撤销';
+        }
+        
+        // 重做
+        function redo() {
+            if (redoStack.length === 0) return;
+            strokes.push(redoStack.pop());
+            statusBar.textContent = '已重做';
+        }
+        
+        // 导出PNG
+        function exportPNG(){
+            const exportCanvas = document.createElement('canvas');
+            exportCanvas.width = canvas.width;
+            exportCanvas.height = canvas.height;
+            const ectx = exportCanvas.getContext('2d');
+
+            // 1. 画背景
+            if(bgImage){
+                ectx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+            }
+
+            // 2. 画标注（复用 drawStroke）
+            strokes.forEach(stroke => {
+                drawStrokeOn(ectx, stroke);
+            });
+
+            const link = document.createElement('a');
+            link.download = 'annotation.png';
+            link.href = exportCanvas.toDataURL('image/png');
+            link.click();
+            statusBar.textContent = '已导出PNG';
+        }
+        
+        // 清空所有图层
+        function clearAll() {
+            strokes = [];
+            redoStack = [];
+            statusBar.textContent = '已清空所有标注';
+        }
+        
+        // =========================
+        // 页面初始化入口
+        // =========================
+        function init() {
+            resizeCanvas();
+            setupEventListeners();
+            setTool(currentTool);
+            setColor(currentColor);
+            updateCursor();
+            brush.style.opacity = '0';
+            render(); // 启动渲染循环
+        }
+        
         window.onload = init;
     </script>
 </body>
